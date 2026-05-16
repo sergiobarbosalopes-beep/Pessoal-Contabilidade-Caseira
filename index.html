@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contabilidade Caseira</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Barra de Navegação Superior -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">💰</span>
+                <a href="#" onclick="showPage('home')">Contabilidade Caseira</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" onclick="showPage('home')" class="nav-link active" id="nav-home">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="showPage('cgd')" class="nav-link" id="nav-cgd">CGD</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="showPage('novobanco')" class="nav-link" id="nav-novobanco">Novo Banco</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+
+        <!-- Página Inicial -->
+        <div id="home" class="page active">
+            <div class="container">
+                <header class="page-header">
+                    <h1>Bem-vindo à Contabilidade Caseira</h1>
+                    <p class="subtitle">Gerencie seu orçamento familiar com facilidade</p>
+                </header>
+
+                <!-- Cards de Resumo -->
+                <div class="cards-container">
+                    <div class="card cgd-card" onclick="showPage('cgd')">
+                        <div class="card-icon">🏦</div>
+                        <h2>CGD</h2>
+                        <p class="card-description">Conta Caixa Geral de Depósitos</p>
+                        <div class="card-balance">Saldo: <span class="balance-amount">€ --,--</span></div>
+                        <button class="card-button">Ver Detalhes</button>
+                    </div>
+
+                    <div class="card novobanco-card" onclick="showPage('novobanco')">
+                        <div class="card-icon">🏦</div>
+                        <h2>Novo Banco</h2>
+                        <p class="card-description">Conta Novo Banco</p>
+                        <div class="card-balance">Saldo: <span class="balance-amount">€ --,--</span></div>
+                        <button class="card-button">Ver Detalhes</button>
+                    </div>
+                </div>
+
+                <!-- Resumo Total -->
+                <div class="summary-card">
+                    <h2>Resumo Geral</h2>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <span class="summary-label">Total em Contas</span>
+                            <span class="summary-value">€ --,--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Receitas</span>
+                            <span class="summary-value income">€ --,--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Despesas</span>
+                            <span class="summary-value expense">€ --,--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Página CGD -->
+        <div id="cgd" class="page">
+            <div class="container">
+                <header class="page-header">
+                    <h1>🏦 CGD - Caixa Geral de Depósitos</h1>
+                    <p class="subtitle">Gerencie sua conta CGD</p>
+                </header>
+
+                <div class="account-overview">
+                    <div class="balance-card cgd-balance">
+                        <h2>Saldo Atual</h2>
+                        <div class="amount">€ --,--</div>
+                    </div>
+                </div>
+
+                <div class="account-actions">
+                    <button class="action-btn">+ Adicionar Transação</button>
+                    <button class="action-btn">Filtrar</button>
+                    <button class="action-btn">Exportar</button>
+                </div>
+
+                <div class="transactions-section">
+                    <h2>Transações</h2>
+                    <p class="empty-state">Nenhuma transação registrada ainda. Comece adicionando uma transação!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Página Novo Banco -->
+        <div id="novobanco" class="page">
+            <div class="container">
+                <header class="page-header">
+                    <h1>🏦 Novo Banco</h1>
+                    <p class="subtitle">Gerencie sua conta Novo Banco</p>
+                </header>
+
+                <div class="account-overview">
+                    <div class="balance-card novobanco-balance">
+                        <h2>Saldo Atual</h2>
+                        <div class="amount">€ --,--</div>
+                    </div>
+                </div>
+
+                <div class="account-actions">
+                    <button class="action-btn">+ Adicionar Transação</button>
+                    <button class="action-btn">Filtrar</button>
+                    <button class="action-btn">Exportar</button>
+                </div>
+
+                <div class="transactions-section">
+                    <h2>Transações</h2>
+                    <p class="empty-state">Nenhuma transação registrada ainda. Comece adicionando uma transação!</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
