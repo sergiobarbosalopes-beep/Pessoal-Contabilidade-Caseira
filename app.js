@@ -224,11 +224,8 @@
   const yearPrev = document.getElementById("yearPrev");
   const yearNext = document.getElementById("yearNext");
   const monthGrid = document.getElementById("monthGrid");
-  const monthLabel = document.getElementById("monthLabel");
-  const monthPrev = document.getElementById("monthPrev");
-  const monthNext = document.getElementById("monthNext");
 
-  if (monthGrid && monthLabel && monthPrev && monthNext && yearValue) {
+  if (monthGrid && yearValue) {
     const months = [
       { short: "Jan", full: "Janeiro" },
       { short: "Fev", full: "Fevereiro" },
@@ -244,8 +241,6 @@
       { short: "Dez", full: "Dezembro" }
     ];
 
-    const MIN_YEAR = 2024;
-    const MAX_YEAR = 2030;
     let selectedYear = 2026;
     let selectedMonth = 4; // Maio (index 4)
 
@@ -292,29 +287,23 @@
     // Update year display
     function updateYearDisplay() {
       yearValue.textContent = selectedYear;
-      if (yearPrev) yearPrev.disabled = selectedYear <= MIN_YEAR;
-      if (yearNext) yearNext.disabled = selectedYear >= MAX_YEAR;
     }
 
     // Year navigation
     if (yearPrev) {
       yearPrev.addEventListener("click", () => {
-        if (selectedYear > MIN_YEAR) {
-          selectedYear--;
-          cgdExpenses = getYearExpenses(selectedYear);
-          updateYearDisplay();
-          renderMonthGrid();
-        }
+        selectedYear--;
+        cgdExpenses = getYearExpenses(selectedYear);
+        updateYearDisplay();
+        renderMonthGrid();
       });
     }
     if (yearNext) {
       yearNext.addEventListener("click", () => {
-        if (selectedYear < MAX_YEAR) {
-          selectedYear++;
-          cgdExpenses = getYearExpenses(selectedYear);
-          updateYearDisplay();
-          renderMonthGrid();
-        }
+        selectedYear++;
+        cgdExpenses = getYearExpenses(selectedYear);
+        updateYearDisplay();
+        renderMonthGrid();
       });
     }
 
@@ -379,13 +368,6 @@
         })
         .join("");
 
-      // Update label
-      monthLabel.textContent = `${months[selectedMonth].full} ${selectedYear}`;
-
-      // Update button states
-      monthPrev.disabled = selectedMonth === 0;
-      monthNext.disabled = selectedMonth === 11;
-
       // Load values for selected month
       loadMonthValues();
 
@@ -397,20 +379,6 @@
         });
       });
     }
-
-    monthPrev.addEventListener("click", () => {
-      if (selectedMonth > 0) {
-        selectedMonth--;
-        renderMonthGrid();
-      }
-    });
-
-    monthNext.addEventListener("click", () => {
-      if (selectedMonth < 11) {
-        selectedMonth++;
-        renderMonthGrid();
-      }
-    });
 
     updateYearDisplay();
     renderMonthGrid();
