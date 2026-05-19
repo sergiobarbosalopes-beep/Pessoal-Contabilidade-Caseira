@@ -1,9 +1,9 @@
 const dashboardMock = {
-  cards: [
-    { title: "Liquidez Atual", value: "2.31", delta: "+0.14 vs mes passado", trend: "up" },
-    { title: "Taxa de Poupanca", value: "27%", delta: "+3.2pp no trimestre", trend: "up" },
-    { title: "Divida Rendimento", value: "29%", delta: "-1.1pp em 60 dias", trend: "up" },
-    { title: "Runway Financeiro", value: "18 meses", delta: "-2 meses", trend: "down" }
+  kpis: [
+    { title: "Liquidez Atual", value: "2.31", trend: "+0.14", trendUp: true },
+    { title: "Taxa de Poupança", value: "27%", trend: "+3.2pp", trendUp: true },
+    { title: "Dívida / Rendimento", value: "29%", trend: "-1.1pp", trendUp: true },
+    { title: "Runway Financeiro", value: "18 meses", trend: "-2 meses", trendUp: false }
   ],
   budgetByMonth: {
     labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
@@ -19,9 +19,16 @@ const dashboardMock = {
     values: [42, 31, 17, 10]
   },
   priorities: [
-    { label: "Fundo de emergencia", amount: "EUR 9 200", status: "on track" },
-    { label: "Amortizacao CH", amount: "EUR 3 150", status: "focus" },
-    { label: "Upgrade paineis", amount: "EUR 1 900", status: "planned" },
-    { label: "Ferias", amount: "EUR 2 400", status: "planned" }
-  ]
+    { label: "Fundo de emergência", amount: "€ 9 200", status: "on track" },
+    { label: "Amortização CH", amount: "€ 3 150", status: "focus" },
+    { label: "Upgrade painéis", amount: "€ 1 900", status: "planned" },
+    { label: "Férias", amount: "€ 2 400", status: "planned" }
+  ],
+  tiles: {
+    cgd: { saldo: "12 450", movimento: "+320" },
+    novobanco: { saldo: "8 720", movimento: "-180" },
+    coverflex: { saldo: "1 850", disponivel: "420" },
+    credito: { divida: "142 000", prestacao: "485" },
+    solares: { poupanca: "1 240", retorno: "68%" }
+  }
 };

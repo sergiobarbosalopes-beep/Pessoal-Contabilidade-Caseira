@@ -3,50 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coverflex</title>
+    <title>Coverflex | Contabilidade Caseira</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="coverflex">
-    <div class="layout">
-      <aside class="sidebar" data-sidebar>
-        <div class="brand">
-          <div class="brand-logo" aria-hidden="true"></div>
-          <div>
-            <h1 class="brand-name">Contabilidade Caseira</h1>
-            <p class="brand-note">Planeamento e analise pessoal</p>
-          </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <div class="navbar-logo"></div>
+          Contabilidade Caseira
+        </a>
+        <div class="navbar-links" id="navLinks">
+          <a data-page="dashboard" href="index.html">Dashboard</a>
+          <a data-page="cgd" href="cgd.html">CGD</a>
+          <a data-page="novobanco" href="novobanco.html">Novo Banco</a>
+          <a data-page="coverflex" href="coverflex.html">Coverflex</a>
+          <a data-page="credito" href="credito-habitacao.html">Crédito</a>
+          <a data-page="solares" href="paineis-solares.html">Solares</a>
         </div>
-        <p class="nav-title">Paginas</p>
-        <nav class="nav-links">
-          <a class="nav-link" data-page="dashboard" href="index.html">Dashboard</a>
-          <a class="nav-link" data-page="cgd" href="cgd.html">Caixa Geral de Depositos</a>
-          <a class="nav-link" data-page="novobanco" href="novobanco.html">Novo Banco</a>
-          <a class="nav-link" data-page="coverflex" href="coverflex.html">Coverflex</a>
-          <a class="nav-link" data-page="credito" href="credito-habitacao.html">Credito Habitacao</a>
-          <a class="nav-link" data-page="solares" href="paineis-solares.html">Paineis Solares</a>
-        </nav>
-      </aside>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
 
-      <main class="content">
-        <header class="topbar">
-          <button class="menu-toggle" data-menu-toggle type="button">Menu</button>
-          <strong>Coverflex</strong>
-          <small>beneficios e saldo flexivel</small>
-        </header>
+    <section class="page-hero">
+      <div class="hero-bg"></div>
+      <div class="particles" id="particles"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="badge-label">Benefícios Flexíveis</span>
+        <h1>Coverflex</h1>
+        <p class="hero-sub">Gestão de benefícios, consumo por categoria e saldo disponível mensal.</p>
+      </div>
+    </section>
 
-        <section class="page-panel">
-          <h1>Painel Coverflex</h1>
-          <p>
-            Este espaco vai mostrar o consumo por categoria, saldo disponivel e previsao de utilizacao mensal de beneficios.
-            Mock visual pronto para ligacao a dados reais.
-          </p>
+    <main class="main-content">
+      <div class="container-wide">
+
+        <section class="content-section reveal">
+          <div class="section-title">
+            <h2>Resumo Coverflex</h2>
+            <p>Estado atual dos benefícios flexíveis</p>
+          </div>
+          <div class="kpi-grid">
+            <div class="kpi kpi-ok">
+              <p>Saldo Total</p>
+              <strong>€ 1 850</strong>
+            </div>
+            <div class="kpi kpi-warn">
+              <p>Disponível Mês</p>
+              <strong>€ 420</strong>
+            </div>
+            <div class="kpi">
+              <p>Refeição</p>
+              <strong>€ 180</strong>
+            </div>
+            <div class="kpi">
+              <p>Educação</p>
+              <strong>€ 240</strong>
+            </div>
+          </div>
         </section>
-      </main>
-    </div>
 
+        <section class="content-section reveal">
+          <div class="glass-panel page-panel">
+            <h1>Detalhes Coverflex</h1>
+            <p>
+              Esta página irá mostrar o consumo por categoria, saldo disponível 
+              e previsão de utilização mensal de benefícios.
+            </p>
+            <p style="margin-top:16px;">
+              <strong>Funcionalidades planeadas:</strong><br/>
+              • Consumo por categoria (refeição, educação, tecnologia)<br/>
+              • Histórico de transações<br/>
+              • Plafond mensal e utilização<br/>
+              • Alertas de expiração de saldo
+            </p>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo"></div>
+          Contabilidade Caseira
+        </div>
+        <p class="footer-copy">© 2026 Dashboard pessoal. Dados mock para demonstração.</p>
+      </div>
+    </footer>
+
+    <script src="data.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

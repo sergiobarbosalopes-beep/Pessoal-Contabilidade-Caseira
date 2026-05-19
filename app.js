@@ -1,178 +1,221 @@
-function setupSidebar() {
-  const menuButton = document.querySelector("[data-menu-toggle]");
-  const sidebar = document.querySelector("[data-sidebar]");
+// ═══════════════════════════════════════════════════════
+// APP.JS — Contabilidade Caseira
+// ═══════════════════════════════════════════════════════
 
-  if (!menuButton || !sidebar) {
-    return;
+(function () {
+  "use strict";
+
+  // ── Scroll progress bar ───────────────────────────────
+  const scrollProgress = document.getElementById("scrollProgress");
+  if (scrollProgress) {
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = progress + "%";
+    });
   }
 
-  menuButton.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-  });
+  // ── Navbar scroll effect ──────────────────────────────
+  const navbar = document.getElementById("navbar");
+  if (navbar) {
+    window.addEventListener("scroll", () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 40);
+    });
+  }
 
-  document.addEventListener("click", (event) => {
-    if (window.innerWidth > 900) {
-      return;
-    }
-    const target = event.target;
-    if (!(target instanceof Element)) {
-      return;
-    }
-    if (!sidebar.contains(target) && !target.closest("[data-menu-toggle]")) {
-      sidebar.classList.remove("open");
-    }
-  });
-}
+  // ── Hamburger menu ────────────────────────────────────
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("navLinks");
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      navLinks.classList.toggle("open");
+    });
+    document.addEventListener("click", (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        hamburger.classList.remove("open");
+        navLinks.classList.remove("open");
+      }
+    });
+  }
 
-function setActiveNav() {
+  // ── Active nav link ───────────────────────────────────
   const page = document.body.dataset.page;
-  if (!page) {
-    return;
+  if (page) {
+    document.querySelectorAll(".navbar-links a").forEach((link) => {
+      if (link.dataset.page === page) link.classList.add("active");
+    });
   }
 
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    if (!(link instanceof HTMLAnchorElement)) {
-      return;
+  // ── Reveal on scroll ──────────────────────────────────
+  const reveals = document.querySelectorAll(".reveal");
+  if (reveals.length) {
+    const revealOnScroll = () => {
+      reveals.forEach((el) => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 80) el.classList.add("active");
+      });
+    };
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+  }
+
+  // ── Particles ─────────────────────────────────────────
+  const particlesContainer = document.getElementById("particles");
+  if (particlesContainer) {
+    for (let i = 0; i < 28; i++) {
+      const p = document.createElement("div");
+      p.className = "particle";
+      p.style.left = Math.random() * 100 + "%";
+      p.style.animationDuration = 6 + Math.random() * 8 + "s";
+      p.style.animationDelay = Math.random() * 6 + "s";
+      particlesContainer.appendChild(p);
     }
-    if (link.dataset.page === page) {
-      link.classList.add("active");
+  }
+
+  // ── Render KPIs ───────────────────────────────────────
+  const kpiContainer = document.getElementById("kpiGrid");
+  if (kpiContainer && window.dashboardMock) {
+    kpiContainer.innerHTML = window.dashboardMock.kpis
+      .map((k) => {
+        const trendClass = k.trendUp ? "kpi-ok" : "kpi-danger";
+        return `
+          <div class="kpi ${trendClass}">
+            <p>${k.title}</p>
+            <strong>${k.value}</strong>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  // ── Render Priorities ─────────────────────────────────
+  const prioritiesList = document.getElementById("prioritiesList");
+  if (prioritiesList && window.dashboardMock) {
+    prioritiesList.innerHTML = window.dashboardMock.priorities
+      .map((p, i) => {
+        let posClass = "";
+        if (i === 0) posClass = "gold";
+        else if (i === 1) posClass = "silver";
+        else if (i === 2) posClass = "bronze";
+        const badgeClass = p.status === "on track" ? "badge-ok" : p.status === "focus" ? "badge-warn" : "badge-ok";
+        return `
+          <li>
+            <span class="ranking-pos ${posClass}">${i + 1}</span>
+            <span class="ranking-label">${p.label}</span>
+            <span class="ranking-value">${p.amount}</span>
+            <span class="badge ${badgeClass}">${p.status}</span>
+          </li>
+        `;
+      })
+      .join("");
+  }
+
+  // ── Tiles data ────────────────────────────────────────
+  if (window.dashboardMock && window.dashboardMock.tiles) {
+    const t = window.dashboardMock.tiles;
+    const setVal = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    };
+    setVal("tileCgdSaldo", t.cgd.saldo);
+    setVal("tileCgdMov", t.cgd.movimento);
+    setVal("tileNbSaldo", t.novobanco.saldo);
+    setVal("tileNbMov", t.novobanco.movimento);
+    setVal("tileCfSaldo", t.coverflex.saldo);
+    setVal("tileCfDisp", t.coverflex.disponivel);
+    setVal("tileChDivida", t.credito.divida);
+    setVal("tileChPrest", t.credito.prestacao);
+    setVal("tileSolPoup", t.solares.poupanca);
+    setVal("tileSolRet", t.solares.retorno);
+  }
+
+  // ── Charts ────────────────────────────────────────────
+  if (typeof Chart !== "undefined" && window.dashboardMock) {
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = "#547064";
+
+    const budgetCtx = document.getElementById("budgetChart");
+    if (budgetCtx) {
+      new Chart(budgetCtx, {
+        type: "line",
+        data: {
+          labels: window.dashboardMock.budgetByMonth.labels,
+          datasets: [
+            {
+              label: "Planeado",
+              data: window.dashboardMock.budgetByMonth.planned,
+              borderColor: "#0f766e",
+              backgroundColor: "rgba(15,118,110,0.12)",
+              tension: 0.4,
+              fill: true
+            },
+            {
+              label: "Real",
+              data: window.dashboardMock.budgetByMonth.actual,
+              borderColor: "#f59e0b",
+              backgroundColor: "rgba(245,158,11,0.1)",
+              tension: 0.4,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { usePointStyle: true } } }
+        }
+      });
     }
-  });
-}
 
-function renderCards() {
-  const container = document.querySelector("[data-cards]");
-  if (!container || !window.dashboardMock) {
-    return;
-  }
-
-  container.innerHTML = window.dashboardMock.cards
-    .map((item) => {
-      const deltaClass = item.trend === "down" ? "down" : "up";
-      return `
-        <article class="card">
-          <h3>${item.title}</h3>
-          <div class="value">${item.value}</div>
-          <div class="delta ${deltaClass}">${item.delta}</div>
-        </article>
-      `;
-    })
-    .join("");
-}
-
-function renderPriorities() {
-  const list = document.querySelector("[data-priorities]");
-  if (!list || !window.dashboardMock) {
-    return;
-  }
-
-  list.innerHTML = window.dashboardMock.priorities
-    .map((p) => `<li><span>${p.label}</span><span>${p.amount} <span class="badge">${p.status}</span></span></li>`)
-    .join("");
-}
-
-function createCharts() {
-  if (typeof window.Chart === "undefined" || !window.dashboardMock) {
-    return;
-  }
-
-  const budgetCtx = document.getElementById("budgetChart");
-  if (budgetCtx) {
-    new window.Chart(budgetCtx, {
-      type: "line",
-      data: {
-        labels: window.dashboardMock.budgetByMonth.labels,
-        datasets: [
-          {
-            label: "Planeado",
-            data: window.dashboardMock.budgetByMonth.planned,
-            borderColor: "#0f766e",
-            backgroundColor: "rgba(15,118,110,0.14)",
-            tension: 0.35,
-            fill: true
-          },
-          {
-            label: "Real",
-            data: window.dashboardMock.budgetByMonth.actual,
-            borderColor: "#f59e0b",
-            backgroundColor: "rgba(245,158,11,0.12)",
-            tension: 0.35,
-            fill: true
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { labels: { usePointStyle: true } }
+    const cashCtx = document.getElementById("cashChart");
+    if (cashCtx) {
+      new Chart(cashCtx, {
+        type: "bar",
+        data: {
+          labels: window.dashboardMock.cashFlow.labels,
+          datasets: [
+            {
+              label: "Cashflow líquido",
+              data: window.dashboardMock.cashFlow.values,
+              backgroundColor: [
+                "#14b8a6", "#2dd4bf", "#5eead4", "#99f6e4",
+                "#34d399", "#10b981", "#fbbf24", "#f59e0b"
+              ],
+              borderRadius: 8
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
         }
-      }
-    });
-  }
+      });
+    }
 
-  const cashCtx = document.getElementById("cashChart");
-  if (cashCtx) {
-    new window.Chart(cashCtx, {
-      type: "bar",
-      data: {
-        labels: window.dashboardMock.cashFlow.labels,
-        datasets: [
-          {
-            label: "Cashflow liquido",
-            data: window.dashboardMock.cashFlow.values,
-            backgroundColor: [
-              "#14b8a6",
-              "#2dd4bf",
-              "#5eead4",
-              "#99f6e4",
-              "#34d399",
-              "#10b981",
-              "#fbbf24",
-              "#f59e0b"
-            ],
-            borderRadius: 8
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
+    const mixCtx = document.getElementById("mixChart");
+    if (mixCtx) {
+      new Chart(mixCtx, {
+        type: "doughnut",
+        data: {
+          labels: window.dashboardMock.accountMix.labels,
+          datasets: [
+            {
+              data: window.dashboardMock.accountMix.values,
+              backgroundColor: ["#0f766e", "#0ea5e9", "#f59e0b", "#7c3aed"],
+              borderWidth: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "62%",
+          plugins: { legend: { position: "bottom" } }
         }
-      }
-    });
+      });
+    }
   }
-
-  const mixCtx = document.getElementById("mixChart");
-  if (mixCtx) {
-    new window.Chart(mixCtx, {
-      type: "doughnut",
-      data: {
-        labels: window.dashboardMock.accountMix.labels,
-        datasets: [
-          {
-            data: window.dashboardMock.accountMix.values,
-            backgroundColor: ["#0f766e", "#0ea5e9", "#f59e0b", "#7c3aed"],
-            borderWidth: 0
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: "62%",
-        plugins: {
-          legend: { position: "bottom" }
-        }
-      }
-    });
-  }
-}
-
-setupSidebar();
-setActiveNav();
-renderCards();
-renderPriorities();
-createCharts();
+})();
