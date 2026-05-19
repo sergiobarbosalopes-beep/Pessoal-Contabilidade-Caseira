@@ -244,46 +244,6 @@
     let selectedYear = 2026;
     let selectedMonth = 4; // Maio (index 4)
 
-    // ── CGD Expenses Data Storage (per year) ────
-    // Structure: cgdAllYears[year] = { rubrica: { subrubrica: [jan..dez] } }
-    const defaultExpenses = () => ({
-      prestacoes: {
-        "credito-habitacao": Array(12).fill(0),
-        "agua": Array(12).fill(0),
-        "eletricidade": Array(12).fill(0)
-      },
-      extras: {},
-      impostos: {},
-      creditos: {},
-      aprovisionamento: {}
-    });
-
-    let cgdAllYears = {};
-
-    // Load all years from localStorage
-    const savedAllYears = localStorage.getItem("cgdExpensesAllYears");
-    if (savedAllYears) {
-      try {
-        cgdAllYears = JSON.parse(savedAllYears);
-      } catch(e) { console.warn("Error loading saved expenses", e); }
-    }
-
-    // Get expenses for a specific year (create if not exists)
-    function getYearExpenses(year) {
-      if (!cgdAllYears[year]) {
-        cgdAllYears[year] = defaultExpenses();
-      }
-      return cgdAllYears[year];
-    }
-
-    // Current year reference
-    let cgdExpenses = getYearExpenses(selectedYear);
-
-    // Save to localStorage
-    function saveExpenses() {
-      localStorage.setItem("cgdExpensesAllYears", JSON.stringify(cgdAllYears));
-    }
-
     // Update year display
     function updateYearDisplay() {
       yearValue.textContent = selectedYear;
@@ -293,60 +253,21 @@
     if (yearPrev) {
       yearPrev.addEventListener("click", () => {
         selectedYear--;
-        cgdExpenses = getYearExpenses(selectedYear);
         updateYearDisplay();
         renderMonthGrid();
+        loadRubricas();
+        renderRubricas();
       });
     }
     if (yearNext) {
       yearNext.addEventListener("click", () => {
         selectedYear++;
-        cgdExpenses = getYearExpenses(selectedYear);
         updateYearDisplay();
         renderMonthGrid();
+        loadRubricas();
+        renderRubricas();
       });
     }
-
-    // Update totals per rubrica
-    function updateRubricaTotals() {
-      Object.keys(cgdExpenses).forEach(rubrica => {
-        let total = 0;
-        Object.keys(cgdExpenses[rubrica]).forEach(sub => {
-          total += cgdExpenses[rubrica][sub][selectedMonth] || 0;
-        });
-        const totalEl = document.getElementById("total" + rubrica.charAt(0).toUpperCase() + rubrica.slice(1));
-        if (totalEl) {
-          totalEl.textContent = "€ " + total.toFixed(2).replace(".", ",");
-        }
-      });
-    }
-
-    // Load values into inputs for selected month
-    function loadMonthValues() {
-      document.querySelectorAll(".subrubrica-input").forEach(input => {
-        const rubrica = input.dataset.rubrica;
-        const sub = input.dataset.sub;
-        if (cgdExpenses[rubrica] && cgdExpenses[rubrica][sub]) {
-          const val = cgdExpenses[rubrica][sub][selectedMonth];
-          input.value = val > 0 ? val : "";
-        }
-      });
-      updateRubricaTotals();
-    }
-
-    // Listen to input changes
-    document.querySelectorAll(".subrubrica-input").forEach(input => {
-      input.addEventListener("input", () => {
-        const rubrica = input.dataset.rubrica;
-        const sub = input.dataset.sub;
-        const val = parseFloat(input.value) || 0;
-        if (cgdExpenses[rubrica] && cgdExpenses[rubrica][sub]) {
-          cgdExpenses[rubrica][sub][selectedMonth] = val;
-          saveExpenses();
-          updateRubricaTotals();
-        }
-      });
-    });
 
     function renderMonthGrid() {
       monthGrid.innerHTML = months
@@ -368,9 +289,6 @@
         })
         .join("");
 
-      // Load values for selected month
-      loadMonthValues();
-
       // Add click listeners to tiles
       monthGrid.querySelectorAll(".month-tile").forEach((tile) => {
         tile.addEventListener("click", () => {
@@ -390,13 +308,23 @@
     // Rubricas data structure: { id: { name: string, values: [12 months] } }
     let dynamicRubricas = {};
 
-    // Load from localStorage
-    const savedRubricas = localStorage.getItem("cgdDynamicRubricas_" + selectedYear);
-    if (savedRubricas) {
-      try {
-        dynamicRubricas = JSON.parse(savedRubricas);
-      } catch(e) { console.warn("Error loading rubricas", e); }
+    // Load rubricas from localStorage for current year
+    function loadRubricas() {
+      const savedRubricas = localStorage.getItem("cgdDynamicRubricas_" + selectedYear);
+      if (savedRubricas) {
+        try {
+          dynamicRubricas = JSON.parse(savedRubricas);
+        } catch(e) { 
+          console.warn("Error loading rubricas", e);
+          dynamicRubricas = {};
+        }
+      } else {
+        dynamicRubricas = {};
+      }
     }
+
+    // Initial load
+    loadRubricas();
 
     function saveRubricas() {
       localStorage.setItem("cgdDynamicRubricas_" + selectedYear, JSON.stringify(dynamicRubricas));
