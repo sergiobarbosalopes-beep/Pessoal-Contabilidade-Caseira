@@ -369,11 +369,15 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   font-size: 1rem; font-weight: 700; color: var(--text);
   text-align: center; flex: 1;
 }
+:root {
+  --year-nav-size: 56px;
+  --year-row-gap: 16px;
+}
 .month-grid {
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 8px;
-  width: 100%;
-  margin-left: 0;
+  width: calc(100% - (var(--year-nav-size) * 2) - (var(--year-row-gap) * 2));
+  margin-left: calc(var(--year-nav-size) + var(--year-row-gap));
 }
 .month-tile {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -631,7 +635,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 8px;
-  padding: 0 10px 12px;
+  width: calc(100% - (var(--year-nav-size) * 2) - (var(--year-row-gap) * 2));
+  margin-left: calc(var(--year-nav-size) + var(--year-row-gap));
+  padding: 0 0 12px;
 }
 .rubrica-month-input {
   display: flex;
@@ -673,11 +679,19 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 
 /* Responsive for rubrica grid */
 @media (max-width: 1024px) {
+  .month-grid {
+    width: calc(100% - (var(--year-nav-size) * 2) - (var(--year-row-gap) * 2));
+    margin-left: calc(var(--year-nav-size) + var(--year-row-gap));
+  }
   .rubrica-inputs-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 @media (max-width: 700px) {
+  .month-grid {
+    width: 100%;
+    margin-left: 0;
+  }
   .rubrica-row-header {
     padding: 10px;
   }
@@ -685,11 +699,15 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
     justify-content: flex-end;
   }
   .rubrica-inputs-grid {
+    width: 100%;
+    margin-left: 0;
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 @media (max-width: 480px) {
   .rubrica-inputs-grid {
+    width: 100%;
+    margin-left: 0;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
