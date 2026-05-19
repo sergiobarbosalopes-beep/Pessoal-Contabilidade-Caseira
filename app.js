@@ -386,11 +386,7 @@
       rubricasDynamic.querySelectorAll(".rubrica-delete-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           const id = btn.dataset.delete;
-          if (confirm("Eliminar esta rubrica?")) {
-            delete dynamicRubricas[id];
-            saveRubricas();
-            renderRubricas();
-          }
+          openDeleteModal(id);
         });
       });
     }
@@ -401,6 +397,11 @@
     const modalCancel = document.getElementById("modalCancel");
     const modalConfirm = document.getElementById("modalConfirm");
     const rubricaNameInput = document.getElementById("rubricaNameInput");
+    const deleteModalOverlay = document.getElementById("deleteModalOverlay");
+    const deleteModalClose = document.getElementById("deleteModalClose");
+    const deleteModalCancel = document.getElementById("deleteModalCancel");
+    const deleteModalConfirm = document.getElementById("deleteModalConfirm");
+    let pendingDeleteId = null;
 
     function openModal() {
       if (modalOverlay) {
@@ -416,6 +417,28 @@
       if (modalOverlay) {
         modalOverlay.classList.remove("active");
       }
+    }
+
+    function openDeleteModal(id) {
+      pendingDeleteId = id;
+      if (deleteModalOverlay) {
+        deleteModalOverlay.classList.add("active");
+      }
+    }
+
+    function closeDeleteModal() {
+      pendingDeleteId = null;
+      if (deleteModalOverlay) {
+        deleteModalOverlay.classList.remove("active");
+      }
+    }
+
+    function confirmDeleteRubrica() {
+      if (!pendingDeleteId) return;
+      delete dynamicRubricas[pendingDeleteId];
+      saveRubricas();
+      renderRubricas();
+      closeDeleteModal();
     }
 
     function confirmAddRubrica() {
@@ -440,12 +463,26 @@
         if (e.target === modalOverlay) closeModal();
       });
     }
+    if (deleteModalClose) deleteModalClose.addEventListener("click", closeDeleteModal);
+    if (deleteModalCancel) deleteModalCancel.addEventListener("click", closeDeleteModal);
+    if (deleteModalConfirm) deleteModalConfirm.addEventListener("click", confirmDeleteRubrica);
+    if (deleteModalOverlay) {
+      deleteModalOverlay.addEventListener("click", (e) => {
+        if (e.target === deleteModalOverlay) closeDeleteModal();
+      });
+    }
     if (rubricaNameInput) {
       rubricaNameInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") confirmAddRubrica();
         if (e.key === "Escape") closeModal();
       });
     }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+        closeDeleteModal();
+      }
+    });
 
     if (addRubricaBtn) {
       addRubricaBtn.addEventListener("click", openModal);
