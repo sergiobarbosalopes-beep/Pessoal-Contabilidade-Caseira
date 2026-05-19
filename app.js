@@ -382,5 +382,108 @@
 
     updateYearDisplay();
     renderMonthGrid();
+
+    // ── Dynamic Rubricas ────────────────────────────────
+    const rubricasDynamic = document.getElementById("rubricasDynamic");
+    const addRubricaBtn = document.getElementById("addRubricaBtn");
+
+    // Rubricas data structure: { id: { name: string, values: [12 months] } }
+    let dynamicRubricas = {};
+
+    // Load from localStorage
+    const savedRubricas = localStorage.getItem("cgdDynamicRubricas_" + selectedYear);
+    if (savedRubricas) {
+      try {
+        dynamicRubricas = JSON.parse(savedRubricas);
+      } catch(e) { console.warn("Error loading rubricas", e); }
+    }
+
+    function saveRubricas() {
+      localStorage.setItem("cgdDynamicRubricas_" + selectedYear, JSON.stringify(dynamicRubricas));
+    }
+
+    function generateId() {
+      return "r_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
+    }
+
+    function renderRubricas() {
+      if (!rubricasDynamic) return;
+      
+      const monthLabels = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+      
+      rubricasDynamic.innerHTML = Object.entries(dynamicRubricas).map(([id, rubrica]) => {
+        const total = rubrica.values.reduce((sum, val) => sum + (val || 0), 0);
+        const inputsHtml = monthLabels.map((label, i) => `
+          <div class="rubrica-month-input">
+            <label>${label}</label>
+            <input type="number" data-rubrica-id="${id}" data-month="${i}" value="${rubrica.values[i] || ""}" placeholder="0" step="0.01">
+          </div>
+        `).join("");
+        
+        return `
+          <div class="rubrica-row" data-id="${id}">
+            <div class="rubrica-row-header">
+              <h4>${rubrica.name}</h4>
+              <div class="rubrica-row-actions">
+                <span class="rubrica-row-total">€ ${total.toFixed(2).replace(".", ",")}</span>
+                <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
+              </div>
+            </div>
+            <div class="rubrica-inputs-grid">
+              ${inputsHtml}
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // Add event listeners for inputs
+      rubricasDynamic.querySelectorAll("input[data-rubrica-id]").forEach(input => {
+        input.addEventListener("input", () => {
+          const id = input.dataset.rubricaId;
+          const monthIdx = parseInt(input.dataset.month, 10);
+          const val = parseFloat(input.value) || 0;
+          if (dynamicRubricas[id]) {
+            dynamicRubricas[id].values[monthIdx] = val;
+            saveRubricas();
+            // Update total
+            const total = dynamicRubricas[id].values.reduce((sum, v) => sum + (v || 0), 0);
+            const row = input.closest(".rubrica-row");
+            const totalEl = row.querySelector(".rubrica-row-total");
+            if (totalEl) totalEl.textContent = "€ " + total.toFixed(2).replace(".", ",");
+          }
+        });
+      });
+
+      // Add event listeners for delete buttons
+      rubricasDynamic.querySelectorAll(".rubrica-delete-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.delete;
+          if (confirm("Eliminar esta rubrica?")) {
+            delete dynamicRubricas[id];
+            saveRubricas();
+            renderRubricas();
+          }
+        });
+      });
+    }
+
+    function addRubrica() {
+      const name = prompt("Nome da nova rubrica:");
+      if (name && name.trim()) {
+        const id = generateId();
+        dynamicRubricas[id] = {
+          name: name.trim(),
+          values: Array(12).fill(0)
+        };
+        saveRubricas();
+        renderRubricas();
+      }
+    }
+
+    if (addRubricaBtn) {
+      addRubricaBtn.addEventListener("click", addRubrica);
+    }
+
+    renderRubricas();
   }
 })();

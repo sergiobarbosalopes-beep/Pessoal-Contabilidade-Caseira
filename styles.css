@@ -442,7 +442,127 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   transform: scale(0.96);
 }
 
-/* ── RUBRICAS ────────────────────────────────────────── */
+/* ── RUBRICAS DYNAMIC ─────────────────────────────── */
+.rubricas-dynamic {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+.rubrica-row {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.rubrica-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(15,118,110,0.08), rgba(20,184,166,0.04));
+  border-bottom: 1px solid var(--glass-border);
+}
+.rubrica-row-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.rubrica-row-total {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #115e59;
+}
+.rubrica-row-actions {
+  display: flex;
+  gap: 8px;
+}
+.rubrica-delete-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(239,68,68,0.1);
+  color: #dc2626;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all .2s;
+}
+.rubrica-delete-btn:hover {
+  background: rgba(239,68,68,0.2);
+}
+.rubrica-inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px;
+}
+.rubrica-month-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.rubrica-month-input label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.rubrica-month-input input {
+  width: 100%;
+  padding: 8px 4px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--teal);
+  background: rgba(255,255,255,0.8);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  text-align: center;
+  transition: all .2s;
+}
+.rubrica-month-input input:focus {
+  outline: none;
+  border-color: var(--teal);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(15,118,110,.1);
+}
+.rubrica-month-input input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.rubrica-month-input input::-webkit-outer-spin-button,
+.rubrica-month-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.rubrica-month-input input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Responsive for rubrica grid */
+@media (max-width: 1024px) {
+  .rubrica-inputs-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .rubrica-inputs-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .rubrica-inputs-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ── RUBRICAS (old - keep for reference) ───────────── */
 .rubricas-container {
   margin-top: 28px;
   display: flex; flex-direction: column; gap: 16px;
