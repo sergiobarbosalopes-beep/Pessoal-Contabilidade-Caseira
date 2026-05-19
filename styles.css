@@ -523,10 +523,11 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   box-shadow: 0 2px 8px rgba(15,118,110,.25);
   flex-shrink: 0;
 }
-.year-nav-btn svg {
-  width: 24px; height: 24px;
-  stroke: #fff;
-  fill: none;
+.year-nav-btn .btn-icon {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
 }
 .year-nav-btn:hover:not(:disabled) {
   transform: scale(1.08);
@@ -547,9 +548,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   padding: 4px 16px;
 }
 .year-icon {
-  color: var(--teal);
-  opacity: 0.8;
-  flex-shrink: 0;
+  font-size: 1.5rem;
+  line-height: 1;
 }
 .year-label {
   font-size: .75rem;
