@@ -369,9 +369,16 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   font-size: 1rem; font-weight: 700; color: var(--text);
   text-align: center; flex: 1;
 }
+:root {
+  --rubrica-name-col: 170px;
+  --rubrica-actions-col: 40px;
+  --rubrica-inline-gap: 10px;
+}
 .month-grid {
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 8px;
+  width: calc(100% - var(--rubrica-name-col) - var(--rubrica-actions-col) - (var(--rubrica-inline-gap) * 2));
+  margin-left: calc(var(--rubrica-name-col) + var(--rubrica-inline-gap));
 }
 .month-tile {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -592,9 +599,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 .rubrica-row-header {
   display: grid;
-  grid-template-columns: minmax(140px, 180px) 1fr auto;
+  grid-template-columns: var(--rubrica-name-col) 1fr var(--rubrica-actions-col);
   align-items: center;
-  gap: 10px;
+  gap: var(--rubrica-inline-gap);
   padding: 12px;
   background: linear-gradient(135deg, rgba(15,118,110,0.08), rgba(20,184,166,0.04));
 }
@@ -604,14 +611,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   font-weight: 700;
   color: var(--text);
 }
-.rubrica-row-total {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: #115e59;
-}
 .rubrica-row-actions {
   display: flex;
-  gap: 8px;
+  justify-content: flex-end;
 }
 .rubrica-delete-btn {
   width: 32px;
@@ -676,14 +678,21 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 
 /* Responsive for rubrica grid */
 @media (max-width: 1024px) {
+  :root {
+    --rubrica-name-col: 150px;
+  }
   .rubrica-row-header {
-    grid-template-columns: minmax(120px, 160px) 1fr auto;
+    grid-template-columns: var(--rubrica-name-col) 1fr var(--rubrica-actions-col);
   }
   .rubrica-inputs-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 @media (max-width: 700px) {
+  .month-grid {
+    width: 100%;
+    margin-left: 0;
+  }
   .rubrica-row-header {
     grid-template-columns: 1fr;
     gap: 10px;

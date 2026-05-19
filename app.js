@@ -338,7 +338,6 @@
       if (!rubricasDynamic) return;
       
       rubricasDynamic.innerHTML = Object.entries(dynamicRubricas).map(([id, rubrica]) => {
-        const total = rubrica.values.reduce((sum, val) => sum + (val || 0), 0);
         const inputsHtml = Array.from({ length: 12 }, (_, i) => `
           <div class="rubrica-month-input">
             <input type="number" data-rubrica-id="${id}" data-month="${i}" value="${rubrica.values[i] || ""}" placeholder="0" step="0.01">
@@ -353,7 +352,6 @@
                 ${inputsHtml}
               </div>
               <div class="rubrica-row-actions">
-                <span class="rubrica-row-total">€ ${total.toFixed(2).replace(".", ",")}</span>
                 <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
               </div>
             </div>
@@ -370,11 +368,6 @@
           if (dynamicRubricas[id]) {
             dynamicRubricas[id].values[monthIdx] = val;
             saveRubricas();
-            // Update total
-            const total = dynamicRubricas[id].values.reduce((sum, v) => sum + (v || 0), 0);
-            const row = input.closest(".rubrica-row");
-            const totalEl = row.querySelector(".rubrica-row-total");
-            if (totalEl) totalEl.textContent = "€ " + total.toFixed(2).replace(".", ",");
           }
         });
       });
