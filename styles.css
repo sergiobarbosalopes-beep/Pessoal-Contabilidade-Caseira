@@ -561,11 +561,16 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 .modal-btn-confirm {
   background: linear-gradient(135deg, var(--teal), var(--teal-dark));
   color: #fff;
-  box-shadow: 0 4px 12px rgba(15,118,110,.3);
+  -webkit-text-fill-color: #fff;
+  box-shadow: 0 4px 14px rgba(15,118,110,.35);
 }
 .modal-btn-confirm:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(15,118,110,.4);
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(15,118,110,.45);
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+}
+.modal-btn-confirm:active {
+  transform: scale(0.96);
 }
 
 /* ── RUBRICAS DYNAMIC ─────────────────────────────── */
