@@ -348,12 +348,12 @@
           <div class="rubrica-row" data-id="${id}">
             <div class="rubrica-row-header">
               <h4>${rubrica.name}</h4>
-              <div class="rubrica-inputs-grid">
-                ${inputsHtml}
-              </div>
               <div class="rubrica-row-actions">
                 <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
               </div>
+            </div>
+            <div class="rubrica-inputs-grid">
+              ${inputsHtml}
             </div>
           </div>
         `;

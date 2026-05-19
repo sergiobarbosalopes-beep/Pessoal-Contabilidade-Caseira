@@ -369,16 +369,11 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   font-size: 1rem; font-weight: 700; color: var(--text);
   text-align: center; flex: 1;
 }
-:root {
-  --rubrica-name-col: 170px;
-  --rubrica-actions-col: 40px;
-  --rubrica-inline-gap: 10px;
-}
 .month-grid {
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 8px;
-  width: calc(100% - var(--rubrica-name-col) - var(--rubrica-actions-col) - (var(--rubrica-inline-gap) * 2));
-  margin-left: calc(var(--rubrica-name-col) + var(--rubrica-inline-gap));
+  width: 100%;
+  margin-left: 0;
 }
 .month-tile {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -598,16 +593,16 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   overflow: hidden;
 }
 .rubrica-row-header {
-  display: grid;
-  grid-template-columns: var(--rubrica-name-col) 1fr var(--rubrica-actions-col);
+  display: flex;
   align-items: center;
-  gap: var(--rubrica-inline-gap);
-  padding: 12px;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 10px 10px;
   background: linear-gradient(135deg, rgba(15,118,110,0.08), rgba(20,184,166,0.04));
 }
 .rubrica-row-header h4 {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text);
 }
@@ -636,7 +631,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 8px;
-  padding: 0;
+  padding: 0 10px 12px;
 }
 .rubrica-month-input {
   display: flex;
@@ -678,24 +673,13 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 
 /* Responsive for rubrica grid */
 @media (max-width: 1024px) {
-  :root {
-    --rubrica-name-col: 150px;
-  }
-  .rubrica-row-header {
-    grid-template-columns: var(--rubrica-name-col) 1fr var(--rubrica-actions-col);
-  }
   .rubrica-inputs-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 @media (max-width: 700px) {
-  .month-grid {
-    width: 100%;
-    margin-left: 0;
-  }
   .rubrica-row-header {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    padding: 10px;
   }
   .rubrica-row-actions {
     justify-content: flex-end;
