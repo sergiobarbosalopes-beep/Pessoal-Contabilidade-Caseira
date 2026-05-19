@@ -72,6 +72,27 @@
         </section>
 
         <section class="content-section reveal">
+          <div class="section-title">
+            <h2>Mês Selecionado</h2>
+            <p>Navega entre os meses para ver os detalhes de cada período</p>
+          </div>
+          <div class="glass-panel">
+            <div class="month-nav">
+              <button class="month-nav-btn" id="monthPrev" aria-label="Mês anterior">←</button>
+              <span class="month-nav-label" id="monthLabel">Maio 2026</span>
+              <button class="month-nav-btn" id="monthNext" aria-label="Mês seguinte">→</button>
+            </div>
+            <div class="month-grid" id="monthGrid">
+              <!-- Rendered by JS -->
+            </div>
+            <div class="rubrica-placeholder" id="rubricaPlaceholder">
+              <strong>Rubricas do mês</strong><br/>
+              Aqui serão adicionados tiles com montantes de cada rubrica para o mês selecionado.
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section reveal">
           <div class="glass-panel page-panel">
             <h1>Detalhes da Conta</h1>
             <p>

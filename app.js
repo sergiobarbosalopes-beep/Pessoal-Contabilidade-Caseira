@@ -218,4 +218,83 @@
       });
     }
   }
+
+  // ── Month Selector (CGD page) ─────────────────────────
+  const monthGrid = document.getElementById("monthGrid");
+  const monthLabel = document.getElementById("monthLabel");
+  const monthPrev = document.getElementById("monthPrev");
+  const monthNext = document.getElementById("monthNext");
+
+  if (monthGrid && monthLabel && monthPrev && monthNext) {
+    const months = [
+      { short: "Jan", full: "Janeiro" },
+      { short: "Fev", full: "Fevereiro" },
+      { short: "Mar", full: "Março" },
+      { short: "Abr", full: "Abril" },
+      { short: "Mai", full: "Maio" },
+      { short: "Jun", full: "Junho" },
+      { short: "Jul", full: "Julho" },
+      { short: "Ago", full: "Agosto" },
+      { short: "Set", full: "Setembro" },
+      { short: "Out", full: "Outubro" },
+      { short: "Nov", full: "Novembro" },
+      { short: "Dez", full: "Dezembro" }
+    ];
+
+    const currentYear = 2026;
+    const currentMonthIndex = new Date().getMonth(); // 0-11 (May = 4 in real, but we mock May = 4)
+    let selectedMonth = 4; // Maio (index 4)
+
+    function renderMonthGrid() {
+      monthGrid.innerHTML = months
+        .map((m, i) => {
+          let stateClass = "";
+          if (i === selectedMonth) {
+            stateClass = "active";
+          } else if (i < selectedMonth) {
+            stateClass = "past";
+          } else {
+            stateClass = "future";
+          }
+          return `
+            <div class="month-tile ${stateClass}" data-month="${i}">
+              <span>${m.short}</span>
+              <strong>${i + 1}</strong>
+            </div>
+          `;
+        })
+        .join("");
+
+      // Update label
+      monthLabel.textContent = `${months[selectedMonth].full} ${currentYear}`;
+
+      // Update button states
+      monthPrev.disabled = selectedMonth === 0;
+      monthNext.disabled = selectedMonth === 11;
+
+      // Add click listeners to tiles
+      monthGrid.querySelectorAll(".month-tile").forEach((tile) => {
+        tile.addEventListener("click", () => {
+          selectedMonth = parseInt(tile.dataset.month, 10);
+          renderMonthGrid();
+        });
+      });
+    }
+
+    monthPrev.addEventListener("click", () => {
+      if (selectedMonth > 0) {
+        selectedMonth--;
+        renderMonthGrid();
+      }
+    });
+
+    monthNext.addEventListener("click", () => {
+      if (selectedMonth < 11) {
+        selectedMonth++;
+        renderMonthGrid();
+      }
+    });
+
+    renderMonthGrid();
+  }
 })();
