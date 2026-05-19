@@ -73,40 +73,69 @@
 
         <section class="content-section reveal">
           <div class="section-title">
-            <h2>Mês Selecionado</h2>
+            <h2>Despesas Registadas</h2>
             <p>Navega entre os meses para ver os detalhes de cada período</p>
           </div>
-          <div class="glass-panel">
-            <div class="month-nav">
-              <button class="month-nav-btn" id="monthPrev" aria-label="Mês anterior">←</button>
-              <span class="month-nav-label" id="monthLabel">Maio 2026</span>
-              <button class="month-nav-btn" id="monthNext" aria-label="Mês seguinte">→</button>
-            </div>
-            <div class="month-grid" id="monthGrid">
-              <!-- Rendered by JS -->
-            </div>
-            <div class="rubrica-placeholder" id="rubricaPlaceholder">
-              <strong>Rubricas do mês</strong><br/>
-              Aqui serão adicionados tiles com montantes de cada rubrica para o mês selecionado.
-            </div>
+          <div class="month-nav">
+            <button class="month-nav-btn" id="monthPrev" aria-label="Mês anterior">←</button>
+            <span class="month-nav-label" id="monthLabel">Maio 2026</span>
+            <button class="month-nav-btn" id="monthNext" aria-label="Mês seguinte">→</button>
           </div>
-        </section>
+          <div class="month-grid" id="monthGrid">
+            <!-- Rendered by JS -->
+          </div>
 
-        <section class="content-section reveal">
-          <div class="glass-panel page-panel">
-            <h1>Detalhes da Conta</h1>
-            <p>
-              Esta página está preparada para receber a integração com dados reais da conta CGD. 
-              Poderás visualizar o histórico de movimentos, categorização automática de despesas, 
-              alertas de custos recorrentes e projeções de saldo futuro.
-            </p>
-            <p style="margin-top:16px;">
-              <strong>Funcionalidades planeadas:</strong><br/>
-              • Listagem de movimentos com filtros<br/>
-              • Gráfico de evolução de saldo<br/>
-              • Categorização de despesas<br/>
-              • Alertas de débitos diretos
-            </p>
+          <!-- Rubricas -->
+          <div class="rubricas-container">
+            <div class="rubrica-section" data-rubrica="prestacoes">
+              <div class="rubrica-header">
+                <h3>Prestações</h3>
+                <span class="rubrica-total" id="totalPrestacoes">€ 0</span>
+              </div>
+              <div class="subrubricas" id="subPrestacoes">
+                <!-- Subrubricas serão adicionadas aqui -->
+              </div>
+            </div>
+
+            <div class="rubrica-section" data-rubrica="extras">
+              <div class="rubrica-header">
+                <h3>Extras</h3>
+                <span class="rubrica-total" id="totalExtras">€ 0</span>
+              </div>
+              <div class="subrubricas" id="subExtras">
+                <!-- Subrubricas serão adicionadas aqui -->
+              </div>
+            </div>
+
+            <div class="rubrica-section" data-rubrica="impostos">
+              <div class="rubrica-header">
+                <h3>Impostos</h3>
+                <span class="rubrica-total" id="totalImpostos">€ 0</span>
+              </div>
+              <div class="subrubricas" id="subImpostos">
+                <!-- Subrubricas serão adicionadas aqui -->
+              </div>
+            </div>
+
+            <div class="rubrica-section" data-rubrica="creditos">
+              <div class="rubrica-header">
+                <h3>Créditos</h3>
+                <span class="rubrica-total" id="totalCreditos">€ 0</span>
+              </div>
+              <div class="subrubricas" id="subCreditos">
+                <!-- Subrubricas serão adicionadas aqui -->
+              </div>
+            </div>
+
+            <div class="rubrica-section" data-rubrica="aprovisionamento">
+              <div class="rubrica-header">
+                <h3>Aprovisionamento</h3>
+                <span class="rubrica-total" id="totalAprovisionamento">€ 0</span>
+              </div>
+              <div class="subrubricas" id="subAprovisionamento">
+                <!-- Subrubricas serão adicionadas aqui -->
+              </div>
+            </div>
           </div>
         </section>
 

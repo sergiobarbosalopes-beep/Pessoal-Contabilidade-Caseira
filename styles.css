@@ -408,10 +408,69 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 .month-tile.past { opacity: 0.4; }
 .month-tile.future { opacity: 0.35; }
-.rubrica-placeholder {
-  margin-top: 20px; padding: 24px;
-  border: 2px dashed var(--glass-border); border-radius: var(--radius);
-  text-align: center; color: var(--text-muted); font-size: .9rem;
+
+/* ── RUBRICAS ────────────────────────────────────────── */
+.rubricas-container {
+  margin-top: 28px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.rubrica-section {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all .25s;
+}
+.rubrica-section:hover {
+  box-shadow: var(--shadow-sm);
+}
+.rubrica-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(15,118,110,0.06), rgba(20,184,166,0.03));
+  border-bottom: 1px solid var(--glass-border);
+  cursor: pointer;
+}
+.rubrica-header h3 {
+  margin: 0; font-size: 1rem; font-weight: 700;
+  color: var(--text);
+}
+.rubrica-total {
+  font-size: 1.1rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--teal), var(--amber));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.subrubricas {
+  padding: 12px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+  min-height: 48px;
+}
+.subrubricas:empty::after {
+  content: "Sem subrubricas definidas";
+  color: var(--text-muted);
+  font-size: .85rem;
+  font-style: italic;
+  display: block;
+  text-align: center;
+  padding: 8px 0;
+}
+.subrubrica-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  transition: all .2s;
+}
+.subrubrica-item:hover {
+  background: rgba(255,255,255,0.8);
+  border-color: rgba(15,118,110,.2);
+}
+.subrubrica-name {
+  font-size: .9rem; font-weight: 500; color: var(--text);
+}
+.subrubrica-value {
+  font-size: .95rem; font-weight: 700; color: var(--teal);
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────── */
