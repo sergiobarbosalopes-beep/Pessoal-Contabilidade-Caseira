@@ -337,13 +337,10 @@
     function renderRubricas() {
       if (!rubricasDynamic) return;
       
-      const monthLabels = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-      
       rubricasDynamic.innerHTML = Object.entries(dynamicRubricas).map(([id, rubrica]) => {
         const total = rubrica.values.reduce((sum, val) => sum + (val || 0), 0);
-        const inputsHtml = monthLabels.map((label, i) => `
+        const inputsHtml = Array.from({ length: 12 }, (_, i) => `
           <div class="rubrica-month-input">
-            <label>${label}</label>
             <input type="number" data-rubrica-id="${id}" data-month="${i}" value="${rubrica.values[i] || ""}" placeholder="0" step="0.01">
           </div>
         `).join("");
