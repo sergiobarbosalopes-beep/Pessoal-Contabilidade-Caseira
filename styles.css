@@ -370,7 +370,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   text-align: center; flex: 1;
 }
 :root {
-  --year-nav-size: 56px;
+  --year-nav-size: 48px;
   --year-row-gap: 16px;
 }
 .month-grid {
@@ -425,23 +425,23 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 36px;
+  height: 36px;
   background: linear-gradient(135deg, var(--teal), var(--teal-dark));
   color: #fff;
   border: none;
-  border-radius: 14px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all .25s ease;
-  box-shadow: 0 4px 14px rgba(15,118,110,.35);
-  font-size: 1.8rem;
+  box-shadow: 0 2px 8px rgba(15,118,110,.25);
+  font-size: 1.4rem;
   font-weight: 800;
   line-height: 1;
-  text-shadow: 0 2px 4px rgba(0,0,0,.2);
+  text-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
 .add-rubrica-btn:hover {
   transform: scale(1.08);
-  box-shadow: 0 6px 24px rgba(15,118,110,.45);
+  box-shadow: 0 4px 12px rgba(15,118,110,.35);
   background: linear-gradient(135deg, #0d9488, #0f766e);
 }
 .add-rubrica-btn:active {
@@ -615,8 +615,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   justify-content: flex-end;
 }
 .rubrica-delete-btn {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -625,7 +625,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   transition: all .25s ease;
   box-shadow: 0 2px 8px rgba(15,118,110,.25);
@@ -633,15 +633,15 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 .rubrica-delete-btn:hover {
   transform: scale(1.08);
-  box-shadow: 0 4px 12px rgba(15,118,110,.35);
-  background: linear-gradient(135deg, #0d9488, #0f766e);
+  box-shadow: 0 4px 12px rgba(220,38,38,.35);
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
 }
 .rubrica-delete-btn:active {
   transform: scale(0.96);
 }
 .rubrica-move-btn {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -650,7 +650,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   transition: all .25s ease;
   box-shadow: 0 2px 8px rgba(15,118,110,.25);
@@ -763,22 +763,22 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   background: linear-gradient(135deg, var(--teal), var(--teal-dark));
   color: #fff;
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all .25s ease;
   box-shadow: 0 4px 14px rgba(15,118,110,.35);
   flex-shrink: 0;
 }
 .year-nav-btn .nav-arrow {
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.4rem;
+  font-weight: 900;
   color: #fff;
-  text-shadow: 0 2px 4px rgba(0,0,0,.2);
+  text-shadow: 0 3px 6px rgba(0,0,0,.4), 0 0 2px rgba(255,255,255,.5);
   letter-spacing: -4px;
 }
 .year-nav-btn:hover {
