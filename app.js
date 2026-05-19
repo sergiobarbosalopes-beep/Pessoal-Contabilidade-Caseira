@@ -219,13 +219,16 @@
     }
   }
 
-  // ── Month Selector & Subrubricas (CGD page) ───────────
+  // ── Year & Month Selector with Subrubricas (CGD page) ───────────
+  const yearValue = document.getElementById("yearValue");
+  const yearPrev = document.getElementById("yearPrev");
+  const yearNext = document.getElementById("yearNext");
   const monthGrid = document.getElementById("monthGrid");
   const monthLabel = document.getElementById("monthLabel");
   const monthPrev = document.getElementById("monthPrev");
   const monthNext = document.getElementById("monthNext");
 
-  if (monthGrid && monthLabel && monthPrev && monthNext) {
+  if (monthGrid && monthLabel && monthPrev && monthNext && yearValue) {
     const months = [
       { short: "Jan", full: "Janeiro" },
       { short: "Fev", full: "Fevereiro" },
@@ -241,12 +244,14 @@
       { short: "Dez", full: "Dezembro" }
     ];
 
-    const currentYear = 2026;
+    const MIN_YEAR = 2024;
+    const MAX_YEAR = 2030;
+    let selectedYear = 2026;
     let selectedMonth = 4; // Maio (index 4)
 
-    // ── CGD Monthly Expenses Data (12 months x subrubricas) ────
-    // Structure: { rubrica: { subrubrica: [jan, fev, mar, ..., dez] } }
-    const cgdExpenses = {
+    // ── CGD Expenses Data Storage (per year) ────
+    // Structure: cgdAllYears[year] = { rubrica: { subrubrica: [jan..dez] } }
+    const defaultExpenses = () => ({
       prestacoes: {
         "credito-habitacao": Array(12).fill(0),
         "agua": Array(12).fill(0),
@@ -256,28 +261,61 @@
       impostos: {},
       creditos: {},
       aprovisionamento: {}
-    };
+    });
 
-    // Load from localStorage if exists
-    const savedExpenses = localStorage.getItem("cgdExpenses2026");
-    if (savedExpenses) {
+    let cgdAllYears = {};
+
+    // Load all years from localStorage
+    const savedAllYears = localStorage.getItem("cgdExpensesAllYears");
+    if (savedAllYears) {
       try {
-        const parsed = JSON.parse(savedExpenses);
-        Object.keys(parsed).forEach(rubrica => {
-          if (cgdExpenses[rubrica]) {
-            Object.keys(parsed[rubrica]).forEach(sub => {
-              if (cgdExpenses[rubrica][sub]) {
-                cgdExpenses[rubrica][sub] = parsed[rubrica][sub];
-              }
-            });
-          }
-        });
+        cgdAllYears = JSON.parse(savedAllYears);
       } catch(e) { console.warn("Error loading saved expenses", e); }
     }
 
+    // Get expenses for a specific year (create if not exists)
+    function getYearExpenses(year) {
+      if (!cgdAllYears[year]) {
+        cgdAllYears[year] = defaultExpenses();
+      }
+      return cgdAllYears[year];
+    }
+
+    // Current year reference
+    let cgdExpenses = getYearExpenses(selectedYear);
+
     // Save to localStorage
     function saveExpenses() {
-      localStorage.setItem("cgdExpenses2026", JSON.stringify(cgdExpenses));
+      localStorage.setItem("cgdExpensesAllYears", JSON.stringify(cgdAllYears));
+    }
+
+    // Update year display
+    function updateYearDisplay() {
+      yearValue.textContent = selectedYear;
+      if (yearPrev) yearPrev.disabled = selectedYear <= MIN_YEAR;
+      if (yearNext) yearNext.disabled = selectedYear >= MAX_YEAR;
+    }
+
+    // Year navigation
+    if (yearPrev) {
+      yearPrev.addEventListener("click", () => {
+        if (selectedYear > MIN_YEAR) {
+          selectedYear--;
+          cgdExpenses = getYearExpenses(selectedYear);
+          updateYearDisplay();
+          renderMonthGrid();
+        }
+      });
+    }
+    if (yearNext) {
+      yearNext.addEventListener("click", () => {
+        if (selectedYear < MAX_YEAR) {
+          selectedYear++;
+          cgdExpenses = getYearExpenses(selectedYear);
+          updateYearDisplay();
+          renderMonthGrid();
+        }
+      });
     }
 
     // Update totals per rubrica
@@ -342,7 +380,7 @@
         .join("");
 
       // Update label
-      monthLabel.textContent = `${months[selectedMonth].full} ${currentYear}`;
+      monthLabel.textContent = `${months[selectedMonth].full} ${selectedYear}`;
 
       // Update button states
       monthPrev.disabled = selectedMonth === 0;
@@ -374,6 +412,7 @@
       }
     });
 
+    updateYearDisplay();
     renderMonthGrid();
   }
 })();

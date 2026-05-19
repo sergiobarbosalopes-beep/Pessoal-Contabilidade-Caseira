@@ -76,6 +76,25 @@
             <h2>Despesas Registadas</h2>
             <p>Navega entre os meses para ver os detalhes de cada período</p>
           </div>
+
+          <!-- Year Selector -->
+          <div class="year-selector">
+            <button class="year-nav-btn" id="yearPrev" aria-label="Ano anterior">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="year-display">
+              <span class="year-label">Ano</span>
+              <span class="year-value" id="yearValue">2026</span>
+            </div>
+            <button class="year-nav-btn" id="yearNext" aria-label="Próximo ano">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
           <div class="month-nav">
             <button class="month-nav-btn" id="monthPrev" aria-label="Mês anterior">←</button>
             <span class="month-nav-label" id="monthLabel">Maio 2026</span>
