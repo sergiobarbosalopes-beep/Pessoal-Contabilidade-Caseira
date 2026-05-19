@@ -386,9 +386,10 @@
                   const value = parseFloat(expense.values?.[monthIdx]) || 0;
                   const isEditable = monthIdx === selectedMonth;
                   return `
-                    <div class="expense-input-tile">
+                    <div class="expense-input-tile ${isEditable ? "is-editable" : "is-locked"}">
                       <input
                         type="number"
+                        class="expense-input ${isEditable ? "editable" : "locked"}"
                         data-expense-input="true"
                         data-rubrica-id="${id}"
                         data-expense-id="${expense.id}"
@@ -426,13 +427,13 @@
               <div class="rubrica-row-header">
                 <h4>${rubrica.name}</h4>
                 <div class="rubrica-row-actions">
-                  <button class="rubrica-toggle-btn" data-toggle-expenses="${id}" aria-label="${isCollapsed ? "Expandir despesas" : "Colapsar despesas"}">${isCollapsed ? "▸" : "▾"}</button>
+                  <button class="rubrica-toggle-btn" data-toggle-expenses="${id}" aria-label="${isCollapsed ? "Expandir despesas" : "Colapsar despesas"}">${isCollapsed ? "⮞" : "⮟"}</button>
                   <button class="rubrica-menu-btn" data-rubrica-menu="${id}" aria-label="Ações da rubrica">⋯</button>
                   <div class="rubrica-menu-dropdown ${openRubricaMenuId === id ? "open" : ""}" data-rubrica-menu-dropdown="${id}">
-                    <button class="rubrica-menu-item" data-rubrica-action="add-expense" data-rubrica-id="${id}">Adicionar despesa</button>
-                    <button class="rubrica-menu-item" data-rubrica-action="move-up" data-rubrica-id="${id}" ${!canMoveUp ? "disabled" : ""}>Mover para cima</button>
-                    <button class="rubrica-menu-item" data-rubrica-action="move-down" data-rubrica-id="${id}" ${!canMoveDown ? "disabled" : ""}>Mover para baixo</button>
-                    <button class="rubrica-menu-item danger" data-rubrica-action="delete" data-rubrica-id="${id}">Eliminar rubrica</button>
+                    <button class="rubrica-menu-item" data-rubrica-action="add-expense" data-rubrica-id="${id}"><span class="menu-icon add">＋</span><span>Adicionar despesa</span></button>
+                    <button class="rubrica-menu-item" data-rubrica-action="move-up" data-rubrica-id="${id}" ${!canMoveUp ? "disabled" : ""}><span class="menu-icon up">▲</span><span>Mover para cima</span></button>
+                    <button class="rubrica-menu-item" data-rubrica-action="move-down" data-rubrica-id="${id}" ${!canMoveDown ? "disabled" : ""}><span class="menu-icon down">▼</span><span>Mover para baixo</span></button>
+                    <button class="rubrica-menu-item danger" data-rubrica-action="delete" data-rubrica-id="${id}"><span class="menu-icon delete">×</span><span>Eliminar rubrica</span></button>
                   </div>
                 </div>
               </div>

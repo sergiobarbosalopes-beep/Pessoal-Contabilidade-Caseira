@@ -673,7 +673,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 700;
   transition: all .25s ease;
   box-shadow: 0 2px 8px rgba(15,118,110,.25);
@@ -721,7 +721,10 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   width: 100%;
   border: none;
   border-radius: 8px;
-  background: rgba(15,118,110,.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
   color: #115e59;
   font-size: 0.85rem;
   font-weight: 700;
@@ -732,7 +735,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 
 .rubrica-menu-item:hover:not(:disabled) {
-  background: rgba(15,118,110,.16);
+  background: rgba(15,118,110,.08);
 }
 
 .rubrica-menu-item:disabled {
@@ -747,6 +750,25 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 
 .rubrica-menu-item.danger:hover {
   background: rgba(220,38,38,.16);
+}
+
+.menu-icon {
+  width: 14px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.menu-icon.add {
+  color: #0f766e;
+}
+
+.menu-icon.up,
+.menu-icon.down {
+  color: #0ea5e9;
+}
+
+.menu-icon.delete {
+  color: #991b1b;
 }
 
 .rubrica-expenses-stack {
@@ -809,11 +831,22 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  padding: 6px 8px;
+  padding: 4px 6px;
   background: rgba(255,255,255,0.85);
   border: 1px solid var(--glass-border);
   border-radius: 10px;
   transition: all .2s;
+}
+
+.expense-input-tile.is-editable {
+  background: rgba(15,118,110,.1);
+  border-color: rgba(15,118,110,.45);
+  box-shadow: 0 0 0 1px rgba(15,118,110,.2);
+}
+
+.expense-input-tile.is-locked {
+  background: rgba(148,163,184,.14);
+  border-color: rgba(148,163,184,.35);
 }
 
 .expense-input-tile:focus-within {
@@ -825,19 +858,23 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 .expense-currency {
   color: #115e59;
   font-weight: 800;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   line-height: 1;
+  opacity: .95;
 }
 
 .expense-input-tile input {
-  flex: 1;
+  width: 100%;
+  min-width: 0;
+  max-width: 28px;
   border: none;
   background: transparent;
   color: #0f172a;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
   outline: none;
   padding: 0;
+  text-align: right;
 }
 
 .expense-input-tile input::placeholder {
@@ -846,7 +883,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 
 .expense-input-tile input:disabled {
-  color: #64748b;
+  color: #94a3b8;
   cursor: not-allowed;
 }
 
