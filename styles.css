@@ -669,60 +669,13 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   opacity: 0.3;
   cursor: not-allowed;
 }
-.rubrica-inputs-grid {
-  display: none;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 8px;
-  width: calc(100% - (var(--year-nav-size) * 2) - (var(--year-row-gap) * 2));
-  margin-left: calc(var(--year-nav-size) + var(--year-row-gap));
-  padding: 0 0 12px;
-}
-.rubrica-month-input {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-.rubrica-month-input input {
-  width: 100%;
-  padding: 9px 4px;
-  font-family: inherit;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--teal);
-  background: rgba(255,255,255,0.8);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  text-align: center;
-  transition: all .2s;
-}
-.rubrica-month-input input:focus {
-  outline: none;
-  border-color: var(--teal);
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(15,118,110,.1);
-}
-.rubrica-month-input input::placeholder {
-  color: var(--text-muted);
-  font-weight: 400;
-}
-.rubrica-month-input input::-webkit-outer-spin-button,
-.rubrica-month-input input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.rubrica-month-input input[type=number] {
-  -moz-appearance: textfield;
-}
+
 
 /* Responsive for rubrica grid */
 @media (max-width: 1024px) {
   .month-grid {
     width: calc(100% - (var(--year-nav-size) * 2) - (var(--year-row-gap) * 2));
     margin-left: calc(var(--year-nav-size) + var(--year-row-gap));
-  }
-  .rubrica-inputs-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 @media (max-width: 700px) {
@@ -736,19 +689,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   .rubrica-row-actions {
     justify-content: flex-end;
   }
-  .rubrica-inputs-grid {
-    width: 100%;
-    margin-left: 0;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }
-@media (max-width: 480px) {
-  .rubrica-inputs-grid {
-    width: 100%;
-    margin-left: 0;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
+
 
 /* ── YEAR SELECTOR ───────────────────────────────────── */
 .year-row {

@@ -339,12 +339,6 @@
       
       const entries = Object.entries(dynamicRubricas);
       rubricasDynamic.innerHTML = entries.map(([id, rubrica], index) => {
-        const inputsHtml = Array.from({ length: 12 }, (_, i) => `
-          <div class="rubrica-month-input">
-            <input type="number" data-rubrica-id="${id}" data-month="${i}" value="${rubrica.values[i] || ""}" placeholder="0" step="0.01">
-          </div>
-        `).join("");
-        
         const canMoveUp = index > 0;
         const canMoveDown = index < entries.length - 1;
         
@@ -358,25 +352,9 @@
                 <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
               </div>
             </div>
-            <div class="rubrica-inputs-grid">
-              ${inputsHtml}
-            </div>
           </div>
         `;
       }).join("");
-
-      // Add event listeners for inputs
-      rubricasDynamic.querySelectorAll("input[data-rubrica-id]").forEach(input => {
-        input.addEventListener("input", () => {
-          const id = input.dataset.rubricaId;
-          const monthIdx = parseInt(input.dataset.month, 10);
-          const val = parseFloat(input.value) || 0;
-          if (dynamicRubricas[id]) {
-            dynamicRubricas[id].values[monthIdx] = val;
-            saveRubricas();
-          }
-        });
-      });
 
       // Add event listeners for move up buttons
       rubricasDynamic.querySelectorAll(".rubrica-move-btn[data-move-up]").forEach(btn => {
