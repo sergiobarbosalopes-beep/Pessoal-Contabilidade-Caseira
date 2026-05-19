@@ -219,7 +219,7 @@
     }
   }
 
-  // ── Month Selector (CGD page) ─────────────────────────
+  // ── Month Selector & Subrubricas (CGD page) ───────────
   const monthGrid = document.getElementById("monthGrid");
   const monthLabel = document.getElementById("monthLabel");
   const monthPrev = document.getElementById("monthPrev");
@@ -242,8 +242,84 @@
     ];
 
     const currentYear = 2026;
-    const currentMonthIndex = new Date().getMonth(); // 0-11 (May = 4 in real, but we mock May = 4)
     let selectedMonth = 4; // Maio (index 4)
+
+    // ── CGD Monthly Expenses Data (12 months x subrubricas) ────
+    // Structure: { rubrica: { subrubrica: [jan, fev, mar, ..., dez] } }
+    const cgdExpenses = {
+      prestacoes: {
+        "credito-habitacao": Array(12).fill(0),
+        "agua": Array(12).fill(0),
+        "eletricidade": Array(12).fill(0)
+      },
+      extras: {},
+      impostos: {},
+      creditos: {},
+      aprovisionamento: {}
+    };
+
+    // Load from localStorage if exists
+    const savedExpenses = localStorage.getItem("cgdExpenses2026");
+    if (savedExpenses) {
+      try {
+        const parsed = JSON.parse(savedExpenses);
+        Object.keys(parsed).forEach(rubrica => {
+          if (cgdExpenses[rubrica]) {
+            Object.keys(parsed[rubrica]).forEach(sub => {
+              if (cgdExpenses[rubrica][sub]) {
+                cgdExpenses[rubrica][sub] = parsed[rubrica][sub];
+              }
+            });
+          }
+        });
+      } catch(e) { console.warn("Error loading saved expenses", e); }
+    }
+
+    // Save to localStorage
+    function saveExpenses() {
+      localStorage.setItem("cgdExpenses2026", JSON.stringify(cgdExpenses));
+    }
+
+    // Update totals per rubrica
+    function updateRubricaTotals() {
+      Object.keys(cgdExpenses).forEach(rubrica => {
+        let total = 0;
+        Object.keys(cgdExpenses[rubrica]).forEach(sub => {
+          total += cgdExpenses[rubrica][sub][selectedMonth] || 0;
+        });
+        const totalEl = document.getElementById("total" + rubrica.charAt(0).toUpperCase() + rubrica.slice(1));
+        if (totalEl) {
+          totalEl.textContent = "€ " + total.toFixed(2).replace(".", ",");
+        }
+      });
+    }
+
+    // Load values into inputs for selected month
+    function loadMonthValues() {
+      document.querySelectorAll(".subrubrica-input").forEach(input => {
+        const rubrica = input.dataset.rubrica;
+        const sub = input.dataset.sub;
+        if (cgdExpenses[rubrica] && cgdExpenses[rubrica][sub]) {
+          const val = cgdExpenses[rubrica][sub][selectedMonth];
+          input.value = val > 0 ? val : "";
+        }
+      });
+      updateRubricaTotals();
+    }
+
+    // Listen to input changes
+    document.querySelectorAll(".subrubrica-input").forEach(input => {
+      input.addEventListener("input", () => {
+        const rubrica = input.dataset.rubrica;
+        const sub = input.dataset.sub;
+        const val = parseFloat(input.value) || 0;
+        if (cgdExpenses[rubrica] && cgdExpenses[rubrica][sub]) {
+          cgdExpenses[rubrica][sub][selectedMonth] = val;
+          saveExpenses();
+          updateRubricaTotals();
+        }
+      });
+    });
 
     function renderMonthGrid() {
       monthGrid.innerHTML = months
@@ -271,6 +347,9 @@
       // Update button states
       monthPrev.disabled = selectedMonth === 0;
       monthNext.disabled = selectedMonth === 11;
+
+      // Load values for selected month
+      loadMonthValues();
 
       // Add click listeners to tiles
       monthGrid.querySelectorAll(".month-tile").forEach((tile) => {
