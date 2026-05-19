@@ -372,8 +372,10 @@
         const canMoveDown = index < entries.length - 1;
         const expenses = Array.isArray(rubrica.expenses) ? rubrica.expenses : [];
         const expensesHtml = expenses.length
-          ? `<div class="rubrica-expenses-list">${expenses
-              .map((expense) => {
+          ? `<div class="rubrica-expenses-stack">${expenses
+              .map((expense, expenseIndex) => {
+                const canMoveExpenseUp = expenseIndex > 0;
+                const canMoveExpenseDown = expenseIndex < expenses.length - 1;
                 const tilesHtml = Array.from({ length: 12 }, (_, monthIdx) => {
                   const value = parseFloat(expense.values?.[monthIdx]) || 0;
                   return `
@@ -395,7 +397,14 @@
 
                 return `
                   <div class="rubrica-expense-row" data-expense-id="${expense.id}">
-                    <div class="rubrica-expense-name">${expense.name}</div>
+                    <div class="rubrica-expense-header">
+                      <div class="rubrica-expense-name">${expense.name}</div>
+                      <div class="rubrica-expense-actions">
+                        <button class="expense-move-btn ${!canMoveExpenseUp ? 'disabled' : ''}" data-expense-move-up="${id}::${expense.id}" ${!canMoveExpenseUp ? 'disabled' : ''} aria-label="Mover despesa para cima">▲</button>
+                        <button class="expense-move-btn ${!canMoveExpenseDown ? 'disabled' : ''}" data-expense-move-down="${id}::${expense.id}" ${!canMoveExpenseDown ? 'disabled' : ''} aria-label="Mover despesa para baixo">▼</button>
+                        <button class="expense-delete-btn" data-expense-delete="${id}::${expense.id}" aria-label="Eliminar despesa">×</button>
+                      </div>
+                    </div>
                     <div class="rubrica-expense-grid">${tilesHtml}</div>
                   </div>
                 `;
@@ -404,14 +413,16 @@
           : "";
         
         return `
-          <div class="rubrica-row" data-id="${id}">
-            <div class="rubrica-row-header">
-              <h4>${rubrica.name}</h4>
-              <div class="rubrica-row-actions">
-                <button class="rubrica-add-expense-btn" data-add-expense="${id}" aria-label="Adicionar despesa">+</button>
-                <button class="rubrica-move-btn ${!canMoveUp ? 'disabled' : ''}" data-move-up="${id}" ${!canMoveUp ? 'disabled' : ''} aria-label="Mover para cima">▲</button>
-                <button class="rubrica-move-btn ${!canMoveDown ? 'disabled' : ''}" data-move-down="${id}" ${!canMoveDown ? 'disabled' : ''} aria-label="Mover para baixo">▼</button>
-                <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
+          <div class="rubrica-block" data-id="${id}">
+            <div class="rubrica-row">
+              <div class="rubrica-row-header">
+                <h4>${rubrica.name}</h4>
+                <div class="rubrica-row-actions">
+                  <button class="rubrica-add-expense-btn" data-add-expense="${id}" aria-label="Adicionar despesa">+</button>
+                  <button class="rubrica-move-btn ${!canMoveUp ? 'disabled' : ''}" data-move-up="${id}" ${!canMoveUp ? 'disabled' : ''} aria-label="Mover para cima">▲</button>
+                  <button class="rubrica-move-btn ${!canMoveDown ? 'disabled' : ''}" data-move-down="${id}" ${!canMoveDown ? 'disabled' : ''} aria-label="Mover para baixo">▼</button>
+                  <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
+                </div>
               </div>
             </div>
             ${expensesHtml}
@@ -440,6 +451,30 @@
         btn.addEventListener("click", () => {
           const id = btn.dataset.addExpense;
           openExpenseModal(id);
+        });
+      });
+
+      // Add event listeners for expense move up buttons
+      rubricasDynamic.querySelectorAll(".expense-move-btn[data-expense-move-up]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const [rubricaId, expenseId] = (btn.dataset.expenseMoveUp || "::").split("::");
+          moveExpenseUp(rubricaId, expenseId);
+        });
+      });
+
+      // Add event listeners for expense move down buttons
+      rubricasDynamic.querySelectorAll(".expense-move-btn[data-expense-move-down]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const [rubricaId, expenseId] = (btn.dataset.expenseMoveDown || "::").split("::");
+          moveExpenseDown(rubricaId, expenseId);
+        });
+      });
+
+      // Add event listeners for expense delete buttons
+      rubricasDynamic.querySelectorAll(".expense-delete-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const [rubricaId, expenseId] = (btn.dataset.expenseDelete || "::").split("::");
+          openDeleteExpenseModal(rubricaId, expenseId);
         });
       });
 
@@ -493,6 +528,30 @@
       }
     }
 
+    function moveExpenseUp(rubricaId, expenseId) {
+      const rubrica = dynamicRubricas[rubricaId];
+      if (!rubrica || !Array.isArray(rubrica.expenses)) return;
+
+      const idx = rubrica.expenses.findIndex((e) => e.id === expenseId);
+      if (idx > 0) {
+        [rubrica.expenses[idx - 1], rubrica.expenses[idx]] = [rubrica.expenses[idx], rubrica.expenses[idx - 1]];
+        saveRubricas();
+        renderRubricas();
+      }
+    }
+
+    function moveExpenseDown(rubricaId, expenseId) {
+      const rubrica = dynamicRubricas[rubricaId];
+      if (!rubrica || !Array.isArray(rubrica.expenses)) return;
+
+      const idx = rubrica.expenses.findIndex((e) => e.id === expenseId);
+      if (idx !== -1 && idx < rubrica.expenses.length - 1) {
+        [rubrica.expenses[idx], rubrica.expenses[idx + 1]] = [rubrica.expenses[idx + 1], rubrica.expenses[idx]];
+        saveRubricas();
+        renderRubricas();
+      }
+    }
+
     // ── Modal for adding rubrica ────────────────────────
     const modalOverlay = document.getElementById("modalOverlay");
     const modalClose = document.getElementById("modalClose");
@@ -503,6 +562,10 @@
     const deleteModalClose = document.getElementById("deleteModalClose");
     const deleteModalCancel = document.getElementById("deleteModalCancel");
     const deleteModalConfirm = document.getElementById("deleteModalConfirm");
+    const deleteExpenseModalOverlay = document.getElementById("deleteExpenseModalOverlay");
+    const deleteExpenseModalClose = document.getElementById("deleteExpenseModalClose");
+    const deleteExpenseModalCancel = document.getElementById("deleteExpenseModalCancel");
+    const deleteExpenseModalConfirm = document.getElementById("deleteExpenseModalConfirm");
     const expenseModalOverlay = document.getElementById("expenseModalOverlay");
     const expenseModalClose = document.getElementById("expenseModalClose");
     const expenseModalCancel = document.getElementById("expenseModalCancel");
@@ -510,6 +573,7 @@
     const expenseNameInput = document.getElementById("expenseNameInput");
     let pendingDeleteId = null;
     let pendingExpenseRubricaId = null;
+    let pendingDeleteExpense = null;
 
     function openModal() {
       if (modalOverlay) {
@@ -541,6 +605,20 @@
       }
     }
 
+    function openDeleteExpenseModal(rubricaId, expenseId) {
+      pendingDeleteExpense = { rubricaId, expenseId };
+      if (deleteExpenseModalOverlay) {
+        deleteExpenseModalOverlay.classList.add("active");
+      }
+    }
+
+    function closeDeleteExpenseModal() {
+      pendingDeleteExpense = null;
+      if (deleteExpenseModalOverlay) {
+        deleteExpenseModalOverlay.classList.remove("active");
+      }
+    }
+
     function openExpenseModal(rubricaId) {
       pendingExpenseRubricaId = rubricaId;
       if (expenseModalOverlay) {
@@ -565,6 +643,22 @@
       saveRubricas();
       renderRubricas();
       closeDeleteModal();
+    }
+
+    function confirmDeleteExpense() {
+      if (!pendingDeleteExpense) return;
+
+      const { rubricaId, expenseId } = pendingDeleteExpense;
+      const rubrica = dynamicRubricas[rubricaId];
+      if (!rubrica || !Array.isArray(rubrica.expenses)) {
+        closeDeleteExpenseModal();
+        return;
+      }
+
+      rubrica.expenses = rubrica.expenses.filter((expense) => expense.id !== expenseId);
+      saveRubricas();
+      renderRubricas();
+      closeDeleteExpenseModal();
     }
 
     function confirmAddRubrica() {
@@ -614,6 +708,14 @@
         if (e.target === deleteModalOverlay) closeDeleteModal();
       });
     }
+    if (deleteExpenseModalClose) deleteExpenseModalClose.addEventListener("click", closeDeleteExpenseModal);
+    if (deleteExpenseModalCancel) deleteExpenseModalCancel.addEventListener("click", closeDeleteExpenseModal);
+    if (deleteExpenseModalConfirm) deleteExpenseModalConfirm.addEventListener("click", confirmDeleteExpense);
+    if (deleteExpenseModalOverlay) {
+      deleteExpenseModalOverlay.addEventListener("click", (e) => {
+        if (e.target === deleteExpenseModalOverlay) closeDeleteExpenseModal();
+      });
+    }
     if (expenseModalClose) expenseModalClose.addEventListener("click", closeExpenseModal);
     if (expenseModalCancel) expenseModalCancel.addEventListener("click", closeExpenseModal);
     if (expenseModalConfirm) expenseModalConfirm.addEventListener("click", confirmAddExpense);
@@ -638,6 +740,7 @@
       if (e.key === "Escape") {
         closeModal();
         closeDeleteModal();
+        closeDeleteExpenseModal();
         closeExpenseModal();
       }
     });

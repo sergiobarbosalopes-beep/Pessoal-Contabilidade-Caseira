@@ -593,6 +593,11 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   gap: 16px;
   margin-top: 24px;
 }
+.rubrica-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .rubrica-row {
   background: var(--glass);
   border: 1px solid var(--glass-border);
@@ -618,7 +623,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   justify-content: flex-end;
   gap: 8px;
 }
-.rubrica-delete-btn {
+.rubrica-delete-btn,
+.expense-delete-btn {
   width: 36px;
   height: 36px;
   display: flex;
@@ -635,15 +641,18 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   box-shadow: 0 2px 8px rgba(15,118,110,.25);
   text-shadow: 0 2px 6px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.3);
 }
-.rubrica-delete-btn:hover {
+.rubrica-delete-btn:hover,
+.expense-delete-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 4px 12px rgba(220,38,38,.35);
   background: linear-gradient(135deg, #dc2626, #b91c1c);
 }
-.rubrica-delete-btn:active {
+.rubrica-delete-btn:active,
+.expense-delete-btn:active {
   transform: scale(0.96);
 }
-.rubrica-move-btn {
+.rubrica-move-btn,
+.expense-move-btn {
   width: 36px;
   height: 36px;
   display: flex;
@@ -660,24 +669,26 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   box-shadow: 0 2px 8px rgba(15,118,110,.25);
   text-shadow: 0 2px 6px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.3);
 }
-.rubrica-move-btn:hover:not(:disabled) {
+.rubrica-move-btn:hover:not(:disabled),
+.expense-move-btn:hover:not(:disabled) {
   transform: scale(1.08);
   box-shadow: 0 4px 12px rgba(15,118,110,.35);
   background: linear-gradient(135deg, #0d9488, #0f766e);
 }
-.rubrica-move-btn:active:not(:disabled) {
+.rubrica-move-btn:active:not(:disabled),
+.expense-move-btn:active:not(:disabled) {
   transform: scale(0.96);
 }
-.rubrica-move-btn:disabled {
+.rubrica-move-btn:disabled,
+.expense-move-btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
 
-.rubrica-expenses-list {
+.rubrica-expenses-stack {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 10px 12px;
 }
 
 .rubrica-expense-row {
@@ -687,7 +698,20 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   padding: 10px;
   border: 1px solid var(--glass-border);
   border-radius: 12px;
-  background: rgba(255,255,255,.55);
+  background: rgba(255,255,255,.65);
+}
+
+.rubrica-expense-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rubrica-expense-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .rubrica-expense-name {
