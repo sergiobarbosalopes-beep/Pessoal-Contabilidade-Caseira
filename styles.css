@@ -591,16 +591,16 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   overflow: hidden;
 }
 .rubrica-row-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(140px, 180px) 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
+  gap: 10px;
+  padding: 12px;
   background: linear-gradient(135deg, rgba(15,118,110,0.08), rgba(20,184,166,0.04));
-  border-bottom: 1px solid var(--glass-border);
 }
 .rubrica-row-header h4 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text);
 }
@@ -634,7 +634,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 8px;
-  padding: 12px;
+  padding: 0;
 }
 .rubrica-month-input {
   display: flex;
@@ -644,9 +644,9 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 .rubrica-month-input input {
   width: 100%;
-  padding: 8px 4px;
+  padding: 9px 4px;
   font-family: inherit;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--teal);
   background: rgba(255,255,255,0.8);
@@ -676,11 +676,21 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 
 /* Responsive for rubrica grid */
 @media (max-width: 1024px) {
+  .rubrica-row-header {
+    grid-template-columns: minmax(120px, 160px) 1fr auto;
+  }
   .rubrica-inputs-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 @media (max-width: 700px) {
+  .rubrica-row-header {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .rubrica-row-actions {
+    justify-content: flex-end;
+  }
   .rubrica-inputs-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
