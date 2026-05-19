@@ -619,12 +619,14 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   color: var(--text);
 }
 .rubrica-row-actions {
+  position: relative;
   display: flex;
   justify-content: flex-end;
   gap: 8px;
 }
 .rubrica-delete-btn,
-.expense-delete-btn {
+.expense-delete-btn,
+.rubrica-menu-btn {
   width: 36px;
   height: 36px;
   display: flex;
@@ -642,14 +644,21 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   text-shadow: 0 2px 6px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.3);
 }
 .rubrica-delete-btn:hover,
-.expense-delete-btn:hover {
+.expense-delete-btn:hover,
+.rubrica-menu-btn:hover {
   transform: scale(1.08);
-  box-shadow: 0 4px 12px rgba(220,38,38,.35);
-  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  box-shadow: 0 4px 12px rgba(15,118,110,.35);
+  background: linear-gradient(135deg, #0d9488, #0f766e);
 }
 .rubrica-delete-btn:active,
-.expense-delete-btn:active {
+.expense-delete-btn:active,
+.rubrica-menu-btn:active {
   transform: scale(0.96);
+}
+.rubrica-delete-btn:hover,
+.expense-delete-btn:hover {
+  box-shadow: 0 4px 12px rgba(220,38,38,.35);
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
 }
 .rubrica-move-btn,
 .expense-move-btn,
@@ -686,6 +695,58 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 .expense-move-btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.rubrica-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 10px 22px rgba(15,23,42,.16);
+}
+
+.rubrica-menu-dropdown.open {
+  display: flex;
+}
+
+.rubrica-menu-item {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: rgba(15,118,110,.08);
+  color: #115e59;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: left;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.rubrica-menu-item:hover:not(:disabled) {
+  background: rgba(15,118,110,.16);
+}
+
+.rubrica-menu-item:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.rubrica-menu-item.danger {
+  background: rgba(220,38,38,.09);
+  color: #991b1b;
+}
+
+.rubrica-menu-item.danger:hover {
+  background: rgba(220,38,38,.16);
 }
 
 .rubrica-expenses-stack {

@@ -307,6 +307,7 @@
 
     // Rubricas data structure: { id: { name: string, expenses: [{ id, name, values[12] }] } }
     let dynamicRubricas = {};
+    let openRubricaMenuId = null;
 
     // Load rubricas from localStorage for current year
     function loadRubricas() {
@@ -423,10 +424,13 @@
                 <h4>${rubrica.name}</h4>
                 <div class="rubrica-row-actions">
                   <button class="rubrica-toggle-btn" data-toggle-expenses="${id}" aria-label="${isCollapsed ? "Expandir despesas" : "Colapsar despesas"}">${isCollapsed ? "▸" : "▾"}</button>
-                  <button class="rubrica-add-expense-btn" data-add-expense="${id}" aria-label="Adicionar despesa">+</button>
-                  <button class="rubrica-move-btn ${!canMoveUp ? 'disabled' : ''}" data-move-up="${id}" ${!canMoveUp ? 'disabled' : ''} aria-label="Mover para cima">▲</button>
-                  <button class="rubrica-move-btn ${!canMoveDown ? 'disabled' : ''}" data-move-down="${id}" ${!canMoveDown ? 'disabled' : ''} aria-label="Mover para baixo">▼</button>
-                  <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
+                  <button class="rubrica-menu-btn" data-rubrica-menu="${id}" aria-label="Ações da rubrica">⋯</button>
+                  <div class="rubrica-menu-dropdown ${openRubricaMenuId === id ? "open" : ""}" data-rubrica-menu-dropdown="${id}">
+                    <button class="rubrica-menu-item" data-rubrica-action="add-expense" data-rubrica-id="${id}">Adicionar despesa</button>
+                    <button class="rubrica-menu-item" data-rubrica-action="move-up" data-rubrica-id="${id}" ${!canMoveUp ? "disabled" : ""}>Mover para cima</button>
+                    <button class="rubrica-menu-item" data-rubrica-action="move-down" data-rubrica-id="${id}" ${!canMoveDown ? "disabled" : ""}>Mover para baixo</button>
+                    <button class="rubrica-menu-item danger" data-rubrica-action="delete" data-rubrica-id="${id}">Eliminar rubrica</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -435,19 +439,49 @@
         `;
       }).join("");
 
-      // Add event listeners for move up buttons
-      rubricasDynamic.querySelectorAll(".rubrica-move-btn[data-move-up]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const id = btn.dataset.moveUp;
-          moveRubricaUp(id);
+      // Add event listeners for rubrica action menu toggle
+      rubricasDynamic.querySelectorAll(".rubrica-menu-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const id = btn.dataset.rubricaMenu;
+          toggleRubricaMenu(id);
         });
       });
 
-      // Add event listeners for move down buttons
-      rubricasDynamic.querySelectorAll(".rubrica-move-btn[data-move-down]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const id = btn.dataset.moveDown;
-          moveRubricaDown(id);
+      // Keep menu open while interacting inside
+      rubricasDynamic.querySelectorAll(".rubrica-menu-dropdown").forEach(menu => {
+        menu.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+      });
+
+      // Add event listeners for rubrica menu actions
+      rubricasDynamic.querySelectorAll(".rubrica-menu-item").forEach(item => {
+        item.addEventListener("click", () => {
+          const action = item.dataset.rubricaAction;
+          const id = item.dataset.rubricaId;
+
+          if (!id) return;
+
+          if (action === "add-expense") {
+            openRubricaMenuId = null;
+            openExpenseModal(id);
+            return;
+          }
+          if (action === "move-up") {
+            openRubricaMenuId = null;
+            moveRubricaUp(id);
+            return;
+          }
+          if (action === "move-down") {
+            openRubricaMenuId = null;
+            moveRubricaDown(id);
+            return;
+          }
+          if (action === "delete") {
+            openRubricaMenuId = null;
+            openDeleteModal(id);
+          }
         });
       });
 
@@ -456,14 +490,6 @@
         btn.addEventListener("click", () => {
           const id = btn.dataset.toggleExpenses;
           toggleRubricaExpenses(id);
-        });
-      });
-
-      // Add event listeners for add expense buttons
-      rubricasDynamic.querySelectorAll(".rubrica-add-expense-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const id = btn.dataset.addExpense;
-          openExpenseModal(id);
         });
       });
 
@@ -510,13 +536,6 @@
         });
       });
 
-      // Add event listeners for delete buttons
-      rubricasDynamic.querySelectorAll(".rubrica-delete-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const id = btn.dataset.delete;
-          openDeleteModal(id);
-        });
-      });
     }
 
     function moveRubricaUp(id) {
@@ -571,6 +590,18 @@
       rubrica.collapsed = !rubrica.collapsed;
       saveRubricas();
       renderRubricas();
+    }
+
+    function toggleRubricaMenu(id) {
+      openRubricaMenuId = openRubricaMenuId === id ? null : id;
+      renderRubricas();
+    }
+
+    function closeRubricaMenu() {
+      if (openRubricaMenuId !== null) {
+        openRubricaMenuId = null;
+        renderRubricas();
+      }
     }
 
     // ── Modal for adding rubrica ────────────────────────
@@ -758,8 +789,10 @@
         if (e.key === "Escape") closeExpenseModal();
       });
     }
+    document.addEventListener("click", closeRubricaMenu);
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
+        closeRubricaMenu();
         closeModal();
         closeDeleteModal();
         closeDeleteExpenseModal();
