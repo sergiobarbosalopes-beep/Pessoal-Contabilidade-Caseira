@@ -602,7 +602,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   background: var(--glass);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  overflow: hidden;
+  overflow: visible;
 }
 .rubrica-row-header {
   display: flex;
@@ -701,7 +701,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  z-index: 20;
+  z-index: 120;
   min-width: 180px;
   display: none;
   flex-direction: column;
