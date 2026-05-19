@@ -1,0 +1,11 @@
+{
+  "name": "pessoal-contabilidade-caseira",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Dashboard financeiro pessoal estatico com deploy automatico para GitHub Pages",
+  "scripts": {
+    "serve": "npx --yes http-server . -p 4173 -c-1",
+    "commit": "powershell -ExecutionPolicy Bypass -File ./deploy.ps1 -Message",
+    "push": "git push origin main"
+  }
+}

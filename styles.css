@@ -1,0 +1,357 @@
+:root {
+  --bg-0: #f3f8f5;
+  --bg-1: #e7efe9;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: #ffffff;
+  --text: #163126;
+  --muted: #547064;
+  --brand: #0f766e;
+  --brand-2: #14b8a6;
+  --accent: #f59e0b;
+  --danger: #dc2626;
+  --ok: #16a34a;
+  --ring: rgba(20, 184, 166, 0.35);
+  --shadow: 0 18px 42px rgba(11, 47, 37, 0.12);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Space Grotesk", "Segoe UI", Tahoma, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 8% 16%, rgba(20, 184, 166, 0.18), transparent 42%),
+    radial-gradient(circle at 86% 8%, rgba(245, 158, 11, 0.15), transparent 38%),
+    linear-gradient(140deg, var(--bg-0), var(--bg-1));
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 28px 20px;
+  background: rgba(8, 37, 29, 0.94);
+  color: #e6f3ee;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #14b8a6, #f59e0b);
+  box-shadow: 0 8px 26px rgba(20, 184, 166, 0.42);
+}
+
+.brand-name {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.08rem;
+  margin: 0;
+}
+
+.brand-note {
+  margin: 2px 0 0;
+  font-size: 0.84rem;
+  color: #a0cbc0;
+}
+
+.nav-title {
+  margin: 18px 0 10px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9dc6bb;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-link {
+  color: #d7ede6;
+  text-decoration: none;
+  padding: 11px 12px;
+  border-radius: 12px;
+  transition: all 180ms ease;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  transform: translateX(3px);
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.25), rgba(245, 158, 11, 0.18));
+  border-color: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.content {
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.menu-toggle {
+  display: none;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(8, 37, 29, 0.92);
+  color: #e7f4ef;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.hero {
+  background: linear-gradient(115deg, rgba(15, 118, 110, 0.95), rgba(15, 23, 42, 0.92));
+  color: #ecfffb;
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: -80px;
+  top: -120px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.35), transparent 60%);
+}
+
+.hero h1 {
+  margin: 0 0 12px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.45rem, 2vw, 2.1rem);
+}
+
+.hero p {
+  margin: 0;
+  max-width: 62ch;
+  color: rgba(235, 255, 250, 0.9);
+}
+
+.grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  grid-column: span 3;
+  background: var(--surface);
+  border: 1px solid rgba(15, 118, 110, 0.16);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(11, 47, 37, 0.08);
+  animation: floatIn 420ms ease both;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.value {
+  margin-top: 6px;
+  font-size: 1.48rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.delta {
+  font-size: 0.86rem;
+  margin-top: 2px;
+}
+
+.delta.up {
+  color: var(--ok);
+}
+
+.delta.down {
+  color: var(--danger);
+}
+
+.tile {
+  grid-column: span 4;
+  min-height: 176px;
+  background: var(--surface-strong);
+  border: 1px solid rgba(15, 118, 110, 0.14);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+
+.tile h2 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.tile p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.chart-wrap {
+  grid-column: span 6;
+  background: var(--surface-strong);
+  border: 1px solid rgba(15, 118, 110, 0.14);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+}
+
+.chart-wrap h2 {
+  margin: 4px 0 12px;
+  font-size: 1rem;
+}
+
+.chart-canvas {
+  width: 100%;
+  height: 280px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f3faf7;
+}
+
+.badge {
+  font-size: 0.75rem;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: #ddf5f2;
+  color: #0f766e;
+}
+
+.page-panel {
+  background: var(--surface-strong);
+  border: 1px solid rgba(15, 118, 110, 0.16);
+  border-radius: var(--radius-xl);
+  padding: 26px;
+  box-shadow: 0 12px 32px rgba(11, 47, 37, 0.08);
+}
+
+.page-panel h1 {
+  margin-top: 0;
+  font-family: "Fraunces", Georgia, serif;
+}
+
+.page-panel p {
+  color: var(--muted);
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1180px) {
+  .card {
+    grid-column: span 6;
+  }
+
+  .tile,
+  .chart-wrap {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(85vw, 290px);
+    transform: translateX(-100%);
+    transition: transform 240ms ease;
+    z-index: 50;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .hero,
+  .page-panel {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    grid-column: span 12;
+  }
+
+  .chart-canvas {
+    height: 220px;
+  }
+}
