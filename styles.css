@@ -554,7 +554,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 .year-value {
   font-size: 2.4rem;
   font-weight: 800;
-  color: var(--teal);
+  color: #115e59;
   line-height: 1;
   letter-spacing: 2px;
 }
