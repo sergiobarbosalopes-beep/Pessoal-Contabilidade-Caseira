@@ -763,7 +763,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 10px;
+  padding: 10px 0 12px;
   border: 1px solid var(--glass-border);
   border-radius: 12px;
   background: rgba(255,255,255,.65);
@@ -774,6 +774,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  padding: 0 10px;
 }
 
 .rubrica-expense-actions {
@@ -799,12 +800,15 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 8px;
+  width: calc(100% - (var(--year-nav-size) * 2) - (var(--year-row-gap) * 2));
+  margin-left: calc(var(--year-nav-size) + var(--year-row-gap));
 }
 
 .expense-input-tile {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 6px;
   padding: 6px 8px;
   background: rgba(255,255,255,0.85);
   border: 1px solid var(--glass-border);
@@ -826,7 +830,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 
 .expense-input-tile input {
-  width: 100%;
+  flex: 1;
   border: none;
   background: transparent;
   color: #0f172a;
@@ -839,6 +843,11 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 .expense-input-tile input::placeholder {
   color: var(--text-muted);
   font-weight: 500;
+}
+
+.expense-input-tile input:disabled {
+  color: #64748b;
+  cursor: not-allowed;
 }
 
 .expense-input-tile input::-webkit-outer-spin-button,
@@ -875,6 +884,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   }
   .rubrica-expense-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+    margin-left: 0;
   }
 }
 @media (max-width: 480px) {

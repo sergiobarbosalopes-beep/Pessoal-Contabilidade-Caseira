@@ -294,6 +294,7 @@
         tile.addEventListener("click", () => {
           selectedMonth = parseInt(tile.dataset.month, 10);
           renderMonthGrid();
+          renderRubricas();
         });
       });
     }
@@ -383,9 +384,9 @@
                 const canMoveExpenseDown = expenseIndex < expenses.length - 1;
                 const tilesHtml = Array.from({ length: 12 }, (_, monthIdx) => {
                   const value = parseFloat(expense.values?.[monthIdx]) || 0;
+                  const isEditable = monthIdx === selectedMonth;
                   return `
                     <div class="expense-input-tile">
-                      <span class="expense-currency">€</span>
                       <input
                         type="number"
                         data-expense-input="true"
@@ -395,7 +396,9 @@
                         value="${value || ""}"
                         placeholder="0"
                         step="0.01"
+                        ${isEditable ? "" : "disabled"}
                       >
+                      <span class="expense-currency">€</span>
                     </div>
                   `;
                 }).join("");
