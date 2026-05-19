@@ -525,6 +525,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 .year-nav-btn svg {
   width: 24px; height: 24px;
+  stroke: #fff;
+  fill: none;
 }
 .year-nav-btn:hover:not(:disabled) {
   transform: scale(1.08);
