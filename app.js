@@ -305,7 +305,7 @@
     const rubricasDynamic = document.getElementById("rubricasDynamic");
     const addRubricaBtn = document.getElementById("addRubricaBtn");
 
-    // Rubricas data structure: { id: { name: string, values?: [12 months], expenses: string[] } }
+    // Rubricas data structure: { id: { name: string, expenses: [{ id, name, values[12] }] } }
     let dynamicRubricas = {};
 
     // Load rubricas from localStorage for current year
@@ -318,6 +318,26 @@
             if (!Array.isArray(rubrica.expenses)) {
               rubrica.expenses = [];
             }
+
+            rubrica.expenses = rubrica.expenses.map((expense) => {
+              if (typeof expense === "string") {
+                return {
+                  id: generateExpenseId(),
+                  name: expense,
+                  values: Array(12).fill(0)
+                };
+              }
+
+              const values = Array.isArray(expense.values)
+                ? Array.from({ length: 12 }, (_, i) => parseFloat(expense.values[i]) || 0)
+                : Array(12).fill(0);
+
+              return {
+                id: expense.id || generateExpenseId(),
+                name: (expense.name || "Despesa").toString(),
+                values
+              };
+            });
           });
         } catch(e) { 
           console.warn("Error loading rubricas", e);
@@ -339,6 +359,10 @@
       return "r_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
     }
 
+    function generateExpenseId() {
+      return "e_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
+    }
+
     function renderRubricas() {
       if (!rubricasDynamic) return;
       
@@ -348,7 +372,35 @@
         const canMoveDown = index < entries.length - 1;
         const expenses = Array.isArray(rubrica.expenses) ? rubrica.expenses : [];
         const expensesHtml = expenses.length
-          ? `<div class="rubrica-expenses">${expenses.map((expense) => `<span class="rubrica-expense-chip">${expense}</span>`).join("")}</div>`
+          ? `<div class="rubrica-expenses-list">${expenses
+              .map((expense) => {
+                const tilesHtml = Array.from({ length: 12 }, (_, monthIdx) => {
+                  const value = parseFloat(expense.values?.[monthIdx]) || 0;
+                  return `
+                    <div class="expense-input-tile">
+                      <span class="expense-currency">€</span>
+                      <input
+                        type="number"
+                        data-expense-input="true"
+                        data-rubrica-id="${id}"
+                        data-expense-id="${expense.id}"
+                        data-month="${monthIdx}"
+                        value="${value || ""}"
+                        placeholder="0"
+                        step="0.01"
+                      >
+                    </div>
+                  `;
+                }).join("");
+
+                return `
+                  <div class="rubrica-expense-row" data-expense-id="${expense.id}">
+                    <div class="rubrica-expense-name">${expense.name}</div>
+                    <div class="rubrica-expense-grid">${tilesHtml}</div>
+                  </div>
+                `;
+              })
+              .join("")}</div>`
           : "";
         
         return `
@@ -356,9 +408,9 @@
             <div class="rubrica-row-header">
               <h4>${rubrica.name}</h4>
               <div class="rubrica-row-actions">
+                <button class="rubrica-add-expense-btn" data-add-expense="${id}" aria-label="Adicionar despesa">+</button>
                 <button class="rubrica-move-btn ${!canMoveUp ? 'disabled' : ''}" data-move-up="${id}" ${!canMoveUp ? 'disabled' : ''} aria-label="Mover para cima">▲</button>
                 <button class="rubrica-move-btn ${!canMoveDown ? 'disabled' : ''}" data-move-down="${id}" ${!canMoveDown ? 'disabled' : ''} aria-label="Mover para baixo">▼</button>
-                <button class="rubrica-add-expense-btn" data-add-expense="${id}" aria-label="Adicionar despesa">+</button>
                 <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
               </div>
             </div>
@@ -388,6 +440,25 @@
         btn.addEventListener("click", () => {
           const id = btn.dataset.addExpense;
           openExpenseModal(id);
+        });
+      });
+
+      // Add event listeners for expense monthly inputs
+      rubricasDynamic.querySelectorAll("input[data-expense-input='true']").forEach(input => {
+        input.addEventListener("input", () => {
+          const rubricaId = input.dataset.rubricaId;
+          const expenseId = input.dataset.expenseId;
+          const monthIdx = parseInt(input.dataset.month, 10);
+          const val = parseFloat(input.value) || 0;
+
+          const rubrica = dynamicRubricas[rubricaId];
+          if (!rubrica || !Array.isArray(rubrica.expenses)) return;
+
+          const expense = rubrica.expenses.find((e) => e.id === expenseId);
+          if (!expense) return;
+
+          expense.values[monthIdx] = val;
+          saveRubricas();
         });
       });
 
@@ -502,8 +573,7 @@
         const id = generateId();
         dynamicRubricas[id] = {
           name: name,
-          expenses: [],
-          values: Array(12).fill(0)
+          expenses: []
         };
         saveRubricas();
         renderRubricas();
@@ -518,7 +588,11 @@
       if (!Array.isArray(dynamicRubricas[pendingExpenseRubricaId].expenses)) {
         dynamicRubricas[pendingExpenseRubricaId].expenses = [];
       }
-      dynamicRubricas[pendingExpenseRubricaId].expenses.push(expenseName);
+      dynamicRubricas[pendingExpenseRubricaId].expenses.push({
+        id: generateExpenseId(),
+        name: expenseName,
+        values: Array(12).fill(0)
+      });
       saveRubricas();
       renderRubricas();
       closeExpenseModal();
