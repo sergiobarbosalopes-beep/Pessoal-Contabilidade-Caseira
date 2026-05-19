@@ -545,14 +545,15 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 14px 24px;
+  height: 56px;
+  padding: 0 24px;
   background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
   border: 2px solid var(--teal);
   border-radius: 14px;
   box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,1);
 }
 .year-value {
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: #115e59;
   line-height: 1;
