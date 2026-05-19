@@ -442,6 +442,132 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   transform: scale(0.96);
 }
 
+/* ── MODAL ──────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  width: 90%;
+  max-width: 420px;
+  transform: scale(0.9) translateY(-20px);
+  transition: all .3s ease;
+}
+.modal-overlay.active .modal {
+  transform: scale(1) translateY(0);
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.modal-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.05);
+  border: none;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.modal-close:hover {
+  background: rgba(0,0,0,0.1);
+  color: var(--text);
+}
+.modal-body {
+  padding: 24px;
+}
+.modal-body label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.modal-body input {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 2px solid var(--glass-border);
+  border-radius: 12px;
+  transition: all .2s;
+}
+.modal-body input:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px rgba(15,118,110,.1);
+}
+.modal-body input::placeholder {
+  color: var(--text-muted);
+}
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px 24px;
+}
+.modal-btn {
+  flex: 1;
+  padding: 14px 20px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.modal-btn-cancel {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-muted);
+}
+.modal-btn-cancel:hover {
+  background: rgba(0,0,0,0.1);
+}
+.modal-btn-confirm {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(15,118,110,.3);
+}
+.modal-btn-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15,118,110,.4);
+}
+
 /* ── RUBRICAS DYNAMIC ─────────────────────────────── */
 .rubricas-dynamic {
   display: flex;

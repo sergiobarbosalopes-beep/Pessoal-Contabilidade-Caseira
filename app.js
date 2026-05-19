@@ -395,21 +395,60 @@
       });
     }
 
-    function addRubrica() {
-      const name = prompt("Nome da nova rubrica:");
-      if (name && name.trim()) {
+    // ── Modal for adding rubrica ────────────────────────
+    const modalOverlay = document.getElementById("modalOverlay");
+    const modalClose = document.getElementById("modalClose");
+    const modalCancel = document.getElementById("modalCancel");
+    const modalConfirm = document.getElementById("modalConfirm");
+    const rubricaNameInput = document.getElementById("rubricaNameInput");
+
+    function openModal() {
+      if (modalOverlay) {
+        modalOverlay.classList.add("active");
+        if (rubricaNameInput) {
+          rubricaNameInput.value = "";
+          rubricaNameInput.focus();
+        }
+      }
+    }
+
+    function closeModal() {
+      if (modalOverlay) {
+        modalOverlay.classList.remove("active");
+      }
+    }
+
+    function confirmAddRubrica() {
+      const name = rubricaNameInput ? rubricaNameInput.value.trim() : "";
+      if (name) {
         const id = generateId();
         dynamicRubricas[id] = {
-          name: name.trim(),
+          name: name,
           values: Array(12).fill(0)
         };
         saveRubricas();
         renderRubricas();
+        closeModal();
       }
     }
 
+    if (modalClose) modalClose.addEventListener("click", closeModal);
+    if (modalCancel) modalCancel.addEventListener("click", closeModal);
+    if (modalConfirm) modalConfirm.addEventListener("click", confirmAddRubrica);
+    if (modalOverlay) {
+      modalOverlay.addEventListener("click", (e) => {
+        if (e.target === modalOverlay) closeModal();
+      });
+    }
+    if (rubricaNameInput) {
+      rubricaNameInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") confirmAddRubrica();
+        if (e.key === "Escape") closeModal();
+      });
+    }
+
     if (addRubricaBtn) {
-      addRubricaBtn.addEventListener("click", addRubrica);
+      addRubricaBtn.addEventListener("click", openModal);
     }
 
     renderRubricas();

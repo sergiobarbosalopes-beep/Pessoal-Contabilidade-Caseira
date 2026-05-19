@@ -110,6 +110,24 @@
       </div>
     </main>
 
+    <!-- Modal for adding rubrica -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Nova Rubrica</h3>
+          <button class="modal-close" id="modalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <label for="rubricaNameInput">Nome da rubrica</label>
+          <input type="text" id="rubricaNameInput" placeholder="Ex: Alimentação, Transportes..." autocomplete="off">
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="modalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="modalConfirm">Adicionar</button>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <div class="footer-inner">
         <div class="footer-brand">
