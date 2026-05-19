@@ -337,18 +337,24 @@
     function renderRubricas() {
       if (!rubricasDynamic) return;
       
-      rubricasDynamic.innerHTML = Object.entries(dynamicRubricas).map(([id, rubrica]) => {
+      const entries = Object.entries(dynamicRubricas);
+      rubricasDynamic.innerHTML = entries.map(([id, rubrica], index) => {
         const inputsHtml = Array.from({ length: 12 }, (_, i) => `
           <div class="rubrica-month-input">
             <input type="number" data-rubrica-id="${id}" data-month="${i}" value="${rubrica.values[i] || ""}" placeholder="0" step="0.01">
           </div>
         `).join("");
         
+        const canMoveUp = index > 0;
+        const canMoveDown = index < entries.length - 1;
+        
         return `
           <div class="rubrica-row" data-id="${id}">
             <div class="rubrica-row-header">
               <h4>${rubrica.name}</h4>
               <div class="rubrica-row-actions">
+                <button class="rubrica-move-btn ${!canMoveUp ? 'disabled' : ''}" data-move-up="${id}" ${!canMoveUp ? 'disabled' : ''} aria-label="Mover para cima">▲</button>
+                <button class="rubrica-move-btn ${!canMoveDown ? 'disabled' : ''}" data-move-down="${id}" ${!canMoveDown ? 'disabled' : ''} aria-label="Mover para baixo">▼</button>
                 <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
               </div>
             </div>
@@ -372,6 +378,22 @@
         });
       });
 
+      // Add event listeners for move up buttons
+      rubricasDynamic.querySelectorAll(".rubrica-move-btn[data-move-up]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.moveUp;
+          moveRubricaUp(id);
+        });
+      });
+
+      // Add event listeners for move down buttons
+      rubricasDynamic.querySelectorAll(".rubrica-move-btn[data-move-down]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.moveDown;
+          moveRubricaDown(id);
+        });
+      });
+
       // Add event listeners for delete buttons
       rubricasDynamic.querySelectorAll(".rubrica-delete-btn").forEach(btn => {
         btn.addEventListener("click", () => {
@@ -379,6 +401,28 @@
           openDeleteModal(id);
         });
       });
+    }
+
+    function moveRubricaUp(id) {
+      const entries = Object.entries(dynamicRubricas);
+      const idx = entries.findIndex(([k]) => k === id);
+      if (idx > 0) {
+        [entries[idx - 1], entries[idx]] = [entries[idx], entries[idx - 1]];
+        dynamicRubricas = Object.fromEntries(entries);
+        saveRubricas();
+        renderRubricas();
+      }
+    }
+
+    function moveRubricaDown(id) {
+      const entries = Object.entries(dynamicRubricas);
+      const idx = entries.findIndex(([k]) => k === id);
+      if (idx < entries.length - 1) {
+        [entries[idx], entries[idx + 1]] = [entries[idx + 1], entries[idx]];
+        dynamicRubricas = Object.fromEntries(entries);
+        saveRubricas();
+        renderRubricas();
+      }
     }
 
     // ── Modal for adding rubrica ────────────────────────
