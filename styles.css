@@ -538,10 +538,16 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 .year-display {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   padding: 4px 16px;
+}
+.year-icon {
+  color: var(--teal);
+  opacity: 0.8;
+  flex-shrink: 0;
 }
 .year-label {
   font-size: .75rem;
