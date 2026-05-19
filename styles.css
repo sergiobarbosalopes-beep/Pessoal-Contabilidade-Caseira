@@ -652,7 +652,8 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   transform: scale(0.96);
 }
 .rubrica-move-btn,
-.expense-move-btn {
+.expense-move-btn,
+.rubrica-toggle-btn {
   width: 36px;
   height: 36px;
   display: flex;
@@ -670,13 +671,15 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   text-shadow: 0 2px 6px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.3);
 }
 .rubrica-move-btn:hover:not(:disabled),
-.expense-move-btn:hover:not(:disabled) {
+.expense-move-btn:hover:not(:disabled),
+.rubrica-toggle-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 4px 12px rgba(15,118,110,.35);
   background: linear-gradient(135deg, #0d9488, #0f766e);
 }
 .rubrica-move-btn:active:not(:disabled),
-.expense-move-btn:active:not(:disabled) {
+.expense-move-btn:active:not(:disabled),
+.rubrica-toggle-btn:active {
   transform: scale(0.96);
 }
 .rubrica-move-btn:disabled,
@@ -689,6 +692,10 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.rubrica-expenses-stack.collapsed {
+  display: none;
 }
 
 .rubrica-expense-row {

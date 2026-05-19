@@ -318,6 +318,9 @@
             if (!Array.isArray(rubrica.expenses)) {
               rubrica.expenses = [];
             }
+            if (typeof rubrica.collapsed !== "boolean") {
+              rubrica.collapsed = false;
+            }
 
             rubrica.expenses = rubrica.expenses.map((expense) => {
               if (typeof expense === "string") {
@@ -370,9 +373,10 @@
       rubricasDynamic.innerHTML = entries.map(([id, rubrica], index) => {
         const canMoveUp = index > 0;
         const canMoveDown = index < entries.length - 1;
+        const isCollapsed = !!rubrica.collapsed;
         const expenses = Array.isArray(rubrica.expenses) ? rubrica.expenses : [];
         const expensesHtml = expenses.length
-          ? `<div class="rubrica-expenses-stack">${expenses
+          ? `<div class="rubrica-expenses-stack ${isCollapsed ? "collapsed" : ""}">${expenses
               .map((expense, expenseIndex) => {
                 const canMoveExpenseUp = expenseIndex > 0;
                 const canMoveExpenseDown = expenseIndex < expenses.length - 1;
@@ -418,6 +422,7 @@
               <div class="rubrica-row-header">
                 <h4>${rubrica.name}</h4>
                 <div class="rubrica-row-actions">
+                  <button class="rubrica-toggle-btn" data-toggle-expenses="${id}" aria-label="${isCollapsed ? "Expandir despesas" : "Colapsar despesas"}">${isCollapsed ? "▸" : "▾"}</button>
                   <button class="rubrica-add-expense-btn" data-add-expense="${id}" aria-label="Adicionar despesa">+</button>
                   <button class="rubrica-move-btn ${!canMoveUp ? 'disabled' : ''}" data-move-up="${id}" ${!canMoveUp ? 'disabled' : ''} aria-label="Mover para cima">▲</button>
                   <button class="rubrica-move-btn ${!canMoveDown ? 'disabled' : ''}" data-move-down="${id}" ${!canMoveDown ? 'disabled' : ''} aria-label="Mover para baixo">▼</button>
@@ -443,6 +448,14 @@
         btn.addEventListener("click", () => {
           const id = btn.dataset.moveDown;
           moveRubricaDown(id);
+        });
+      });
+
+      // Add event listeners for expand/collapse rubrica expenses
+      rubricasDynamic.querySelectorAll(".rubrica-toggle-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.toggleExpenses;
+          toggleRubricaExpenses(id);
         });
       });
 
@@ -550,6 +563,14 @@
         saveRubricas();
         renderRubricas();
       }
+    }
+
+    function toggleRubricaExpenses(id) {
+      const rubrica = dynamicRubricas[id];
+      if (!rubrica) return;
+      rubrica.collapsed = !rubrica.collapsed;
+      saveRubricas();
+      renderRubricas();
     }
 
     // ── Modal for adding rubrica ────────────────────────
@@ -667,6 +688,7 @@
         const id = generateId();
         dynamicRubricas[id] = {
           name: name,
+          collapsed: false,
           expenses: []
         };
         saveRubricas();
