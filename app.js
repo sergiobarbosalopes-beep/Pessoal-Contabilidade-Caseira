@@ -305,7 +305,7 @@
     const rubricasDynamic = document.getElementById("rubricasDynamic");
     const addRubricaBtn = document.getElementById("addRubricaBtn");
 
-    // Rubricas data structure: { id: { name: string, values: [12 months] } }
+    // Rubricas data structure: { id: { name: string, values?: [12 months], expenses: string[] } }
     let dynamicRubricas = {};
 
     // Load rubricas from localStorage for current year
@@ -314,6 +314,11 @@
       if (savedRubricas) {
         try {
           dynamicRubricas = JSON.parse(savedRubricas);
+          Object.values(dynamicRubricas).forEach((rubrica) => {
+            if (!Array.isArray(rubrica.expenses)) {
+              rubrica.expenses = [];
+            }
+          });
         } catch(e) { 
           console.warn("Error loading rubricas", e);
           dynamicRubricas = {};
@@ -341,6 +346,10 @@
       rubricasDynamic.innerHTML = entries.map(([id, rubrica], index) => {
         const canMoveUp = index > 0;
         const canMoveDown = index < entries.length - 1;
+        const expenses = Array.isArray(rubrica.expenses) ? rubrica.expenses : [];
+        const expensesHtml = expenses.length
+          ? `<div class="rubrica-expenses">${expenses.map((expense) => `<span class="rubrica-expense-chip">${expense}</span>`).join("")}</div>`
+          : "";
         
         return `
           <div class="rubrica-row" data-id="${id}">
@@ -349,9 +358,11 @@
               <div class="rubrica-row-actions">
                 <button class="rubrica-move-btn ${!canMoveUp ? 'disabled' : ''}" data-move-up="${id}" ${!canMoveUp ? 'disabled' : ''} aria-label="Mover para cima">▲</button>
                 <button class="rubrica-move-btn ${!canMoveDown ? 'disabled' : ''}" data-move-down="${id}" ${!canMoveDown ? 'disabled' : ''} aria-label="Mover para baixo">▼</button>
+                <button class="rubrica-add-expense-btn" data-add-expense="${id}" aria-label="Adicionar despesa">+</button>
                 <button class="rubrica-delete-btn" data-delete="${id}" aria-label="Eliminar rubrica">×</button>
               </div>
             </div>
+            ${expensesHtml}
           </div>
         `;
       }).join("");
@@ -369,6 +380,14 @@
         btn.addEventListener("click", () => {
           const id = btn.dataset.moveDown;
           moveRubricaDown(id);
+        });
+      });
+
+      // Add event listeners for add expense buttons
+      rubricasDynamic.querySelectorAll(".rubrica-add-expense-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.addExpense;
+          openExpenseModal(id);
         });
       });
 
@@ -413,7 +432,13 @@
     const deleteModalClose = document.getElementById("deleteModalClose");
     const deleteModalCancel = document.getElementById("deleteModalCancel");
     const deleteModalConfirm = document.getElementById("deleteModalConfirm");
+    const expenseModalOverlay = document.getElementById("expenseModalOverlay");
+    const expenseModalClose = document.getElementById("expenseModalClose");
+    const expenseModalCancel = document.getElementById("expenseModalCancel");
+    const expenseModalConfirm = document.getElementById("expenseModalConfirm");
+    const expenseNameInput = document.getElementById("expenseNameInput");
     let pendingDeleteId = null;
+    let pendingExpenseRubricaId = null;
 
     function openModal() {
       if (modalOverlay) {
@@ -445,6 +470,24 @@
       }
     }
 
+    function openExpenseModal(rubricaId) {
+      pendingExpenseRubricaId = rubricaId;
+      if (expenseModalOverlay) {
+        expenseModalOverlay.classList.add("active");
+      }
+      if (expenseNameInput) {
+        expenseNameInput.value = "";
+        expenseNameInput.focus();
+      }
+    }
+
+    function closeExpenseModal() {
+      pendingExpenseRubricaId = null;
+      if (expenseModalOverlay) {
+        expenseModalOverlay.classList.remove("active");
+      }
+    }
+
     function confirmDeleteRubrica() {
       if (!pendingDeleteId) return;
       delete dynamicRubricas[pendingDeleteId];
@@ -459,12 +502,26 @@
         const id = generateId();
         dynamicRubricas[id] = {
           name: name,
+          expenses: [],
           values: Array(12).fill(0)
         };
         saveRubricas();
         renderRubricas();
         closeModal();
       }
+    }
+
+    function confirmAddExpense() {
+      const expenseName = expenseNameInput ? expenseNameInput.value.trim() : "";
+      if (!expenseName || !pendingExpenseRubricaId || !dynamicRubricas[pendingExpenseRubricaId]) return;
+
+      if (!Array.isArray(dynamicRubricas[pendingExpenseRubricaId].expenses)) {
+        dynamicRubricas[pendingExpenseRubricaId].expenses = [];
+      }
+      dynamicRubricas[pendingExpenseRubricaId].expenses.push(expenseName);
+      saveRubricas();
+      renderRubricas();
+      closeExpenseModal();
     }
 
     if (modalClose) modalClose.addEventListener("click", closeModal);
@@ -483,16 +540,31 @@
         if (e.target === deleteModalOverlay) closeDeleteModal();
       });
     }
+    if (expenseModalClose) expenseModalClose.addEventListener("click", closeExpenseModal);
+    if (expenseModalCancel) expenseModalCancel.addEventListener("click", closeExpenseModal);
+    if (expenseModalConfirm) expenseModalConfirm.addEventListener("click", confirmAddExpense);
+    if (expenseModalOverlay) {
+      expenseModalOverlay.addEventListener("click", (e) => {
+        if (e.target === expenseModalOverlay) closeExpenseModal();
+      });
+    }
     if (rubricaNameInput) {
       rubricaNameInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") confirmAddRubrica();
         if (e.key === "Escape") closeModal();
       });
     }
+    if (expenseNameInput) {
+      expenseNameInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") confirmAddExpense();
+        if (e.key === "Escape") closeExpenseModal();
+      });
+    }
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         closeModal();
         closeDeleteModal();
+        closeExpenseModal();
       }
     });
 

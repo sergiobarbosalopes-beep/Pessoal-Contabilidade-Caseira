@@ -145,6 +145,24 @@
       </div>
     </div>
 
+    <!-- Modal for adding expense to rubrica -->
+    <div class="modal-overlay" id="expenseModalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Nova Despesa</h3>
+          <button class="modal-close" id="expenseModalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <label for="expenseNameInput">Nome da despesa</label>
+          <input type="text" id="expenseNameInput" placeholder="Ex: Supermercado, Combustível..." autocomplete="off">
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="expenseModalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="expenseModalConfirm">Adicionar</button>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <div class="footer-inner">
         <div class="footer-brand">
