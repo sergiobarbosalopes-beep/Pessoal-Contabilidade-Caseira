@@ -2051,8 +2051,8 @@ body[data-page="novobanco"] .toggle-track::after {
 }
 
 body[data-page="novobanco"] .toggle-switch input:checked + .toggle-track {
-  background: var(--nb-gradient-primary);
-  border-color: var(--nb-primary-500);
+  background: var(--nb-accent-gold);
+  border-color: var(--nb-accent-gold);
 }
 
 body[data-page="novobanco"] .toggle-switch input:checked + .toggle-track::after {
