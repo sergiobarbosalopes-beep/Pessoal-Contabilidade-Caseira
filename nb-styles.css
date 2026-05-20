@@ -869,6 +869,20 @@ body[data-page="novobanco"] .rubrica-toggle-btn:hover {
   transform: scale(1.05);
 }
 
+/* Per-rubrica toggle: more subtle/neutral */
+body[data-page="novobanco"] .rubrica-row-header .rubrica-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--nb-border-subtle);
+  color: var(--nb-text-muted);
+}
+
+body[data-page="novobanco"] .rubrica-row-header .rubrica-toggle-btn:hover {
+  background: var(--nb-surface-glass-light);
+  border-color: var(--nb-text-muted);
+  color: var(--nb-text-secondary);
+  transform: scale(1.05);
+}
+
 /* ── Menu Button ───────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .rubrica-menu-btn,
 body[data-page="novobanco"] .expense-menu-btn {
