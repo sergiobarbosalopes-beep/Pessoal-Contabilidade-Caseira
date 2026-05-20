@@ -1017,6 +1017,7 @@ body[data-page="novobanco"] .total-value {
 }
 
 body[data-page="novobanco"] .total-tile .expense-currency {
+  position: absolute;
   color: var(--nb-accent-gold);
   font-size: 6px;
   right: 2px;
@@ -1095,10 +1096,12 @@ body[data-page="novobanco"] .rubrica-expense-grid {
 /* ── Expense Input Tile ────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .expense-input-tile {
   position: relative;
+  display: flex;
+  align-items: flex-end;
   background: var(--nb-bg-dark);
   border-radius: 6px;
   border: 1px solid var(--nb-border-subtle);
-  padding: 0;
+  padding: 0 2px;
 }
 
 body[data-page="novobanco"] .expense-input-tile.is-editable,
@@ -1118,8 +1121,10 @@ body[data-page="novobanco"] .expense-input-tile.is-editable {
 
 /* ── Expense Input ─────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .expense-input {
-  width: 100%;
-  padding: 4px 10px 4px 2px;
+  width: auto;
+  flex: 1;
+  min-width: 0;
+  padding: 4px 0;
   background: transparent;
   border: none;
   color: var(--nb-text-primary);
@@ -1152,6 +1157,12 @@ body[data-page="novobanco"] .expense-currency {
   font-weight: 600;
   pointer-events: none;
   line-height: 1;
+}
+
+body[data-page="novobanco"] .expense-input-tile .expense-currency {
+  position: static;
+  margin-left: 2px;
+  margin-bottom: 1px;
 }
 
 /* ── Note Indicator ────────────────────────────────────────────────────────── */
