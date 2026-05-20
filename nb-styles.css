@@ -992,7 +992,7 @@ body[data-page="novobanco"] .total-tile.is-active {
 }
 
 body[data-page="novobanco"] .expense-input-tile.total-tile .total-value {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
   color: var(--nb-text-muted);
   display: inline-block;
