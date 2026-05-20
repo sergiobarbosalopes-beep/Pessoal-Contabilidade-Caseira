@@ -1116,13 +1116,13 @@ body[data-page="novobanco"] .expense-input-tile.is-editable {
 /* ── Expense Input ─────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .expense-input {
   width: 100%;
-  padding: 4px 12px 4px 0;
+  padding: 4px 2px;
   background: transparent;
   border: none;
   color: var(--nb-text-primary);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  text-align: right;
+  text-align: center;
   cursor: inherit;
   box-sizing: border-box;
 }
@@ -1141,14 +1141,7 @@ body[data-page="novobanco"] .expense-input.locked {
 
 /* ── Currency Symbol ───────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .expense-currency {
-  position: absolute;
-  right: 1px;
-  bottom: 1px;
-  color: var(--nb-accent-gold);
-  font-size: 6px;
-  font-weight: 600;
-  pointer-events: none;
-  line-height: 1;
+  display: none;
 }
 
 /* ── Note Indicator ────────────────────────────────────────────────────────── */
