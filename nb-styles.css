@@ -1006,7 +1006,7 @@ body[data-page="novobanco"] .total-tile.is-active {
 body[data-page="novobanco"] .total-value {
   font-size: 9px !important;
   font-weight: 400 !important;
-  color: var(--nb-text-muted);
+  color: #9ca3af !important;
   display: inline-block;
   width: 100%;
   text-align: center;
@@ -1116,7 +1116,7 @@ body[data-page="novobanco"] .expense-input-tile.is-editable {
 /* ── Expense Input ─────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .expense-input {
   width: 100%;
-  padding: 4px 16px 4px 2px;
+  padding: 4px 20px 4px 2px;
   background: transparent;
   border: none;
   color: var(--nb-text-primary);
