@@ -1905,10 +1905,21 @@ body[data-page="novobanco"] #rubricasPanel.collapsed .add-rubrica-btn {
 /* Collapsible content */
 body[data-page="novobanco"] .rubricas-content {
   overflow: hidden;
+  transition: none;
 }
 
 body[data-page="novobanco"] .rubricas-content.collapsed {
-  display: none;
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+}
+
+/* Panel adjusts height when collapsed */
+body[data-page="novobanco"] #rubricasPanel.collapsed {
+  height: auto;
+  min-height: 0;
 }
 
 body[data-page="novobanco"] #rubricasPanel.collapsed .rubricas-header {
