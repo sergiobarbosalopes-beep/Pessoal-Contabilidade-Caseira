@@ -798,7 +798,7 @@ body[data-page="novobanco"] .rubrica-block {
   border-radius: 0;
   border: none;
   border-bottom: 1px solid var(--nb-border-subtle);
-  overflow: hidden;
+  overflow: visible;
 }
 
 body[data-page="novobanco"] .rubrica-block:last-child {
