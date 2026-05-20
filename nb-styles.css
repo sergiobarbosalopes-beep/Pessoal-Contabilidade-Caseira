@@ -2030,8 +2030,8 @@ body[data-page="novobanco"] .toggle-switch input {
 body[data-page="novobanco"] .toggle-track {
   width: 44px;
   height: 24px;
-  background: var(--nb-surface-glass);
-  border: 1px solid var(--nb-border-subtle);
+  background: var(--nb-bg-dark);
+  border: 1px solid var(--nb-border-medium);
   border-radius: 12px;
   position: relative;
   transition: all var(--nb-transition-fast);
