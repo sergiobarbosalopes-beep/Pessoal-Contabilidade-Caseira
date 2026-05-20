@@ -991,7 +991,7 @@ body[data-page="novobanco"] .total-tile.is-active {
   border-color: var(--nb-primary-400);
 }
 
-body[data-page="novobanco"] .total-value {
+body[data-page="novobanco"] .expense-input-tile.total-tile .total-value {
   font-size: 7px;
   font-weight: 500;
   color: var(--nb-text-primary);
