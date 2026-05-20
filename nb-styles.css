@@ -2020,6 +2020,7 @@ body[data-page="novobanco"] .toggle-track::after {
   background: var(--nb-text-muted);
   top: 2px;
   left: 2px;
+  transform: none !important;
   transition: all var(--nb-transition-fast);
 }
 
@@ -2029,8 +2030,9 @@ body[data-page="novobanco"] .toggle-switch input:checked + .toggle-track {
 }
 
 body[data-page="novobanco"] .toggle-switch input:checked + .toggle-track::after {
-  background: white;
-  left: 22px;
+  background: white !important;
+  left: 22px !important;
+  transform: none !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
