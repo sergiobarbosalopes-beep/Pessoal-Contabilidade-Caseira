@@ -970,7 +970,7 @@ body[data-page="novobanco"] .menu-icon {
 
 /* ── Totals Row ────────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .rubrica-totals-row {
-  margin: 8px 0 0 0;
+  margin: 8px 56px 0 56px;
   padding: 0;
 }
 
@@ -979,7 +979,7 @@ body[data-page="novobanco"] .rubrica-totals-grid {
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
   padding: 0;
-  margin: 0 56px;
+  margin: 0;
   box-sizing: border-box;
 }
 
