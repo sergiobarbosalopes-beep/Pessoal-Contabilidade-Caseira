@@ -248,19 +248,15 @@
       // Create overlay element
       const overlay = document.createElement("div");
       overlay.id = "columnHighlightOverlay";
+      overlay.className = "column-highlight";
       overlay.style.cssText = `
         position: absolute;
         top: ${overlayTop}px;
         left: ${overlayLeft}px;
         width: ${overlayWidth + 8}px;
         height: ${overlayHeight}px;
-        background: linear-gradient(180deg, 
-          rgba(15,118,110,.10) 0%, 
-          rgba(15,118,110,.08) 50%,
-          rgba(15,118,110,.06) 100%);
         pointer-events: none;
         z-index: 0;
-        border-radius: 12px;
         margin-left: -4px;
         transition: height 0.5s ease-out, top 0.3s ease-out;
       `;
@@ -2320,6 +2316,40 @@
 
     if (addRubricaBtn) {
       addRubricaBtn.addEventListener("click", openModal);
+    }
+
+    // Collapsible rubricas panel
+    const rubricasToggleBtn = document.getElementById("rubricasToggleBtn");
+    const rubricasPanel = document.getElementById("rubricasPanel");
+    const rubricasContent = document.getElementById("rubricasDynamic");
+    
+    if (rubricasToggleBtn && rubricasPanel && rubricasContent) {
+      // Load collapsed state from localStorage
+      const isCollapsed = localStorage.getItem("nbRubricasPanelCollapsed") === "true";
+      if (isCollapsed) {
+        rubricasPanel.classList.add("collapsed");
+        rubricasContent.classList.add("collapsed");
+      }
+      
+      rubricasToggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const nowCollapsed = rubricasPanel.classList.toggle("collapsed");
+        rubricasContent.classList.toggle("collapsed");
+        localStorage.setItem("nbRubricasPanelCollapsed", nowCollapsed);
+      });
+      
+      // Also allow clicking on the header (excluding the add button) to toggle
+      const rubricasHeaderToggle = document.getElementById("rubricasHeaderToggle");
+      if (rubricasHeaderToggle) {
+        rubricasHeaderToggle.addEventListener("click", (e) => {
+          // Don't toggle if clicking on the add button
+          if (e.target.closest(".add-rubrica-btn")) return;
+          
+          const nowCollapsed = rubricasPanel.classList.toggle("collapsed");
+          rubricasContent.classList.toggle("collapsed");
+          localStorage.setItem("nbRubricasPanelCollapsed", nowCollapsed);
+        });
+      }
     }
 
     renderRubricas();
