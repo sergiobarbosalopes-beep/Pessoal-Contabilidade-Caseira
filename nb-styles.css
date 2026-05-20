@@ -844,11 +844,7 @@ body[data-page="novobanco"] .rubrica-row-header h4 {
 }
 
 body[data-page="novobanco"] .rubrica-row-header h4::before {
-  content: '';
-  width: 4px;
-  height: 20px;
-  background: var(--nb-gradient-primary);
-  border-radius: 2px;
+  display: none;
 }
 
 body[data-page="novobanco"] .rubrica-row-actions {
@@ -865,7 +861,7 @@ body[data-page="novobanco"] .rubrica-toggle-btn {
   border-radius: 8px;
   background: var(--nb-surface-glass-light);
   border: 1px solid var(--nb-border-subtle);
-  color: var(--nb-accent-gold);
+  color: var(--nb-text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
