@@ -705,6 +705,7 @@ body[data-page="novobanco"] .month-tile {
   cursor: pointer;
   transition: all var(--nb-transition-fast);
   overflow: hidden;
+  min-height: 56px;
 }
 
 body[data-page="novobanco"] .month-tile::before {
@@ -818,6 +819,7 @@ body[data-page="novobanco"] .rubrica-row-header {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
+  min-height: 56px;
 }
 
 body[data-page="novobanco"] .rubrica-row-header h4 {
@@ -1112,6 +1114,7 @@ body[data-page="novobanco"] .expense-input-tile {
   padding: 10px 6px;
   display: flex;
   align-items: center;
+  min-height: 56px;
 }
 
 body[data-page="novobanco"] .expense-input-tile.is-editable,
