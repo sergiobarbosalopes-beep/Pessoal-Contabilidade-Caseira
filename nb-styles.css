@@ -581,7 +581,7 @@ body[data-page="novobanco"] .scroll-progress {
   -webkit-backdrop-filter: blur(20px);
   border-radius: var(--nb-border-radius-lg);
   border: 1px solid var(--nb-border-subtle);
-  overflow: hidden;
+  overflow: visible;
   transition: all var(--nb-transition-normal);
 }
 
@@ -692,7 +692,8 @@ body[data-page="novobanco"] #monthGrid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
-  margin: 0 56px 16px 56px;
+  width: calc(100% - 112px);
+  margin: 0 auto 16px auto;
 }
 
 body[data-page="novobanco"] .month-tile {
@@ -794,7 +795,13 @@ body[data-page="novobanco"] .rubrica-block {
   border-radius: 0;
   border: none;
   border-bottom: 1px solid var(--nb-border-subtle);
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+body[data-page="novobanco"] .rubrica-block:has(.rubrica-menu-dropdown.open) {
+  z-index: 200;
 }
 
 body[data-page="novobanco"] .rubrica-block:last-child {
@@ -816,7 +823,7 @@ body[data-page="novobanco"] .rubrica-row {
 body[data-page="novobanco"] .rubrica-row-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
   margin-bottom: 8px;
 }
 
@@ -825,17 +832,6 @@ body[data-page="novobanco"] .rubrica-row-header h4 {
   font-weight: 700;
   color: var(--nb-text-primary);
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-body[data-page="novobanco"] .rubrica-row-header h4::before {
-  content: '';
-  width: 4px;
-  height: 20px;
-  background: var(--nb-gradient-primary);
-  border-radius: 2px;
 }
 
 body[data-page="novobanco"] .rubrica-row-actions {
@@ -843,6 +839,7 @@ body[data-page="novobanco"] .rubrica-row-actions {
   align-items: center;
   gap: 8px;
   position: relative;
+  margin-left: auto;
 }
 
 /* ── Toggle Button ─────────────────────────────────────────────────────────── */
@@ -865,6 +862,20 @@ body[data-page="novobanco"] .rubrica-toggle-btn:hover {
   background: var(--nb-primary-600);
   border-color: var(--nb-primary-500);
   color: white;
+  transform: scale(1.05);
+}
+
+/* Per-rubrica toggle: more subtle/neutral */
+body[data-page="novobanco"] .rubrica-row-header .rubrica-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--nb-border-subtle);
+  color: var(--nb-text-muted);
+}
+
+body[data-page="novobanco"] .rubrica-row-header .rubrica-toggle-btn:hover {
+  background: var(--nb-surface-glass-light);
+  border-color: var(--nb-text-muted);
+  color: var(--nb-text-secondary);
   transform: scale(1.05);
 }
 
@@ -973,16 +984,17 @@ body[data-page="novobanco"] .rubrica-totals-grid {
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
   padding: 0;
-  margin: 0 56px;
+  width: calc(100% - 112px);
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 body[data-page="novobanco"] .total-tile {
   position: relative;
-  padding: 0;
+  padding: 4px 2px;
   background: var(--nb-bg-dark);
   border-radius: 6px;
-  border: 1px solid var(--nb-border-subtle);
+  border: 1px solid var(--nb-border-accent);
   text-align: center;
 }
 
@@ -993,7 +1005,7 @@ body[data-page="novobanco"] .total-tile.is-active {
 
 body[data-page="novobanco"] .total-value {
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--nb-text-primary);
   display: inline-block;
   width: 100%;
@@ -1013,19 +1025,14 @@ body[data-page="novobanco"] .total-tile .expense-currency {
 /* ── Expenses Stack ────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .rubrica-expenses-stack {
   overflow: hidden;
-  max-height: 2000px;
   opacity: 1;
-  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.4s ease-out,
-              padding 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.15s ease;
   padding: 0;
   margin: 0;
 }
 
 body[data-page="novobanco"] .rubrica-expenses-stack.collapsed {
-  max-height: 0;
-  opacity: 0;
-  padding: 0;
+  display: none;
 }
 
 /* ── Expense Row ───────────────────────────────────────────────────────────── */
@@ -1033,34 +1040,12 @@ body[data-page="novobanco"] .rubrica-expense-row {
   padding: 6px 0;
   margin: 0;
   border-bottom: 1px solid var(--nb-border-subtle);
-  animation: slideInExpense 0.4s ease-out backwards;
   background: transparent;
 }
 
 body[data-page="novobanco"] .rubrica-expense-row.moving {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
-}
-
-/* Cascading animation delays */
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(1) { animation-delay: 0.05s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(2) { animation-delay: 0.1s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(3) { animation-delay: 0.15s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(4) { animation-delay: 0.2s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(5) { animation-delay: 0.25s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(6) { animation-delay: 0.3s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(7) { animation-delay: 0.35s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(8) { animation-delay: 0.4s; }
-
-@keyframes slideInExpense {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 body[data-page="novobanco"] .rubrica-expense-row:last-child {
@@ -1099,7 +1084,8 @@ body[data-page="novobanco"] .rubrica-expense-grid {
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
   padding: 0;
-  margin: 0 56px;
+  width: calc(100% - 112px);
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -1108,8 +1094,8 @@ body[data-page="novobanco"] .expense-input-tile {
   position: relative;
   background: var(--nb-bg-dark);
   border-radius: 6px;
-  border: 1px solid var(--nb-border-accent);
-  padding: 4px 2px;
+  border: 1px solid var(--nb-border-subtle);
+  padding: 0;
 }
 
 body[data-page="novobanco"] .expense-input-tile.is-editable,
@@ -1135,7 +1121,7 @@ body[data-page="novobanco"] .expense-input {
   border: none;
   color: var(--nb-text-primary);
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 500;
   text-align: center;
   cursor: inherit;
   box-sizing: border-box;
@@ -1853,27 +1839,6 @@ body[data-page="novobanco"] .rubricas-header-left {
   gap: 12px;
 }
 
-body[data-page="novobanco"] .rubricas-header-toggle {
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-body[data-page="novobanco"] .rubricas-header-toggle svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--nb-accent-gold);
-  stroke-width: 2;
-  fill: none;
-  transition: transform var(--nb-transition-fast);
-}
-
 body[data-page="novobanco"] .rubricas-header h3 {
   font-size: 16px;
   font-weight: 600;
@@ -1935,10 +1900,6 @@ body[data-page="novobanco"] #rubricasPanel.collapsed {
 
 body[data-page="novobanco"] #rubricasPanel.collapsed .rubricas-header {
   margin-bottom: 0;
-}
-
-body[data-page="novobanco"] #rubricasPanel.collapsed .rubricas-header-toggle svg {
-  transform: rotate(-90deg);
 }
 
 /* Auto height panel */
