@@ -996,10 +996,10 @@ body[data-page="novobanco"] .expense-input-tile.total-tile .total-value {
   font-weight: 500;
   color: var(--nb-text-muted);
   display: inline-block;
-  width: 100%;
+  width: calc(100% - 28px);
   text-align: right;
-  padding-right: 28px;
-  box-sizing: content-box;
+  margin-right: 28px;
+  box-sizing: border-box;
   white-space: nowrap;
   overflow: visible;
 }
@@ -1129,8 +1129,9 @@ body[data-page="novobanco"] .expense-input-tile.is-editable {
 
 /* ── Expense Input ─────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .expense-input {
-  width: 100%;
-  padding: 4px 28px 4px 2px;
+  width: calc(100% - 28px);
+  padding: 4px 0 4px 2px;
+  margin-right: 28px;
   background: transparent;
   border: none;
   color: var(--nb-text-primary);
@@ -1138,7 +1139,7 @@ body[data-page="novobanco"] .expense-input {
   font-weight: 600;
   text-align: right;
   cursor: inherit;
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 body[data-page="novobanco"] .expense-input:focus {
