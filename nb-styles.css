@@ -1010,7 +1010,7 @@ body[data-page="novobanco"] .total-value {
   display: inline-block;
   width: 100%;
   text-align: right;
-  padding-right: 10px;
+  padding-right: 12px;
   box-sizing: border-box;
   white-space: nowrap;
   overflow: visible;
@@ -1019,11 +1019,11 @@ body[data-page="novobanco"] .total-value {
 body[data-page="novobanco"] .total-tile .expense-currency {
   position: absolute;
   color: var(--nb-accent-gold);
-  font-size: 6px;
+  font-size: 8px;
   right: 2px;
-  bottom: 2px;
-  top: auto;
-  transform: none;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
 }
 
 /* ── Expenses Stack ────────────────────────────────────────────────────────── */
@@ -1097,7 +1097,7 @@ body[data-page="novobanco"] .rubrica-expense-grid {
 body[data-page="novobanco"] .expense-input-tile {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   background: var(--nb-bg-dark);
   border-radius: 6px;
   border: 1px solid var(--nb-border-subtle);
@@ -1162,7 +1162,8 @@ body[data-page="novobanco"] .expense-currency {
 body[data-page="novobanco"] .expense-input-tile .expense-currency {
   position: static;
   margin-left: 2px;
-  margin-bottom: 1px;
+  margin-bottom: 0;
+  font-size: 8px;
 }
 
 /* ── Note Indicator ────────────────────────────────────────────────────────── */
