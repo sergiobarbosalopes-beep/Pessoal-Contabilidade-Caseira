@@ -999,7 +999,7 @@ body[data-page="novobanco"] .expense-input-tile.total-tile .total-value {
   width: 100%;
   text-align: right;
   padding-right: 28px;
-  box-sizing: border-box;
+  box-sizing: content-box;
   white-space: nowrap;
   overflow: visible;
 }
@@ -1138,7 +1138,7 @@ body[data-page="novobanco"] .expense-input {
   font-weight: 600;
   text-align: right;
   cursor: inherit;
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 
 body[data-page="novobanco"] .expense-input:focus {
