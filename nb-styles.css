@@ -1132,7 +1132,7 @@ body[data-page="novobanco"] .expense-input {
   color: var(--nb-text-primary);
   font-size: 10px;
   font-weight: 600;
-  text-align: left;
+  text-align: right;
   cursor: inherit;
   box-sizing: border-box;
 }
