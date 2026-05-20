@@ -680,7 +680,7 @@ body[data-page="novobanco"] .scroll-progress {
 .nb-year-display span {
   font-size: 18px;
   font-weight: 700;
-  color: var(--nb-accent-gold);
+  color: var(--nb-text-primary);
   letter-spacing: 1px;
 }
 
@@ -763,9 +763,12 @@ body[data-page="novobanco"] .month-tile.active {
   transform: translateY(-2px);
 }
 
-body[data-page="novobanco"] .month-tile.active span,
+body[data-page="novobanco"] .month-tile.active span {
+  color: var(--nb-text-secondary);
+}
+
 body[data-page="novobanco"] .month-tile.active strong {
-  color: var(--nb-accent-gold);
+  color: var(--nb-text-primary);
 }
 
 body[data-page="novobanco"] .month-tile.active::before {
