@@ -10,11 +10,14 @@
     <link rel="stylesheet" href="styles.css?v=2" />
     <link rel="stylesheet" href="nb-styles.css?v=2" />
     <style>
-      .nb-checkbox {
+      .modal-body input.nb-checkbox {
         -webkit-appearance: none;
         appearance: none;
-        width: 18px;
-        height: 18px;
+        width: 18px !important;
+        height: 18px !important;
+        min-width: 18px;
+        max-width: 18px;
+        padding: 0 !important;
         border: 2px solid rgba(251,191,36,0.4);
         border-radius: 4px;
         background: transparent;
@@ -22,12 +25,13 @@
         flex-shrink: 0;
         transition: all 0.15s ease;
         position: relative;
+        box-sizing: border-box;
       }
-      .nb-checkbox:checked {
+      .modal-body input.nb-checkbox:checked {
         background: #fbbf24;
         border-color: #fbbf24;
       }
-      .nb-checkbox:checked::after {
+      .modal-body input.nb-checkbox:checked::after {
         content: "";
         position: absolute;
         top: 2px;
@@ -38,8 +42,16 @@
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
       }
-      .value-toggle-row { display: flex; align-items: center; gap: 12px; }
-      .value-toggle-row .toggle-label { flex: 1; }
+      .value-toggle-row {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 12px !important;
+      }
+      .value-toggle-row .toggle-label {
+        flex: 1;
+        font-size: 14px;
+      }
     </style>
   </head>
   <body data-page="novobanco">
