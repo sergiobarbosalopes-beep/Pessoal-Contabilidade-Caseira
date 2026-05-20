@@ -1004,9 +1004,9 @@ body[data-page="novobanco"] .expense-input-tile.total-tile .total-value {
   font-weight: 500;
   color: var(--nb-text-muted);
   display: inline-block;
-  width: calc(100% - 28px);
+  width: calc(100% - 18px);
   text-align: right;
-  margin-right: 28px;
+  margin-right: 18px;
   box-sizing: border-box;
   white-space: nowrap;
   overflow: visible;
