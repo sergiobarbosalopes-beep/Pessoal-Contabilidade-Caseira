@@ -986,11 +986,12 @@ body[data-page="novobanco"] .rubrica-totals-grid {
 
 body[data-page="novobanco"] .total-tile {
   position: relative;
-  padding: 4px 2px;
+  padding: 2px 2px;
   background: var(--nb-bg-dark);
   border-radius: 6px;
   border: 1px solid var(--nb-border-accent);
   text-align: center;
+  min-height: auto;
 }
 
 body[data-page="novobanco"] .total-tile.is-active {
