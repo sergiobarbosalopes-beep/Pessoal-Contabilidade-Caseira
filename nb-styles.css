@@ -933,7 +933,8 @@ body[data-page="novobanco"] .rubrica-expense-row:has(.expense-menu-dropdown.open
   position: relative;
 }
 
-body[data-page="novobanco"] .rubrica-block:has(.rubrica-menu-dropdown.open) {
+body[data-page="novobanco"] .rubrica-block:has(.rubrica-menu-dropdown.open),
+body[data-page="novobanco"] .rubrica-block:has(.expense-menu-dropdown.open) {
   z-index: 999;
   position: relative;
 }
