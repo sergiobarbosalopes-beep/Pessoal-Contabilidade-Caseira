@@ -693,6 +693,8 @@ body[data-page="novobanco"] #monthGrid {
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
   margin-bottom: 16px;
+  margin-left: 56px;  /* 44px botão + 12px gap */
+  margin-right: 56px; /* 44px botão + 12px gap */
 }
 
 body[data-page="novobanco"] .month-tile {
@@ -785,7 +787,7 @@ body[data-page="novobanco"] #rubricasDynamic {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: var(--nb-bg-dark);
+  background: transparent;
 }
 
 /* ── Individual Rubrica Block ──────────────────────────────────────────────── */
@@ -971,6 +973,7 @@ body[data-page="novobanco"] .rubrica-totals-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
+  padding: 0;
 }
 
 body[data-page="novobanco"] .total-tile {
@@ -1028,6 +1031,7 @@ body[data-page="novobanco"] .rubrica-expense-row {
   padding: 6px 0;
   border-bottom: 1px solid var(--nb-border-subtle);
   animation: slideInExpense 0.4s ease-out backwards;
+  background: transparent;
 }
 
 body[data-page="novobanco"] .rubrica-expense-row.moving {
@@ -1091,6 +1095,7 @@ body[data-page="novobanco"] .rubrica-expense-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
+  padding: 0;
 }
 
 /* ── Expense Input Tile ────────────────────────────────────────────────────── */
@@ -1158,14 +1163,15 @@ body[data-page="novobanco"] .expense-currency {
 /* ── Note Indicator ────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .note-indicator {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 8px;
-  height: 8px;
+  top: -2px;
+  right: -2px;
+  width: 6px;
+  height: 6px;
   background: var(--nb-accent-gold);
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--nb-accent-gold);
+  box-shadow: 0 0 6px var(--nb-accent-gold);
   animation: pulse-note 2s infinite;
+  z-index: 10;
 }
 
 @keyframes pulse-note {
