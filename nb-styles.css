@@ -5,62 +5,62 @@
 
 /* ── CSS Variables ─────────────────────────────────────────────────────────── */
 :root {
-  /* Primary palette - Figma Criativa Balanceada */
-  --nb-primary-50: #fef6f1;
-  --nb-primary-100: #fde9e0;
-  --nb-primary-200: #fbd5c5;
-  --nb-primary-300: #f9bfaa;
-  --nb-primary-400: #f7ab8f;
-  --nb-primary-500: #f24e1e;
-  --nb-primary-600: #d43e14;
-  --nb-primary-700: #b6330d;
-  --nb-primary-800: #982a09;
-  --nb-primary-900: #7a2105;
+  /* Primary palette - Inetum Inspired: Purple + Pink + Cyan */
+  --nb-primary-50: #f5e8f8;
+  --nb-primary-100: #ead1f2;
+  --nb-primary-200: #d4a3e4;
+  --nb-primary-300: #bf75d6;
+  --nb-primary-400: #aa47c8;
+  --nb-primary-500: #6B1F6B;
+  --nb-primary-600: #5a1b5a;
+  --nb-primary-700: #491749;
+  --nb-primary-800: #381338;
+  --nb-primary-900: #270f27;
   
-  /* Background palette - Dark Figma */
-  --nb-bg-darkest: #1e1e1e;
-  --nb-bg-darker: #2a2a2a;
-  --nb-bg-dark: #333333;
-  --nb-bg-medium: #3d3d3d;
-  --nb-bg-light: #4a4a4a;
+  /* Background palette - Inetum dark with depth */
+  --nb-bg-darkest: #060e1a;
+  --nb-bg-darker: #0a1628;
+  --nb-bg-dark: #0f1923;
+  --nb-bg-medium: #152d45;
+  --nb-bg-light: #1a3a55;
   
   /* Surface colors - Glass effect layers */
-  --nb-surface-glass: rgba(30, 30, 30, 0.95);
-  --nb-surface-glass-light: rgba(42, 42, 42, 0.9);
-  --nb-surface-glass-lighter: rgba(61, 61, 61, 0.85);
+  --nb-surface-glass: rgba(10, 22, 40, 0.95);
+  --nb-surface-glass-light: rgba(15, 25, 35, 0.9);
+  --nb-surface-glass-lighter: rgba(21, 45, 69, 0.85);
   
   /* Text colors - HIGH CONTRAST */
-  --nb-text-primary: #fff7f0;
-  --nb-text-secondary: #f0e8e0;
-  --nb-text-muted: #c9b9ad;
-  --nb-text-accent: #00d9ff;
+  --nb-text-primary: #f0f0f0;
+  --nb-text-secondary: #e8e8e8;
+  --nb-text-muted: #8a9bb8;
+  --nb-text-accent: #00d4ff;
   
-  /* Accent colors - Figma palette */
-  --nb-accent-gold: #9747ff;
-  --nb-accent-gold-soft: rgba(151, 71, 255, 0.15);
-  --nb-accent-success: #00d9ff;
-  --nb-accent-danger: #f24e1e;
-  --nb-accent-warning: #fbbf24;
-  --nb-accent-orange: #f24e1e;
-  --nb-accent-amber: #00d9ff;
+  /* Accent colors - Inetum palette */
+  --nb-accent-gold: #E91E8C;
+  --nb-accent-gold-soft: rgba(233, 30, 140, 0.15);
+  --nb-accent-success: #00c853;
+  --nb-accent-danger: #e53935;
+  --nb-accent-warning: #ff9800;
+  --nb-accent-orange: #E91E8C;
+  --nb-accent-amber: #00d4ff;
   
-  /* Gradients - Figma creative style */
-  --nb-gradient-hero: linear-gradient(135deg, #f24e1e 0%, #9747ff 50%, #00d9ff 100%);
-  --nb-gradient-primary: linear-gradient(135deg, #f24e1e 0%, #9747ff 100%);
-  --nb-gradient-surface: linear-gradient(180deg, rgba(42, 42, 42, 0.98) 0%, rgba(30, 30, 30, 0.99) 100%);
-  --nb-gradient-glow: radial-gradient(ellipse at center, rgba(242, 78, 30, 0.15) 0%, transparent 70%);
+  /* Gradients - Inetum style: Purple + Pink + Cyan */
+  --nb-gradient-hero: linear-gradient(135deg, #0a1a3a 0%, #6B1F6B 30%, #1a0a3a 55%, #060e1a 80%, #0a1628 100%);
+  --nb-gradient-primary: linear-gradient(135deg, #E91E8C 0%, #00d4ff 100%);
+  --nb-gradient-surface: linear-gradient(180deg, rgba(15, 25, 35, 0.98) 0%, rgba(6, 14, 26, 0.99) 100%);
+  --nb-gradient-glow: radial-gradient(ellipse at center, rgba(107, 31, 107, 0.15) 0%, transparent 70%);
   
   /* Shadows */
   --nb-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.7);
   --nb-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.8);
   --nb-shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.85);
-  --nb-shadow-glow: 0 0 40px rgba(242, 78, 30, 0.2);
-  --nb-shadow-glow-strong: 0 0 60px rgba(151, 71, 255, 0.2);
+  --nb-shadow-glow: 0 0 40px rgba(107, 31, 107, 0.2);
+  --nb-shadow-glow-strong: 0 0 60px rgba(233, 30, 140, 0.2);
   
   /* Borders */
-  --nb-border-subtle: rgba(242, 78, 30, 0.1);
-  --nb-border-medium: rgba(242, 78, 30, 0.2);
-  --nb-border-accent: rgba(242, 78, 30, 0.4);
+  --nb-border-subtle: rgba(233, 30, 140, 0.1);
+  --nb-border-medium: rgba(233, 30, 140, 0.2);
+  --nb-border-accent: rgba(0, 212, 255, 0.3);
   
   /* Transitions */
   --nb-transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
