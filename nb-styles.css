@@ -671,10 +671,11 @@ body[data-page="novobanco"] .scroll-progress {
 .nb-year-display {
   flex: 1;
   padding: 10px 24px;
-  background: rgba(245, 158, 11, 0.6);
-  border: 1px solid rgba(245, 158, 11, 0.75);
+  background: var(--nb-gradient-primary);
+  border: none;
   border-radius: 10px;
   text-align: center;
+  box-shadow: var(--nb-shadow-glow);
 }
 
 .nb-year-display span {
@@ -758,14 +759,14 @@ body[data-page="novobanco"] .month-tile.past:hover {
 }
 
 body[data-page="novobanco"] .month-tile.active {
-  background: rgba(245, 158, 11, 0.6);
-  border-color: rgba(245, 158, 11, 0.75);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+  background: var(--nb-gradient-primary);
+  border-color: transparent;
+  box-shadow: var(--nb-shadow-glow);
   transform: translateY(-2px);
 }
 
 body[data-page="novobanco"] .month-tile.active span {
-  color: var(--nb-text-secondary);
+  color: var(--nb-text-primary);
 }
 
 body[data-page="novobanco"] .month-tile.active strong {
