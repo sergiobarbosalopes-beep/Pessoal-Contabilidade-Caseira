@@ -1970,6 +1970,10 @@ body[data-page="novobanco"] .rubricas-content.collapsed {
 }
 
 /* Panel adjusts height when collapsed */
+body[data-page="novobanco"] #rubricasPanel {
+  overflow: visible;
+}
+
 body[data-page="novobanco"] #rubricasPanel.collapsed {
   height: auto;
   min-height: 0;

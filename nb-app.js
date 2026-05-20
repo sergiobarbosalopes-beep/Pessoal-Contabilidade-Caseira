@@ -1394,14 +1394,22 @@
     }
 
     function toggleRubricaMenu(id) {
-      openRubricaMenuId = openRubricaMenuId === id ? null : id;
-      renderRubricas();
+      // Close all open menus first
+      document.querySelectorAll('.rubrica-menu-dropdown.open').forEach(d => d.classList.remove('open'));
+      
+      if (openRubricaMenuId === id) {
+        openRubricaMenuId = null;
+      } else {
+        openRubricaMenuId = id;
+        const dropdown = document.querySelector(`[data-rubrica-menu-dropdown="${id}"]`);
+        if (dropdown) dropdown.classList.add('open');
+      }
     }
 
     function closeRubricaMenu() {
       if (openRubricaMenuId !== null) {
+        document.querySelectorAll('.rubrica-menu-dropdown.open').forEach(d => d.classList.remove('open'));
         openRubricaMenuId = null;
-        renderRubricas();
       }
     }
 
