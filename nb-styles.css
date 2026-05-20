@@ -1856,27 +1856,6 @@ body[data-page="novobanco"] .rubricas-header-left {
   gap: 12px;
 }
 
-body[data-page="novobanco"] .rubricas-header-toggle {
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-body[data-page="novobanco"] .rubricas-header-toggle svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--nb-accent-gold);
-  stroke-width: 2;
-  fill: none;
-  transition: transform var(--nb-transition-fast);
-}
-
 body[data-page="novobanco"] .rubricas-header h3 {
   font-size: 16px;
   font-weight: 600;
@@ -1938,10 +1917,6 @@ body[data-page="novobanco"] #rubricasPanel.collapsed {
 
 body[data-page="novobanco"] #rubricasPanel.collapsed .rubricas-header {
   margin-bottom: 0;
-}
-
-body[data-page="novobanco"] #rubricasPanel.collapsed .rubricas-header-toggle svg {
-  transform: rotate(-90deg);
 }
 
 /* Auto height panel */

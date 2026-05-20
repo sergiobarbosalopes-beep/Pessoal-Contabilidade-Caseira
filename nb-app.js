@@ -2268,12 +2268,14 @@
       if (isCollapsed) {
         rubricasPanel.classList.add("collapsed");
         rubricasContent.classList.add("collapsed");
+        rubricasToggleBtn.textContent = "⮞";
       }
       
       rubricasToggleBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const nowCollapsed = rubricasPanel.classList.toggle("collapsed");
         rubricasContent.classList.toggle("collapsed");
+        rubricasToggleBtn.textContent = nowCollapsed ? "⮞" : "⮟";
         localStorage.setItem("nbRubricasPanelCollapsed", nowCollapsed);
       });
       
@@ -2283,9 +2285,11 @@
         rubricasHeaderToggle.addEventListener("click", (e) => {
           // Don't toggle if clicking on the add button
           if (e.target.closest(".add-rubrica-btn")) return;
+          if (e.target.closest(".rubrica-toggle-btn")) return;
           
           const nowCollapsed = rubricasPanel.classList.toggle("collapsed");
           rubricasContent.classList.toggle("collapsed");
+          rubricasToggleBtn.textContent = nowCollapsed ? "⮞" : "⮟";
           localStorage.setItem("nbRubricasPanelCollapsed", nowCollapsed);
         });
       }
