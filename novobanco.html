@@ -9,15 +9,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css?v=2" />
     <link rel="stylesheet" href="nb-styles.css?v=2" />
-      <style>
-      /* Checkbox styling - gold accent */
+    <style>
       .nb-checkbox {
-        width: 20px;
-        height: 20px;
-        accent-color: #fbbf24;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(251,191,36,0.4);
+        border-radius: 4px;
+        background: transparent;
         cursor: pointer;
         flex-shrink: 0;
+        transition: all 0.15s ease;
+        position: relative;
       }
+      .nb-checkbox:checked {
+        background: #fbbf24;
+        border-color: #fbbf24;
+      }
+      .nb-checkbox:checked::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 5px;
+        height: 9px;
+        border: solid #1f2937;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+      .value-toggle-row { display: flex; align-items: center; gap: 12px; }
+      .value-toggle-row .toggle-label { flex: 1; }
     </style>
   </head>
   <body data-page="novobanco">
@@ -215,8 +237,8 @@
           <label for="rubricaNameInput">Nome da rubrica</label>
           <input type="text" id="rubricaNameInput" placeholder="Ex: Alimentação, Transportes..." autocomplete="off">
           <div class="value-toggle-row" style="margin-top: 16px;">
-            <span class="toggle-label">Criar para todos os meses</span>
             <input type="checkbox" id="rubricaAllMonths" checked class="nb-checkbox">
+            <span class="toggle-label">Criar para todos os meses</span>
           </div>
         </div>
         <div class="modal-footer">
@@ -236,8 +258,8 @@
         <div class="modal-body">
           <p>Tem a certeza que pretende eliminar a rubrica <strong id="deleteRubricaName"></strong>?</p>
           <div class="value-toggle-row" style="margin-top: 16px;">
-            <span class="toggle-label">Eliminar em todos os meses</span>
             <input type="checkbox" id="deleteRubricaAllMonths" checked class="nb-checkbox">
+            <span class="toggle-label">Eliminar em todos os meses</span>
           </div>
         </div>
         <div class="modal-footer">
@@ -258,8 +280,8 @@
           <label for="expenseNameInput">Nome da despesa</label>
           <input type="text" id="expenseNameInput" placeholder="Ex: Supermercado, Combustível..." autocomplete="off">
           <div class="value-toggle-row" style="margin-top: 16px;">
-            <span class="toggle-label">Criar para todos os meses</span>
             <input type="checkbox" id="expenseAllMonths" checked class="nb-checkbox">
+            <span class="toggle-label">Criar para todos os meses</span>
           </div>
         </div>
         <div class="modal-footer">
@@ -279,8 +301,8 @@
         <div class="modal-body">
           <p>Tem a certeza que pretende eliminar a despesa <strong id="deleteExpenseName"></strong>?</p>
           <div class="value-toggle-row" style="margin-top: 16px;">
-            <span class="toggle-label">Eliminar em todos os meses</span>
             <input type="checkbox" id="deleteExpenseAllMonths" checked class="nb-checkbox">
+            <span class="toggle-label">Eliminar em todos os meses</span>
           </div>
         </div>
         <div class="modal-footer">
@@ -367,14 +389,14 @@
           
           <!-- Toggle: Include in total -->
           <div class="value-toggle-row">
-            <span class="toggle-label">Incluir no totalizador</span>
             <input type="checkbox" id="valueIncludeInTotal" checked class="nb-checkbox">
+            <span class="toggle-label">Incluir no totalizador</span>
           </div>
           
           <!-- Toggle: Apply to all months -->
           <div class="value-toggle-row">
-            <span class="toggle-label">Adicionar a todos os meses até final do ano</span>
             <input type="checkbox" id="valueApplyAllMonths" class="nb-checkbox">
+            <span class="toggle-label">Adicionar a todos os meses até final do ano</span>
           </div>
           
           <!-- History section -->
@@ -402,6 +424,9 @@
     <script src="nb-app.js"></script>
   </body>
 </html>
+
+
+
 
 
 
