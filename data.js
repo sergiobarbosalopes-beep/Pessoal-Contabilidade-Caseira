@@ -32,3 +32,4 @@ const dashboardMock = {
     solares: { poupanca: "1 240", retorno: "68%" }
   }
 };
+window.dashboardMock = dashboardMock;

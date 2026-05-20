@@ -1,0 +1,7 @@
+1. Aggregate expense action buttons into a kebab menu per expense, matching the rubrica menu pattern (HTML structure and CSS).
+2. Add event delegation for opening/closing the expense menu and handling actions (move up, move down, delete) using custom events.
+3. Listen for these custom events in the main logic and call the existing moveExpenseUp, moveExpenseDown, and openDeleteExpenseModal functions.
+4. Remove the old expense action button listeners from renderRubricas (they are now handled via the menu).
+5. Ensure keyboard navigation and outside click closes the menu.
+6. Style the menu to match the rubrica menu dropdown, with appropriate icons/colors.
+7. Test all actions for accessibility and usability.
