@@ -821,7 +821,7 @@ body[data-page="novobanco"] .rubrica-row-header {
 }
 
 body[data-page="novobanco"] .rubrica-row-header h4 {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--nb-text-primary);
   margin: 0;
@@ -992,7 +992,7 @@ body[data-page="novobanco"] .total-tile.is-active {
 }
 
 body[data-page="novobanco"] .total-value {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 500;
   color: var(--nb-text-primary);
   display: inline-block;
