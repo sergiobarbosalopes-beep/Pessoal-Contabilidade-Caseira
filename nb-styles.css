@@ -828,9 +828,9 @@ body[data-page="novobanco"] .rubrica-row-header {
 }
 
 body[data-page="novobanco"] .rubrica-row-header h4 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--nb-text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nb-text-secondary);
   margin: 0;
 }
 
