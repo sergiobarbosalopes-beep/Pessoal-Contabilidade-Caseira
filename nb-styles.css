@@ -1957,7 +1957,7 @@ body[data-page="novobanco"] #rubricasPanel.collapsed .add-rubrica-btn {
 
 /* Collapsible content */
 body[data-page="novobanco"] .rubricas-content {
-  overflow: hidden;
+  overflow: visible;
   transition: none;
 }
 
