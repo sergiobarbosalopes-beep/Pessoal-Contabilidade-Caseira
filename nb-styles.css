@@ -1113,6 +1113,9 @@ body[data-page="novobanco"] .rubrica-expense-grid {
   gap: 8px;
   padding: 0;
   margin: 0 56px;
+  width: auto;
+  margin-left: 56px;
+  margin-right: 56px;
   box-sizing: border-box;
 }
 
