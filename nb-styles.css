@@ -1085,7 +1085,7 @@ body[data-page="novobanco"] .rubrica-expense-header {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 3px;
-  padding: 0 56px;
+  padding: 0 56px 0 32px;
 }
 
 body[data-page="novobanco"] .rubrica-expense-name {
