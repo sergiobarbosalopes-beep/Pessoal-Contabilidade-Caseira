@@ -1109,7 +1109,9 @@ body[data-page="novobanco"] .expense-input-tile {
   background: var(--nb-bg-dark);
   border-radius: 6px;
   border: 1px solid var(--nb-border-subtle);
-  padding: 0;
+  padding: 10px 6px;
+  display: flex;
+  align-items: center;
 }
 
 body[data-page="novobanco"] .expense-input-tile.is-editable,
