@@ -1875,6 +1875,17 @@ body[data-page="novobanco"] .rubricas-header-left {
   gap: 12px;
 }
 
+body[data-page="novobanco"] .rubricas-header .rubrica-toggle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--nb-gradient-primary);
+  border: none;
+  color: white;
+  font-size: 14px;
+  box-shadow: var(--nb-shadow-glow);
+}
+
 body[data-page="novobanco"] .rubricas-header-toggle {
   width: 32px;
   height: 32px;
