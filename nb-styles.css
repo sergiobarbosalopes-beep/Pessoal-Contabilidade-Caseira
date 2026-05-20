@@ -1042,7 +1042,7 @@ body[data-page="novobanco"] .rubrica-expenses-stack.collapsed {
 
 /* ── Expense Row ───────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .rubrica-expense-row {
-  padding: 6px 0;
+  padding: 3px 0;
   margin: 0;
   border-bottom: 1px solid var(--nb-border-subtle);
   animation: slideInExpense 0.4s ease-out backwards;
@@ -1084,15 +1084,15 @@ body[data-page="novobanco"] .rubrica-expense-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: 3px;
   padding: 0 56px;
 }
 
 body[data-page="novobanco"] .rubrica-expense-name {
-  font-size: 15px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--nb-text-secondary);
-  padding: 4px 16px;
+  padding: 2px 12px;
   border: 1px solid var(--nb-primary-600);
   border-radius: 20px;
   box-shadow: 0 0 6px rgba(99, 102, 241, 0.4);
