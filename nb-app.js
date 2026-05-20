@@ -1009,9 +1009,9 @@
           <div class="rubrica-block" data-id="${id}">
             <div class="rubrica-row">
               <div class="rubrica-row-header">
-                <button class="rubrica-toggle-btn" data-toggle-expenses="${id}" aria-label="${isCollapsed ? "Expandir despesas" : "Colapsar despesas"}">${isCollapsed ? "⮞" : "⮟"}</button>
                 <h4>${rubrica.name}</h4>
                 <div class="rubrica-row-actions">
+                  <button class="rubrica-toggle-btn" data-toggle-expenses="${id}" aria-label="${isCollapsed ? "Expandir despesas" : "Colapsar despesas"}">${isCollapsed ? "⮞" : "⮟"}</button>
                   <button class="rubrica-menu-btn" data-rubrica-menu="${id}" aria-label="Ações da rubrica">⋯</button>
                   <div class="rubrica-menu-dropdown ${openRubricaMenuId === id ? "open" : ""}" data-rubrica-menu-dropdown="${id}">
                     <button class="rubrica-menu-item" data-rubrica-action="rename" data-rubrica-id="${id}"><span class="menu-icon edit">✎</span><span>Renomear rubrica</span></button>
@@ -2268,14 +2268,12 @@
       if (isCollapsed) {
         rubricasPanel.classList.add("collapsed");
         rubricasContent.classList.add("collapsed");
-        rubricasToggleBtn.textContent = "⮞";
       }
       
       rubricasToggleBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const nowCollapsed = rubricasPanel.classList.toggle("collapsed");
         rubricasContent.classList.toggle("collapsed");
-        rubricasToggleBtn.textContent = nowCollapsed ? "⮞" : "⮟";
         localStorage.setItem("nbRubricasPanelCollapsed", nowCollapsed);
       });
       
@@ -2285,11 +2283,9 @@
         rubricasHeaderToggle.addEventListener("click", (e) => {
           // Don't toggle if clicking on the add button
           if (e.target.closest(".add-rubrica-btn")) return;
-          if (e.target.closest(".rubrica-toggle-btn")) return;
           
           const nowCollapsed = rubricasPanel.classList.toggle("collapsed");
           rubricasContent.classList.toggle("collapsed");
-          rubricasToggleBtn.textContent = nowCollapsed ? "⮞" : "⮟";
           localStorage.setItem("nbRubricasPanelCollapsed", nowCollapsed);
         });
       }
