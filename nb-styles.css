@@ -5,62 +5,62 @@
 
 /* ── CSS Variables ─────────────────────────────────────────────────────────── */
 :root {
-  /* Primary palette - Inetum Inspired: Purple + Pink + Cyan */
-  --nb-primary-50: #f5e8f8;
-  --nb-primary-100: #ead1f2;
-  --nb-primary-200: #d4a3e4;
-  --nb-primary-300: #bf75d6;
-  --nb-primary-400: #aa47c8;
-  --nb-primary-500: #6B1F6B;
-  --nb-primary-600: #5a1b5a;
-  --nb-primary-700: #491749;
-  --nb-primary-800: #381338;
-  --nb-primary-900: #270f27;
+  /* Primary palette - Warm amber/gold tones for better contrast */
+  --nb-primary-50: #fffbeb;
+  --nb-primary-100: #fef3c7;
+  --nb-primary-200: #fde68a;
+  --nb-primary-300: #fcd34d;
+  --nb-primary-400: #fbbf24;
+  --nb-primary-500: #f59e0b;
+  --nb-primary-600: #d97706;
+  --nb-primary-700: #b45309;
+  --nb-primary-800: #92400e;
+  --nb-primary-900: #78350f;
   
-  /* Background palette - Inetum dark with depth */
-  --nb-bg-darkest: #060e1a;
-  --nb-bg-darker: #0a1628;
-  --nb-bg-dark: #0f1923;
-  --nb-bg-medium: #152d45;
-  --nb-bg-light: #1a3a55;
+  /* Background palette - Deep slate blues */
+  --nb-bg-darkest: #0a0f1a;
+  --nb-bg-darker: #111827;
+  --nb-bg-dark: #1f2937;
+  --nb-bg-medium: #374151;
+  --nb-bg-light: #4b5563;
   
   /* Surface colors - Glass effect layers */
-  --nb-surface-glass: rgba(10, 22, 40, 0.95);
-  --nb-surface-glass-light: rgba(15, 25, 35, 0.9);
-  --nb-surface-glass-lighter: rgba(21, 45, 69, 0.85);
+  --nb-surface-glass: rgba(17, 24, 39, 0.9);
+  --nb-surface-glass-light: rgba(31, 41, 55, 0.85);
+  --nb-surface-glass-lighter: rgba(55, 65, 81, 0.7);
   
   /* Text colors - HIGH CONTRAST */
-  --nb-text-primary: #f0f0f0;
-  --nb-text-secondary: #e8e8e8;
-  --nb-text-muted: #8a9bb8;
-  --nb-text-accent: #00d4ff;
+  --nb-text-primary: #ffffff;
+  --nb-text-secondary: #e5e7eb;
+  --nb-text-muted: #9ca3af;
+  --nb-text-accent: #fcd34d;
   
-  /* Accent colors - Inetum palette */
-  --nb-accent-gold: #E91E8C;
-  --nb-accent-gold-soft: rgba(233, 30, 140, 0.15);
-  --nb-accent-success: #00c853;
-  --nb-accent-danger: #e53935;
-  --nb-accent-warning: #ff9800;
-  --nb-accent-orange: #E91E8C;
-  --nb-accent-amber: #00d4ff;
+  /* Accent colors */
+  --nb-accent-gold: #fbbf24;
+  --nb-accent-gold-soft: rgba(251, 191, 36, 0.2);
+  --nb-accent-success: #4ade80;
+  --nb-accent-danger: #fb7185;
+  --nb-accent-warning: #fb923c;
+  --nb-accent-orange: #f97316;
+  --nb-accent-amber: #fbbf24;
   
-  /* Gradients - Inetum style: Purple + Pink + Cyan */
-  --nb-gradient-hero: linear-gradient(135deg, #0a1a3a 0%, #6B1F6B 30%, #1a0a3a 55%, #060e1a 80%, #0a1628 100%);
-  --nb-gradient-primary: linear-gradient(135deg, #E91E8C 0%, #00d4ff 100%);
-  --nb-gradient-surface: linear-gradient(180deg, rgba(15, 25, 35, 0.98) 0%, rgba(6, 14, 26, 0.99) 100%);
-  --nb-gradient-glow: radial-gradient(ellipse at center, rgba(107, 31, 107, 0.15) 0%, transparent 70%);
+  /* Gradients - Warm amber tones */
+  --nb-gradient-hero: linear-gradient(135deg, #92400e 0%, #78350f 50%, #111827 100%);
+  --nb-gradient-primary: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --nb-gradient-surface: linear-gradient(180deg, rgba(31, 41, 55, 0.95) 0%, rgba(17, 24, 39, 0.98) 100%);
+  --nb-gradient-glow: radial-gradient(ellipse at center, rgba(251, 191, 36, 0.12) 0%, transparent 70%);
   
   /* Shadows */
-  --nb-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.7);
-  --nb-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.8);
-  --nb-shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.85);
-  --nb-shadow-glow: 0 0 40px rgba(107, 31, 107, 0.2);
-  --nb-shadow-glow-strong: 0 0 60px rgba(233, 30, 140, 0.2);
+  --nb-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --nb-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --nb-shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+  --nb-shadow-glow: 0 0 40px rgba(251, 191, 36, 0.15);
+  --nb-shadow-glow-strong: 0 0 60px rgba(251, 191, 36, 0.25);
   
   /* Borders */
-  --nb-border-subtle: rgba(233, 30, 140, 0.1);
-  --nb-border-medium: rgba(233, 30, 140, 0.2);
-  --nb-border-accent: rgba(0, 212, 255, 0.3);
+  --nb-border-subtle: rgba(251, 191, 36, 0.1);
+  --nb-border-medium: rgba(251, 191, 36, 0.2);
+  --nb-border-accent: rgba(251, 191, 36, 0.4);
   
   /* Transitions */
   --nb-transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
