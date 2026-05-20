@@ -1019,19 +1019,14 @@ body[data-page="novobanco"] .total-tile .expense-currency {
 /* ── Expenses Stack ────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .rubrica-expenses-stack {
   overflow: hidden;
-  max-height: 2000px;
   opacity: 1;
-  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.4s ease-out,
-              padding 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.15s ease;
   padding: 0;
   margin: 0;
 }
 
 body[data-page="novobanco"] .rubrica-expenses-stack.collapsed {
-  max-height: 0;
-  opacity: 0;
-  padding: 0;
+  display: none;
 }
 
 /* ── Expense Row ───────────────────────────────────────────────────────────── */
@@ -1039,34 +1034,12 @@ body[data-page="novobanco"] .rubrica-expense-row {
   padding: 6px 0;
   margin: 0;
   border-bottom: 1px solid var(--nb-border-subtle);
-  animation: slideInExpense 0.4s ease-out backwards;
   background: transparent;
 }
 
 body[data-page="novobanco"] .rubrica-expense-row.moving {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
-}
-
-/* Cascading animation delays */
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(1) { animation-delay: 0.05s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(2) { animation-delay: 0.1s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(3) { animation-delay: 0.15s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(4) { animation-delay: 0.2s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(5) { animation-delay: 0.25s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(6) { animation-delay: 0.3s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(7) { animation-delay: 0.35s; }
-body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(8) { animation-delay: 0.4s; }
-
-@keyframes slideInExpense {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 body[data-page="novobanco"] .rubrica-expense-row:last-child {
