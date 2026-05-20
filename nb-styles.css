@@ -785,7 +785,7 @@ body[data-page="novobanco"] .month-tile.active::before {
 body[data-page="novobanco"] .rubricas-dynamic,
 body[data-page="novobanco"] #rubricasDynamic {
   padding: 0;
-  margin: 0 56px;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -822,6 +822,7 @@ body[data-page="novobanco"] .rubrica-row-header {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
+  padding: 0 56px;
   min-height: 56px;
 }
 
@@ -970,7 +971,7 @@ body[data-page="novobanco"] .menu-icon {
 
 /* ── Totals Row ────────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .rubrica-totals-row {
-  margin: 8px 56px 0 56px;
+  margin: 8px 0 0 0;
   padding: 0;
 }
 
@@ -979,7 +980,7 @@ body[data-page="novobanco"] .rubrica-totals-grid {
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
   padding: 0;
-  margin: 0;
+  margin: 0 56px;
   box-sizing: border-box;
 }
 
@@ -1039,7 +1040,7 @@ body[data-page="novobanco"] .rubrica-expenses-stack.collapsed {
 /* ── Expense Row ───────────────────────────────────────────────────────────── */
 body[data-page="novobanco"] .rubrica-expense-row {
   padding: 6px 0;
-  margin: 0 56px;
+  margin: 0;
   border-bottom: 1px solid var(--nb-border-subtle);
   animation: slideInExpense 0.4s ease-out backwards;
   background: transparent;
@@ -1081,6 +1082,7 @@ body[data-page="novobanco"] .rubrica-expense-header {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 6px;
+  padding: 0 56px;
 }
 
 body[data-page="novobanco"] .rubrica-expense-name {
@@ -1107,7 +1109,7 @@ body[data-page="novobanco"] .rubrica-expense-grid {
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
   padding: 0;
-  margin: 0;
+  margin: 0 56px;
   box-sizing: border-box;
 }
 
