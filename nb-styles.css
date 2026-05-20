@@ -727,6 +727,7 @@ body[data-page="novobanco"] .month-tile span {
   position: relative;
   z-index: 1;
   transition: color var(--nb-transition-fast);
+  line-height: 1;
 }
 
 body[data-page="novobanco"] .month-tile strong {
@@ -738,6 +739,7 @@ body[data-page="novobanco"] .month-tile strong {
   position: relative;
   z-index: 1;
   transition: color var(--nb-transition-fast);
+  line-height: 1;
 }
 
 body[data-page="novobanco"] .month-tile:hover {
@@ -830,6 +832,7 @@ body[data-page="novobanco"] .rubrica-row-header h4 {
   display: flex;
   align-items: center;
   gap: 8px;
+  line-height: 1;
 }
 
 body[data-page="novobanco"] .rubrica-row-header h4::before {
@@ -1004,6 +1007,8 @@ body[data-page="novobanco"] .expense-input-tile.total-tile .total-value {
   box-sizing: border-box;
   white-space: nowrap;
   overflow: visible;
+  line-height: 1;
+  vertical-align: middle;
 }
 
 body[data-page="novobanco"] .total-tile .expense-currency {
@@ -1145,6 +1150,8 @@ body[data-page="novobanco"] .expense-input {
   text-align: right;
   cursor: inherit;
   box-sizing: border-box;
+  line-height: 1;
+  vertical-align: middle;
 }
 
 body[data-page="novobanco"] .expense-input:focus {
