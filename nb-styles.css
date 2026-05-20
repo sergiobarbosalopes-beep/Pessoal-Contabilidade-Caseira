@@ -1095,6 +1095,7 @@ body[data-page="novobanco"] .rubrica-expense-name {
   padding: 4px 16px;
   border: 1px solid var(--nb-primary-600);
   border-radius: 20px;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.4);
 }
 
 body[data-page="novobanco"] .rubrica-expense-actions {
