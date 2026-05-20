@@ -72,24 +72,255 @@
         </section>
 
         <section class="content-section reveal">
-          <div class="glass-panel page-panel">
-            <h1>Detalhes da Conta</h1>
-            <p>
-              Esta página está preparada para consolidar movimentos, fluxo de cartão, 
-              alertas de custos recorrentes e previsão de fecho mensal.
-            </p>
-            <p style="margin-top:16px;">
-              <strong>Funcionalidades planeadas:</strong><br/>
-              • Movimentos do cartão de crédito<br/>
-              • Débitos diretos e subscrições<br/>
-              • Alertas de vencimento<br/>
-              • Projeção de fecho mensal
-            </p>
+          <div class="section-title">
+            <h2>Navegação Mensal</h2>
+            <p>Navega entre os meses para ver os detalhes de cada período</p>
+          </div>
+
+          <!-- Year Selector -->
+          <div class="year-row">
+            <button class="year-nav-btn" id="yearPrev" aria-label="Ano anterior">
+              <span class="nav-arrow">❮❮</span>
+            </button>
+            <div class="year-display">
+              <span class="year-value" id="yearValue">2026</span>
+            </div>
+            <button class="year-nav-btn" id="yearNext" aria-label="Próximo ano">
+              <span class="nav-arrow">❯❯</span>
+            </button>
+          </div>
+
+          <div class="month-row">
+            <div class="month-grid" id="monthGrid">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Rubricas Header with Add Button -->
+          <div class="rubricas-header">
+            <h3>Despesas</h3>
+            <button class="add-rubrica-btn" id="addRubricaBtn" aria-label="Adicionar rubrica">
+              +
+            </button>
+          </div>
+
+          <!-- Rubricas Container (dynamic) -->
+          <div class="rubricas-dynamic" id="rubricasDynamic">
+            <!-- Rubricas will be added here dynamically -->
           </div>
         </section>
 
       </div>
     </main>
+
+    <!-- Modal for adding rubrica -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Nova Rubrica</h3>
+          <button class="modal-close" id="modalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <label for="rubricaNameInput">Nome da rubrica</label>
+          <input type="text" id="rubricaNameInput" placeholder="Ex: Alimentação, Transportes..." autocomplete="off">
+          <!-- Toggle for creating in all months -->
+          <div class="value-toggle-row" style="margin-top: 16px;">
+            <span class="toggle-label">Criar para todos os meses</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="rubricaAllMonths" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="modalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="modalConfirm">Adicionar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for deleting rubrica -->
+    <div class="modal-overlay" id="deleteModalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Eliminar Rubrica</h3>
+          <button class="modal-close" id="deleteModalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <p>Tem a certeza que pretende eliminar a rubrica <strong id="deleteRubricaName"></strong>?</p>
+          <!-- Toggle for deleting in all months -->
+          <div class="value-toggle-row" style="margin-top: 16px;">
+            <span class="toggle-label">Eliminar em todos os meses</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="deleteRubricaAllMonths" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="deleteModalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="deleteModalConfirm">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for adding expense to rubrica -->
+    <div class="modal-overlay" id="expenseModalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Nova Despesa</h3>
+          <button class="modal-close" id="expenseModalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <label for="expenseNameInput">Nome da despesa</label>
+          <input type="text" id="expenseNameInput" placeholder="Ex: Supermercado, Combustível..." autocomplete="off">
+          <!-- Toggle for creating in all months -->
+          <div class="value-toggle-row" style="margin-top: 16px;">
+            <span class="toggle-label">Criar para todos os meses</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="expenseAllMonths" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="expenseModalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="expenseModalConfirm">Adicionar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for deleting expense -->
+    <div class="modal-overlay" id="deleteExpenseModalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Eliminar Despesa</h3>
+          <button class="modal-close" id="deleteExpenseModalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <p>Tem a certeza que pretende eliminar a despesa <strong id="deleteExpenseName"></strong>?</p>
+          <!-- Toggle for deleting in all months -->
+          <div class="value-toggle-row" style="margin-top: 16px;">
+            <span class="toggle-label">Eliminar em todos os meses</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="deleteExpenseAllMonths" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="deleteExpenseModalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="deleteExpenseModalConfirm">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for renaming rubrica -->
+    <div class="modal-overlay" id="renameRubricaModalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Renomear Rubrica</h3>
+          <button class="modal-close" id="renameRubricaModalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <label for="renameRubricaInput">Novo nome</label>
+          <input type="text" id="renameRubricaInput" placeholder="Nome da rubrica..." autocomplete="off">
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="renameRubricaModalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="renameRubricaModalConfirm">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for renaming expense -->
+    <div class="modal-overlay" id="renameExpenseModalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Renomear Despesa</h3>
+          <button class="modal-close" id="renameExpenseModalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <label for="renameExpenseInput">Novo nome</label>
+          <input type="text" id="renameExpenseInput" placeholder="Nome da despesa..." autocomplete="off">
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="renameExpenseModalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="renameExpenseModalConfirm">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for editing expense value -->
+    <div class="modal-overlay" id="valueModalOverlay">
+      <div class="modal value-modal">
+        <div class="modal-header">
+          <h3 id="valueModalTitle">Editar Valor</h3>
+          <button class="modal-close" id="valueModalClose">×</button>
+        </div>
+        <div class="modal-body">
+          <!-- Top: 3 inputs side by side -->
+          <div class="value-inputs-row">
+            <div class="value-input-group compact">
+              <label for="valueCurrentInput">Valor Atual</label>
+              <div class="value-input-wrapper">
+                <input type="text" inputmode="decimal" id="valueCurrentInput" placeholder="0.00" autocomplete="off">
+                <span class="value-currency">€</span>
+              </div>
+            </div>
+            <div class="value-input-group compact">
+              <label for="valueAddInput">Adicionar</label>
+              <div class="value-input-wrapper add">
+                <input type="text" inputmode="decimal" id="valueAddInput" placeholder="0.00" autocomplete="off">
+                <span class="value-currency">€</span>
+              </div>
+            </div>
+            <div class="value-input-group compact">
+              <label for="valueSubtractInput">Subtrair</label>
+              <div class="value-input-wrapper subtract">
+                <input type="text" inputmode="decimal" id="valueSubtractInput" placeholder="0.00" autocomplete="off">
+                <span class="value-currency">€</span>
+              </div>
+            </div>
+          </div>
+          <!-- Note field (visible only when add/subtract has value) -->
+          <div class="value-note-row" id="valueNoteRow" style="display: none;">
+            <label for="valueNoteInput">Nota</label>
+            <input type="text" id="valueNoteInput" placeholder="Adicionar uma nota..." autocomplete="off">
+          </div>
+          <!-- Toggle for including in total -->
+          <div class="value-toggle-row">
+            <span class="toggle-label">Incluir no totalizador</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="valueIncludeInTotal" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+          <!-- Toggle for applying to all months until end of year -->
+          <div class="value-toggle-row">
+            <span class="toggle-label">Adicionar a todos os meses até final do ano</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="valueApplyAllMonths">
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+          <!-- Bottom: history -->
+          <div class="value-history" id="valueHistory">
+            <div class="value-history-header">
+              <span class="value-history-title">Histórico</span>
+              <button type="button" class="value-history-clear" id="valueHistoryClear" title="Limpar histórico">Limpar</button>
+            </div>
+            <div class="value-history-list" id="valueHistoryList">
+              <!-- History entries will be inserted here -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-cancel" id="valueModalCancel">Cancelar</button>
+          <button class="modal-btn modal-btn-confirm" id="valueModalConfirm">Guardar</button>
+        </div>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="footer-inner">
@@ -102,6 +333,6 @@
     </footer>
 
     <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="nb-app.js"></script>
   </body>
 </html>
