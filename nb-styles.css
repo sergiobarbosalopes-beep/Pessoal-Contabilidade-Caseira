@@ -822,7 +822,7 @@ body[data-page="novobanco"] .rubrica-row-header {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2px;
-  padding: 0 56px;
+  padding: 0 56px 0 32px;
   min-height: 32px;
 }
 
