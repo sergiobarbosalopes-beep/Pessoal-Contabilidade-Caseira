@@ -1432,7 +1432,8 @@ body[data-page="novobanco"] .toggle-switch input {
 body[data-page="novobanco"] .toggle-track {
   position: absolute;
   inset: 0;
-  background: var(--nb-bg-medium);
+  background: var(--nb-bg-dark);
+  border: 1px solid var(--nb-border-medium);
   border-radius: 13px;
   transition: background var(--nb-transition-fast);
 }
