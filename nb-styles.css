@@ -918,12 +918,24 @@ body[data-page="novobanco"] .expense-menu-dropdown {
   border: 1px solid var(--nb-border-medium);
   border-radius: var(--nb-border-radius-sm);
   box-shadow: var(--nb-shadow-lg);
-  z-index: 100;
+  z-index: 9999;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px) scale(0.95);
   transition: all var(--nb-transition-fast);
   overflow: hidden;
+}
+
+
+/* Fix dropdown overlap - elevate row when dropdown is open */
+body[data-page="novobanco"] .rubrica-expense-row:has(.expense-menu-dropdown.open) {
+  z-index: 999;
+  position: relative;
+}
+
+body[data-page="novobanco"] .rubrica-block:has(.rubrica-menu-dropdown.open) {
+  z-index: 999;
+  position: relative;
 }
 
 body[data-page="novobanco"] .rubrica-menu-dropdown.open,
