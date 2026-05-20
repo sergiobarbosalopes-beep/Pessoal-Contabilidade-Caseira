@@ -581,7 +581,7 @@ body[data-page="novobanco"] .scroll-progress {
   -webkit-backdrop-filter: blur(20px);
   border-radius: var(--nb-border-radius-lg);
   border: 1px solid var(--nb-border-subtle);
-  overflow: hidden;
+  overflow: visible;
   transition: all var(--nb-transition-normal);
 }
 
