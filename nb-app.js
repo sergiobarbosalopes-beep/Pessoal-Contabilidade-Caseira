@@ -195,74 +195,13 @@
       setTimeout(updateColumnHighlight, 50);
     }
 
-    // ── Column Highlight Overlay ────────────────────────
+    // ── Column Highlight Overlay (DISABLED) ────────────────────────
     function updateColumnHighlight() {
-      // Remove existing overlay
+      // Remove existing overlay and don't create new one
       const existingOverlay = document.getElementById("columnHighlightOverlay");
       if (existingOverlay) existingOverlay.remove();
-
-      // Find the active month tile
-      const activeTile = monthGrid.querySelector(".month-tile.active");
-      if (!activeTile) return;
-
-      // Find the first and last rubrica blocks
-      const rubricaBlocks = document.querySelectorAll(".rubrica-block");
-      if (rubricaBlocks.length === 0) return;
-
-      const firstRubrica = rubricaBlocks[0];
-      const lastRubrica = rubricaBlocks[rubricaBlocks.length - 1];
-      
-      // Find the last visible element
-      // Check if last rubrica has visible (non-collapsed) expenses
-      const lastExpensesStack = lastRubrica.querySelector(".rubrica-expenses-stack");
-      const isCollapsed = lastExpensesStack && lastExpensesStack.classList.contains("collapsed");
-      
-      let lastElement;
-      if (isCollapsed || !lastExpensesStack) {
-        // Use the totals row or rubrica row if collapsed or no expenses
-        const totalsRow = lastRubrica.querySelector(".rubrica-totals-row");
-        lastElement = totalsRow || lastRubrica.querySelector(".rubrica-row") || lastRubrica;
-      } else {
-        // Use the last expense grid if expanded
-        const lastExpenseGrids = lastRubrica.querySelectorAll(".rubrica-expense-grid");
-        lastElement = lastExpenseGrids.length > 0 
-          ? lastExpenseGrids[lastExpenseGrids.length - 1] 
-          : lastRubrica;
-      }
-
-      // Get positions relative to the content section
-      const contentSection = monthGrid.closest(".content-section");
-      if (!contentSection) return;
-
-      const sectionRect = contentSection.getBoundingClientRect();
-      const tileRect = activeTile.getBoundingClientRect();
-      const firstRubricaRect = firstRubrica.getBoundingClientRect();
-      const lastRect = lastElement.getBoundingClientRect();
-
-      // Calculate overlay dimensions - start from first rubrica, end at last element
-      const overlayTop = firstRubricaRect.top - sectionRect.top;
-      const overlayHeight = lastRect.bottom - firstRubricaRect.top + 10;
-      const overlayLeft = tileRect.left - sectionRect.left;
-      const overlayWidth = tileRect.width;
-
-      // Create overlay element
-      const overlay = document.createElement("div");
-      overlay.id = "columnHighlightOverlay";
-      overlay.className = "column-highlight";
-      overlay.style.cssText = `
-        position: absolute;
-        top: ${overlayTop}px;
-        left: ${overlayLeft}px;
-        width: ${overlayWidth + 8}px;
-        height: ${overlayHeight}px;
-        pointer-events: none;
-        z-index: 0;
-        margin-left: -4px;
-        transition: height 0.5s ease-out, top 0.3s ease-out;
-      `;
-
-      contentSection.style.position = "relative";
-      contentSection.appendChild(overlay);
+      // Column highlight disabled per user request
+      return;
     }
 
     // ── Resize handler for column highlight ─────────────
