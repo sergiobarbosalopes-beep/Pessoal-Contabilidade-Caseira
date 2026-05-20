@@ -796,6 +796,12 @@ body[data-page="novobanco"] .rubrica-block {
   border: none;
   border-bottom: 1px solid var(--nb-border-subtle);
   overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+body[data-page="novobanco"] .rubrica-block:has(.rubrica-menu-dropdown.open) {
+  z-index: 200;
 }
 
 body[data-page="novobanco"] .rubrica-block:last-child {
