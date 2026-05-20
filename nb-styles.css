@@ -817,7 +817,7 @@ body[data-page="novobanco"] .rubrica-row {
 body[data-page="novobanco"] .rubrica-row-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
   margin-bottom: 8px;
 }
 
@@ -844,6 +844,7 @@ body[data-page="novobanco"] .rubrica-row-actions {
   align-items: center;
   gap: 8px;
   position: relative;
+  margin-left: auto;
 }
 
 /* ── Toggle Button ─────────────────────────────────────────────────────────── */
