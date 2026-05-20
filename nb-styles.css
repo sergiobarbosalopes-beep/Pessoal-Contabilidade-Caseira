@@ -830,7 +830,7 @@ body[data-page="novobanco"] .rubrica-row-header {
 body[data-page="novobanco"] .rubrica-row-header h4 {
   font-size: 12px;
   font-weight: 600;
-  color: var(--nb-text-primary);
+  color: var(--nb-accent-orange);
   margin: 0;
 }
 
