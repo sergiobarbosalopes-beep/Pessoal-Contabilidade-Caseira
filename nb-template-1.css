@@ -34,3 +34,20 @@ body.nb-template-1 .hero-content h1 {
 body.nb-template-1 .content-section {
   backdrop-filter: blur(6px);
 }
+
+/* Restore default page shell hidden by nb-styles base */
+body.nb-template-1 .navbar,
+body.nb-template-1 .page-hero,
+body.nb-template-1 .footer,
+body.nb-template-1 .scroll-progress {
+  display: block;
+}
+
+body.nb-template-1 .main-content {
+  display: block;
+}
+
+body.nb-template-1 .container-wide {
+  max-width: 1320px;
+  padding: 0 20px;
+}

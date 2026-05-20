@@ -31,3 +31,20 @@ body.nb-template-4 .hero-sub {
 body.nb-template-4 .rubrica-block {
   border-bottom-color: rgba(45, 212, 191, 0.24);
 }
+
+/* Restore default page shell hidden by nb-styles base */
+body.nb-template-4 .navbar,
+body.nb-template-4 .page-hero,
+body.nb-template-4 .footer,
+body.nb-template-4 .scroll-progress {
+  display: block;
+}
+
+body.nb-template-4 .main-content {
+  display: block;
+}
+
+body.nb-template-4 .container-wide {
+  max-width: 1320px;
+  padding: 0 20px;
+}

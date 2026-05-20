@@ -36,3 +36,20 @@ body.nb-template-2 .page-hero::after {
 body.nb-template-2 .kpi {
   border-color: rgba(236, 72, 153, 0.28);
 }
+
+/* Restore default page shell hidden by nb-styles base */
+body.nb-template-2 .navbar,
+body.nb-template-2 .page-hero,
+body.nb-template-2 .footer,
+body.nb-template-2 .scroll-progress {
+  display: block;
+}
+
+body.nb-template-2 .main-content {
+  display: block;
+}
+
+body.nb-template-2 .container-wide {
+  max-width: 1320px;
+  padding: 0 20px;
+}

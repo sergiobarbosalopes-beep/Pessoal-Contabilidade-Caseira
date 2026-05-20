@@ -31,3 +31,20 @@ body.nb-template-3 .section-title h2 {
 body.nb-template-3 .month-tile.active {
   filter: saturate(1.12);
 }
+
+/* Restore default page shell hidden by nb-styles base */
+body.nb-template-3 .navbar,
+body.nb-template-3 .page-hero,
+body.nb-template-3 .footer,
+body.nb-template-3 .scroll-progress {
+  display: block;
+}
+
+body.nb-template-3 .main-content {
+  display: block;
+}
+
+body.nb-template-3 .container-wide {
+  max-width: 1320px;
+  padding: 0 20px;
+}
