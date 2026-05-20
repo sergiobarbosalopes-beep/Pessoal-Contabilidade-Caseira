@@ -1451,11 +1451,13 @@ body[data-page="novobanco"] .toggle-track::after {
 }
 
 body[data-page="novobanco"] .toggle-switch input:checked + .toggle-track {
-  background: var(--nb-primary-500);
+  background: var(--nb-accent-gold) !important;
+  border-color: var(--nb-accent-gold) !important;
 }
 
 body[data-page="novobanco"] .toggle-switch input:checked + .toggle-track::after {
   transform: translateX(22px);
+  background: white;
 }
 
 /* ── Value History ─────────────────────────────────────────────────────────── */
