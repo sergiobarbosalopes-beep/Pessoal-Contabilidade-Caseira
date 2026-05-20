@@ -1004,7 +1004,7 @@ body[data-page="novobanco"] .total-tile.is-active {
 }
 
 body[data-page="novobanco"] .total-value {
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 400 !important;
   color: var(--nb-text-muted);
   display: inline-block;
