@@ -1,0 +1,33 @@
+/* Template 4 - Inspired by bold startup landing kits */
+body.nb-template-4 {
+  --nb-primary-500: #14b8a6;
+  --nb-primary-600: #0d9488;
+  --nb-primary-700: #0f766e;
+  --nb-bg-darkest: #04151a;
+  --nb-bg-darker: #07232b;
+  --nb-bg-dark: #0a2f39;
+  --nb-bg-medium: #10414d;
+  --nb-bg-light: #175462;
+  --nb-text-primary: #ecfeff;
+  --nb-text-secondary: #ccfbf1;
+  --nb-text-muted: #99f6e4;
+  --nb-accent-gold: #2dd4bf;
+  --nb-accent-gold-soft: rgba(45, 212, 191, 0.2);
+  --nb-accent-orange: #f97316;
+  --nb-gradient-hero: linear-gradient(140deg, #0a2f39 0%, #0f172a 48%, #0b3a40 100%);
+  --nb-gradient-primary: linear-gradient(135deg, #14b8a6 0%, #22d3ee 55%, #f97316 100%);
+  --nb-gradient-glow: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.24) 0%, transparent 72%);
+  --nb-shadow-glow: 0 0 42px rgba(20, 184, 166, 0.24);
+  --nb-shadow-glow-strong: 0 0 64px rgba(249, 115, 22, 0.22);
+  --nb-border-subtle: rgba(45, 212, 191, 0.16);
+  --nb-border-medium: rgba(45, 212, 191, 0.26);
+  --nb-border-accent: rgba(249, 115, 22, 0.38);
+}
+
+body.nb-template-4 .hero-sub {
+  color: #d1fae5;
+}
+
+body.nb-template-4 .rubrica-block {
+  border-bottom-color: rgba(45, 212, 191, 0.24);
+}

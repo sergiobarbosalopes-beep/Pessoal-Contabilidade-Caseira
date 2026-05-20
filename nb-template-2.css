@@ -1,0 +1,38 @@
+/* Template 2 - Inspired by premium CMS visuals */
+body.nb-template-2 {
+  --nb-primary-500: #ec4899;
+  --nb-primary-600: #db2777;
+  --nb-primary-700: #9d174d;
+  --nb-bg-darkest: #090510;
+  --nb-bg-darker: #140b1f;
+  --nb-bg-dark: #1f1133;
+  --nb-bg-medium: #2b1845;
+  --nb-bg-light: #3a225e;
+  --nb-text-primary: #faf5ff;
+  --nb-text-secondary: #f5d0fe;
+  --nb-text-muted: #d8b4fe;
+  --nb-accent-gold: #22d3ee;
+  --nb-accent-gold-soft: rgba(34, 211, 238, 0.2);
+  --nb-accent-orange: #f472b6;
+  --nb-gradient-hero: linear-gradient(130deg, #140b1f 0%, #3b0764 48%, #0f172a 100%);
+  --nb-gradient-primary: linear-gradient(135deg, #ec4899 0%, #8b5cf6 55%, #22d3ee 100%);
+  --nb-gradient-glow: radial-gradient(ellipse at center, rgba(236, 72, 153, 0.24) 0%, transparent 72%);
+  --nb-shadow-glow: 0 0 46px rgba(236, 72, 153, 0.24);
+  --nb-shadow-glow-strong: 0 0 66px rgba(139, 92, 246, 0.28);
+  --nb-border-subtle: rgba(236, 72, 153, 0.14);
+  --nb-border-medium: rgba(236, 72, 153, 0.24);
+  --nb-border-accent: rgba(34, 211, 238, 0.36);
+}
+
+body.nb-template-2 .page-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.2), transparent 38%),
+    radial-gradient(circle at 80% 30%, rgba(34, 211, 238, 0.18), transparent 36%);
+}
+
+body.nb-template-2 .kpi {
+  border-color: rgba(236, 72, 153, 0.28);
+}

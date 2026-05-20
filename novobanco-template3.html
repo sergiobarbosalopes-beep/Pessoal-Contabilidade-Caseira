@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CGD | Contabilidade Caseira</title>
+    <title>Template 3 - Novo Banco Pro</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="nb-styles.css" />
+    <link rel="stylesheet" href="nb-template-3.css" />
   </head>
-  <body data-page="cgd">
+  <body data-page="novobanco" data-template-page="novobanco-template3" class="nb-template nb-template-3">
     <div class="scroll-progress" id="scrollProgress"></div>
 
     <nav class="navbar" id="navbar">
@@ -41,9 +43,9 @@
       <div class="particles" id="particles"></div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <span class="badge-label">Conta Principal</span>
-        <h1>Caixa Geral de Depósitos</h1>
-        <p class="hero-sub">Acompanhamento de saldos, movimentos e metas de poupança da conta CGD.</p>
+        <span class="badge-label">Template 3 - Enterprise Ops</span>
+        <h1>Novo Banco Template 3</h1>
+        <p class="hero-sub">Layout executivo orientado a controlo operacional, historico e consistencia mensal.</p>
       </div>
     </section>
 
@@ -53,24 +55,24 @@
         <section class="content-section reveal">
           <div class="section-title">
             <h2>Resumo da Conta</h2>
-            <p>Indicadores atuais da conta CGD</p>
+            <p>Indicadores atuais da conta Novo Banco</p>
           </div>
           <div class="kpi-grid">
             <div class="kpi kpi-ok">
               <p>Saldo Atual</p>
-              <strong>€ 12 450</strong>
+              <strong>€ 8 720</strong>
             </div>
             <div class="kpi">
               <p>Média Mensal</p>
-              <strong>€ 11 800</strong>
+              <strong>€ 8 450</strong>
             </div>
-            <div class="kpi kpi-warn">
+            <div class="kpi kpi-danger">
               <p>Movimentos Mês</p>
-              <strong>+€ 320</strong>
+              <strong>-€ 180</strong>
             </div>
             <div class="kpi">
-              <p>Poupança Programada</p>
-              <strong>€ 500</strong>
+              <p>Cartão Crédito</p>
+              <strong>€ 320</strong>
             </div>
           </div>
         </section>
@@ -337,6 +339,7 @@
     </footer>
 
     <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="nb-app.js"></script>
+    <script src="nb-template-nav.js"></script>
   </body>
 </html>

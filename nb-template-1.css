@@ -1,0 +1,36 @@
+/* Template 1 - Inspired by clean admin dashboards */
+body.nb-template-1 {
+  --nb-primary-500: #4f46e5;
+  --nb-primary-600: #4338ca;
+  --nb-primary-700: #312e81;
+  --nb-bg-darkest: #050816;
+  --nb-bg-darker: #0b1023;
+  --nb-bg-dark: #121a34;
+  --nb-bg-medium: #1b2650;
+  --nb-bg-light: #27356b;
+  --nb-text-primary: #eef2ff;
+  --nb-text-secondary: #c7d2fe;
+  --nb-text-muted: #94a3b8;
+  --nb-accent-gold: #22d3ee;
+  --nb-accent-gold-soft: rgba(34, 211, 238, 0.18);
+  --nb-accent-orange: #818cf8;
+  --nb-gradient-hero: linear-gradient(140deg, #0b1023 0%, #1e1b4b 45%, #0f172a 100%);
+  --nb-gradient-primary: linear-gradient(135deg, #4f46e5 0%, #22d3ee 100%);
+  --nb-gradient-glow: radial-gradient(ellipse at center, rgba(79, 70, 229, 0.22) 0%, transparent 72%);
+  --nb-shadow-glow: 0 0 42px rgba(79, 70, 229, 0.25);
+  --nb-shadow-glow-strong: 0 0 64px rgba(34, 211, 238, 0.24);
+  --nb-border-subtle: rgba(99, 102, 241, 0.16);
+  --nb-border-medium: rgba(99, 102, 241, 0.26);
+  --nb-border-accent: rgba(34, 211, 238, 0.4);
+}
+
+body.nb-template-1 .hero-content h1 {
+  background: linear-gradient(90deg, #eef2ff 0%, #a5b4fc 65%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+body.nb-template-1 .content-section {
+  backdrop-filter: blur(6px);
+}

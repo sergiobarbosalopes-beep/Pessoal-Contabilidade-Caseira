@@ -1,0 +1,33 @@
+/* Template 3 - Inspired by enterprise project dashboards */
+body.nb-template-3 {
+  --nb-primary-500: #f59e0b;
+  --nb-primary-600: #d97706;
+  --nb-primary-700: #b45309;
+  --nb-bg-darkest: #0c111b;
+  --nb-bg-darker: #131a26;
+  --nb-bg-dark: #1c2533;
+  --nb-bg-medium: #273244;
+  --nb-bg-light: #33425b;
+  --nb-text-primary: #f8fafc;
+  --nb-text-secondary: #e2e8f0;
+  --nb-text-muted: #94a3b8;
+  --nb-accent-gold: #f59e0b;
+  --nb-accent-gold-soft: rgba(245, 158, 11, 0.2);
+  --nb-accent-orange: #fb7185;
+  --nb-gradient-hero: linear-gradient(145deg, #1c2533 0%, #0f172a 50%, #111827 100%);
+  --nb-gradient-primary: linear-gradient(135deg, #f59e0b 0%, #fb7185 100%);
+  --nb-gradient-glow: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.2) 0%, transparent 72%);
+  --nb-shadow-glow: 0 0 38px rgba(245, 158, 11, 0.22);
+  --nb-shadow-glow-strong: 0 0 60px rgba(251, 113, 133, 0.22);
+  --nb-border-subtle: rgba(148, 163, 184, 0.2);
+  --nb-border-medium: rgba(148, 163, 184, 0.3);
+  --nb-border-accent: rgba(245, 158, 11, 0.42);
+}
+
+body.nb-template-3 .section-title h2 {
+  letter-spacing: 0.4px;
+}
+
+body.nb-template-3 .month-tile.active {
+  filter: saturate(1.12);
+}
