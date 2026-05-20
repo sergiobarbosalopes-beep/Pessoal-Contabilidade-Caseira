@@ -693,8 +693,6 @@ body[data-page="novobanco"] #monthGrid {
   grid-template-columns: repeat(12, 1fr);
   gap: 8px;
   margin-bottom: 16px;
-  margin-left: 56px;  /* 44px botão + 12px gap */
-  margin-right: 56px; /* 44px botão + 12px gap */
 }
 
 body[data-page="novobanco"] .month-tile {
