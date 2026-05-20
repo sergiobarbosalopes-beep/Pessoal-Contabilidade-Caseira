@@ -788,7 +788,7 @@ body[data-page="novobanco"] #rubricasDynamic {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
   background: transparent;
 }
 
@@ -812,7 +812,7 @@ body[data-page="novobanco"] .rubrica-block.moving {
 
 /* ── Rubrica Row (Header) ──────────────────────────────────────────────────── */
 body[data-page="novobanco"] .rubrica-row {
-  padding: 10px 0;
+  padding: 4px 0;
   background: transparent;
   border-bottom: 1px solid var(--nb-border-subtle);
 }
@@ -823,7 +823,7 @@ body[data-page="novobanco"] .rubrica-row-header {
   justify-content: space-between;
   margin-bottom: 2px;
   padding: 0 56px;
-  min-height: 56px;
+  min-height: 32px;
 }
 
 body[data-page="novobanco"] .rubrica-row-header h4 {
