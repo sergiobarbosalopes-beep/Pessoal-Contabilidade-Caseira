@@ -1430,21 +1430,6 @@ body[data-page="novobanco"] .toggle-label {
   color: var(--nb-text-secondary);
 }
 
-body[data-page="novobanco"] .toggle-switch {
-  position: relative;
-  width: 48px;
-  height: 26px;
-  cursor: pointer;
-}
-
-body[data-page="novobanco"] .toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* Toggle styles consolidated in MODAL TOGGLE ALIGNMENT FIX section below */
-
 /* â”€â”€ Value History â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 body[data-page="novobanco"] .value-history {
   margin-top: 20px;
@@ -1979,93 +1964,6 @@ body[data-page="novobanco"] #rubricasPanel.collapsed .rubricas-header-toggle svg
 body[data-page="novobanco"] .nb-panel-auto-height {
   height: auto;
   min-height: 0;
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MODAL TOGGLE ALIGNMENT FIX
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
-body[data-page="novobanco"] .value-toggle-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-top: 1px solid var(--nb-border-subtle);
-  margin-top: 12px;
-}
-
-body[data-page="novobanco"] .toggle-label {
-  font-size: 14px;
-  color: var(--nb-text-secondary);
-  flex: 1;
-}
-
-body[data-page="novobanco"] .toggle-switch {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-body[data-page="novobanco"] .toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-}
-
-body[data-page="novobanco"] .toggle-track {
-  width: 44px;
-  height: 24px;
-  background: var(--nb-bg-dark);
-  border: 1px solid var(--nb-border-medium);
-  border-radius: 12px;
-  position: relative;
-  transition: all var(--nb-transition-fast);
-}
-
-body[data-page="novobanco"] .toggle-track::after {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--nb-text-muted);
-  top: 2px;
-  left: 2px;
-  transform: none !important;
-  transition: all var(--nb-transition-fast);
-}
-
-body[data-page="novobanco"] .toggle-switch input:checked + .toggle-track {
-  background: var(--nb-accent-gold) !important;
-  border-color: var(--nb-accent-gold) !important;
-}
-
-body[data-page="novobanco"] .toggle-switch input:checked + .toggle-track::after {
-  background: white !important;
-  left: 22px !important;
-  transform: none !important;
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   COLUMN HIGHLIGHT ALIGNMENT FIX
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
-body[data-page="novobanco"] .column-highlight {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, 
-    rgba(245, 158, 11, 0.08) 0%, 
-    rgba(251, 191, 36, 0.04) 100%);
-  border-left: 2px solid var(--nb-accent-gold);
-  border-right: 2px solid var(--nb-accent-gold);
-  pointer-events: none;
-  z-index: 1;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
 }
 
 /* Selection styling - update to gold */
