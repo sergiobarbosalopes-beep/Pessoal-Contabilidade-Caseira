@@ -1,11 +1,11 @@
-﻿// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// APP.JS â€” Contabilidade Caseira
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════
+// APP.JS — Contabilidade Caseira
+// ═══════════════════════════════════════════════════════
 
 (function () {
   "use strict";
 
-  // â”€â”€ Scroll progress bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Scroll progress bar ───────────────────────────────
   const scrollProgress = document.getElementById("scrollProgress");
   if (scrollProgress) {
     window.addEventListener("scroll", () => {
@@ -16,7 +16,7 @@
     });
   }
 
-  // â”€â”€ Navbar scroll effect â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Navbar scroll effect ──────────────────────────────
   const navbar = document.getElementById("navbar");
   if (navbar) {
     window.addEventListener("scroll", () => {
@@ -24,7 +24,7 @@
     });
   }
 
-  // â”€â”€ Hamburger menu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Hamburger menu ────────────────────────────────────
   const hamburger = document.getElementById("hamburger");
   const navLinks = document.getElementById("navLinks");
   if (hamburger && navLinks) {
@@ -40,7 +40,7 @@
     });
   }
 
-  // â”€â”€ Active nav link â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Active nav link ───────────────────────────────────
   const page = document.body.dataset.page;
   if (page) {
     document.querySelectorAll(".navbar-links a").forEach((link) => {
@@ -48,7 +48,7 @@
     });
   }
 
-  // â”€â”€ Reveal on scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Reveal on scroll ──────────────────────────────────
   const reveals = document.querySelectorAll(".reveal");
   if (reveals.length) {
     const revealOnScroll = () => {
@@ -61,7 +61,7 @@
     revealOnScroll();
   }
 
-  // â”€â”€ Particles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Particles ─────────────────────────────────────────
   const particlesContainer = document.getElementById("particles");
   if (particlesContainer) {
     for (let i = 0; i < 28; i++) {
@@ -74,7 +74,7 @@
     }
   }
 
-  // â”€â”€ Render KPIs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Render KPIs ───────────────────────────────────────
   const kpiContainer = document.getElementById("kpiGrid");
   if (kpiContainer && window.dashboardMock) {
     kpiContainer.innerHTML = window.dashboardMock.kpis
@@ -90,7 +90,7 @@
       .join("");
   }
 
-  // â”€â”€ Render Priorities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Render Priorities ─────────────────────────────────
   const prioritiesList = document.getElementById("prioritiesList");
   if (prioritiesList && window.dashboardMock) {
     prioritiesList.innerHTML = window.dashboardMock.priorities
@@ -112,7 +112,7 @@
       .join("");
   }
 
-  // â”€â”€ Year & Month Selector with Subrubricas (CGD page) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Year & Month Selector with Subrubricas (CGD page) ───────────
   const yearValue = document.getElementById("yearValue");
   const yearPrev = document.getElementById("yearPrev");
   const yearNext = document.getElementById("yearNext");
@@ -122,7 +122,7 @@
     const months = [
       { short: "Jan", full: "Janeiro" },
       { short: "Fev", full: "Fevereiro" },
-      { short: "Mar", full: "MarÃ§o" },
+      { short: "Mar", full: "Março" },
       { short: "Abr", full: "Abril" },
       { short: "Mai", full: "Maio" },
       { short: "Jun", full: "Junho" },
@@ -195,7 +195,7 @@
       setTimeout(updateColumnHighlight, 50);
     }
 
-    // â”€â”€ Column Highlight Overlay (DISABLED) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Column Highlight Overlay (DISABLED) ────────────────────────
     function updateColumnHighlight() {
       // Remove existing overlay and don't create new one
       const existingOverlay = document.getElementById("columnHighlightOverlay");
@@ -204,7 +204,7 @@
       return;
     }
 
-    // â”€â”€ Resize handler for column highlight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Resize handler for column highlight ─────────────
     let resizeTimeout;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
@@ -214,7 +214,7 @@
     updateYearDisplay();
     renderMonthGrid();
 
-    // â”€â”€ Supabase Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Supabase Configuration ──────────────────────────
     const SUPABASE_URL = "https://uooovgxrexpstrtfktst.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvb292Z3hyZXhwc3RydGZrdHN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMTkxMjYsImV4cCI6MjA5NDc5NTEyNn0.4zYL75OJAI3Lxzofh9f0fIJ26S5EwHnUKGQuYQcf9mY";
 
@@ -287,7 +287,7 @@
       return true;
     }
 
-    // â”€â”€ Dynamic Rubricas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Dynamic Rubricas ────────────────────────────────
     const rubricasDynamic = document.getElementById("rubricasDynamic");
     const addRubricaBtn = document.getElementById("addRubricaBtn");
 
@@ -592,7 +592,7 @@
       }
     }
 
-    // â”€â”€ Despesa Supabase Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Despesa Supabase Functions ──────────────────────
     
     // Get next despesa_id from Supabase for a rubrica
     async function getNextDespesaId(rubricaDbId) {
@@ -746,7 +746,7 @@
       }
     }
 
-    // â”€â”€ Despesa Notas Supabase Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Despesa Notas Supabase Functions ───────────────────
     
     // Get next contador_id for despesa notas
     async function getNextContadorId(rubricaDbId, despesaDbId) {
@@ -917,14 +917,8 @@
       if (e.key === 'Escape') closeAllExpenseMenus();
     }
 
-    let hasRenderedOnce = false;
     function renderRubricas() {
       if (!rubricasDynamic) return;
-
-      // Disable animations on re-renders
-      if (hasRenderedOnce) {
-        rubricasDynamic.classList.add('no-animate');
-      }
       
       const entries = Object.entries(dynamicRubricas);
       rubricasDynamic.innerHTML = entries.map(([id, rubrica], index) => {
@@ -951,7 +945,7 @@
                 return `
                   <div class="expense-input-tile total-tile ${isActive ? "is-active" : ""}">
                     <span class="total-value">${displayTotal}</span>
-                    <span class="expense-currency">â‚¬</span>
+                    <span class="expense-currency">€</span>
                   </div>
                 `;
               }).join("")}
@@ -985,7 +979,7 @@
                         readonly
                         ${isEditable ? "" : "disabled"}
                       >
-                      <span class="expense-currency">â‚¬</span>
+                      <span class="expense-currency">€</span>
                     </div>
                   `;
                 }).join("");
@@ -995,12 +989,12 @@
                     <div class="rubrica-expense-header">
                       <div class="rubrica-expense-name">${expense.name}</div>
                       <div class="rubrica-expense-actions">
-                        <button class="expense-menu-btn" data-expense-menu="${id}::${expense.id}" aria-label="AÃ§Ãµes da despesa">â‹¯</button>
+                        <button class="expense-menu-btn" data-expense-menu="${id}::${expense.id}" aria-label="Ações da despesa">⋯</button>
                         <div class="expense-menu-dropdown" data-expense-menu-dropdown="${id}::${expense.id}">
-                          <button class="expense-menu-item" data-expense-action="rename" data-rubrica-id="${id}" data-expense-id="${expense.id}"><span class="menu-icon edit">âœŽ</span><span>Renomear despesa</span></button>
-                          <button class="expense-menu-item" data-expense-action="move-up" data-rubrica-id="${id}" data-expense-id="${expense.id}" ${!canMoveExpenseUp ? "disabled" : ""}><span class="menu-icon up">â–²</span><span>Mover para cima</span></button>
-                          <button class="expense-menu-item" data-expense-action="move-down" data-rubrica-id="${id}" data-expense-id="${expense.id}" ${!canMoveExpenseDown ? "disabled" : ""}><span class="menu-icon down">â–¼</span><span>Mover para baixo</span></button>
-                          <button class="expense-menu-item danger" data-expense-action="delete" data-rubrica-id="${id}" data-expense-id="${expense.id}"><span class="menu-icon delete">Ã—</span><span>Eliminar despesa</span></button>
+                          <button class="expense-menu-item" data-expense-action="rename" data-rubrica-id="${id}" data-expense-id="${expense.id}"><span class="menu-icon edit">✎</span><span>Renomear despesa</span></button>
+                          <button class="expense-menu-item" data-expense-action="move-up" data-rubrica-id="${id}" data-expense-id="${expense.id}" ${!canMoveExpenseUp ? "disabled" : ""}><span class="menu-icon up">▲</span><span>Mover para cima</span></button>
+                          <button class="expense-menu-item" data-expense-action="move-down" data-rubrica-id="${id}" data-expense-id="${expense.id}" ${!canMoveExpenseDown ? "disabled" : ""}><span class="menu-icon down">▼</span><span>Mover para baixo</span></button>
+                          <button class="expense-menu-item danger" data-expense-action="delete" data-rubrica-id="${id}" data-expense-id="${expense.id}"><span class="menu-icon delete">×</span><span>Eliminar despesa</span></button>
                         </div>
                       </div>
                     </div>
@@ -1016,17 +1010,17 @@
             <div class="rubrica-row">
               <div class="rubrica-row-header">
                 <div class="rubrica-row-left">
-                  <button class="rubrica-toggle-btn" data-toggle-expenses="${id}" aria-label="${isCollapsed ? "Expandir despesas" : "Colapsar despesas"}">${isCollapsed ? "â®ž" : "â®Ÿ"}</button>
+                  <button class="rubrica-toggle-btn" data-toggle-expenses="${id}" aria-label="${isCollapsed ? "Expandir despesas" : "Colapsar despesas"}">${isCollapsed ? "⮞" : "⮟"}</button>
                   <h4>${rubrica.name}</h4>
                 </div>
                 <div class="rubrica-row-actions">
-                  <button class="rubrica-menu-btn" data-rubrica-menu="${id}" aria-label="AÃ§Ãµes da rubrica">â‹¯</button>
+                  <button class="rubrica-menu-btn" data-rubrica-menu="${id}" aria-label="Ações da rubrica">⋯</button>
                   <div class="rubrica-menu-dropdown ${openRubricaMenuId === id ? "open" : ""}" data-rubrica-menu-dropdown="${id}">
-                    <button class="rubrica-menu-item" data-rubrica-action="rename" data-rubrica-id="${id}"><span class="menu-icon edit">âœŽ</span><span>Renomear rubrica</span></button>
-                    <button class="rubrica-menu-item" data-rubrica-action="add-expense" data-rubrica-id="${id}"><span class="menu-icon add">ï¼‹</span><span>Adicionar despesa</span></button>
-                    <button class="rubrica-menu-item" data-rubrica-action="move-up" data-rubrica-id="${id}" ${!canMoveUp ? "disabled" : ""}><span class="menu-icon up">â–²</span><span>Mover para cima</span></button>
-                    <button class="rubrica-menu-item" data-rubrica-action="move-down" data-rubrica-id="${id}" ${!canMoveDown ? "disabled" : ""}><span class="menu-icon down">â–¼</span><span>Mover para baixo</span></button>
-                    <button class="rubrica-menu-item danger" data-rubrica-action="delete" data-rubrica-id="${id}"><span class="menu-icon delete">Ã—</span><span>Eliminar rubrica</span></button>
+                    <button class="rubrica-menu-item" data-rubrica-action="rename" data-rubrica-id="${id}"><span class="menu-icon edit">✎</span><span>Renomear rubrica</span></button>
+                    <button class="rubrica-menu-item" data-rubrica-action="add-expense" data-rubrica-id="${id}"><span class="menu-icon add">＋</span><span>Adicionar despesa</span></button>
+                    <button class="rubrica-menu-item" data-rubrica-action="move-up" data-rubrica-id="${id}" ${!canMoveUp ? "disabled" : ""}><span class="menu-icon up">▲</span><span>Mover para cima</span></button>
+                    <button class="rubrica-menu-item" data-rubrica-action="move-down" data-rubrica-id="${id}" ${!canMoveDown ? "disabled" : ""}><span class="menu-icon down">▼</span><span>Mover para baixo</span></button>
+                    <button class="rubrica-menu-item danger" data-rubrica-action="delete" data-rubrica-id="${id}"><span class="menu-icon delete">×</span><span>Eliminar rubrica</span></button>
                   </div>
                 </div>
               </div>
@@ -1079,7 +1073,6 @@
 
       // Update column highlight after rubricas render
       setTimeout(updateColumnHighlight, 50);
-      hasRenderedOnce = true;
     }
 
     // Update all rubrica sequences in Supabase after reorder
@@ -1112,7 +1105,7 @@
         
         if (stackElement && wasExpanded) {
           stackElement.classList.add('collapsed');
-          if (toggleBtn) toggleBtn.textContent = 'â®ž';
+          if (toggleBtn) toggleBtn.textContent = '⮞';
         }
 
         // Step 2: Wait for collapse animation, then animate movement
@@ -1165,7 +1158,7 @@
                   if (newStackElement) {
                     newStackElement.classList.remove('collapsed');
                   }
-                  if (newToggleBtn) newToggleBtn.textContent = 'â®Ÿ';
+                  if (newToggleBtn) newToggleBtn.textContent = '⮟';
                   saveRubricas();
                   // Update column highlight during expansion animation
                   setTimeout(updateColumnHighlight, 100);
@@ -1204,7 +1197,7 @@
         
         if (stackElement && wasExpanded) {
           stackElement.classList.add('collapsed');
-          if (toggleBtn) toggleBtn.textContent = 'â®ž';
+          if (toggleBtn) toggleBtn.textContent = '⮞';
         }
 
         // Step 2: Wait for collapse animation, then animate movement
@@ -1257,7 +1250,7 @@
                   if (newStackElement) {
                     newStackElement.classList.remove('collapsed');
                   }
-                  if (newToggleBtn) newToggleBtn.textContent = 'â®Ÿ';
+                  if (newToggleBtn) newToggleBtn.textContent = '⮟';
                   saveRubricas();
                   // Update column highlight during expansion animation
                   setTimeout(updateColumnHighlight, 100);
@@ -1383,11 +1376,11 @@
         if (rubrica.collapsed) {
           // Collapsing - add class and update button immediately
           stackElement.classList.add('collapsed');
-          if (toggleBtn) toggleBtn.textContent = 'â®ž';
+          if (toggleBtn) toggleBtn.textContent = '⮞';
         } else {
           // Expanding - remove class to trigger animation, then update button
           stackElement.classList.remove('collapsed');
-          if (toggleBtn) toggleBtn.textContent = 'â®Ÿ';
+          if (toggleBtn) toggleBtn.textContent = '⮟';
         }
         // Update column highlight during animation
         // Use multiple updates to follow the animation
@@ -1420,7 +1413,7 @@
       }
     }
 
-    // â”€â”€ Modal for adding rubrica â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Modal for adding rubrica ────────────────────────
     const modalOverlay = document.getElementById("modalOverlay");
     const modalClose = document.getElementById("modalClose");
     const modalCancel = document.getElementById("modalCancel");
@@ -1760,7 +1753,7 @@
           const noteText = entry.nota || "";
           return `
             <div class="value-history-entry ${typeClass}">
-              <span class="entry-value">${sign}${parseFloat(entry.valor).toFixed(2)} â‚¬</span>
+              <span class="entry-value">${sign}${parseFloat(entry.valor).toFixed(2)} €</span>
               <span class="entry-note-text">${noteText}</span>
             </div>
           `;
@@ -2085,7 +2078,7 @@
           const monthsWithRubrica = rubricaMonths.map(r => r.mes);
           
           if (monthsWithRubrica.length === 0) {
-            alert("Rubrica nÃ£o encontrada na base de dados.");
+            alert("Rubrica não encontrada na base de dados.");
             return;
           }
           
