@@ -1084,6 +1084,14 @@ body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-exp
 body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(7) { animation-delay: 0.35s; }
 body[data-page="novobanco"] .rubrica-expenses-stack:not(.collapsed) .rubrica-expense-row:nth-child(8) { animation-delay: 0.4s; }
 
+
+/* Disable animations on re-renders */
+body[data-page="novobanco"] .no-animate .rubrica-expense-row {
+  animation: none !important;
+}
+body[data-page="novobanco"] .no-animate .rubrica-block {
+  animation: none !important;
+}
 @keyframes slideInExpense {
   from {
     opacity: 0;
